@@ -4,28 +4,8 @@
 
     
   <url>
-    <loc>https://yansaid.github.io/2222/02/22/Me/</loc>
-    <lastmod>2017-03-31T07:51:23.000Z</lastmod>
-    <data>
-        <display>
-        <title>Welcome To Yan's Website.</title>
-        <pubTime>2222-02-21T16:00:00.000Z</pubTime>
-        
-        <tag>essay</tag>
-         
-         
-           
-             
-              <breadCrumb title="introduce" url="https://yansaid.github.io/categories/introduce/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://yansaid.github.io/2016/06/30/tipsView/</loc>
-    <lastmod>2017-03-31T07:37:31.000Z</lastmod>
+    <lastmod>2017-03-31T07:54:51.000Z</lastmod>
     <data>
         <display>
         <title>一个react native 的第三方, 附 npm 发布教程.</title>
@@ -37,6 +17,26 @@
            
              
               <breadCrumb title="React Native" url="https://yansaid.github.io/categories/React-Native/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://yansaid.github.io/2222/02/22/Me/</loc>
+    <lastmod>2017-03-31T07:54:46.000Z</lastmod>
+    <data>
+        <display>
+        <title>Welcome To Yan's Website.</title>
+        <pubTime>2222-02-21T16:00:00.000Z</pubTime>
+        
+        <tag>essay</tag>
+         
+         
+           
+             
+              <breadCrumb title="introduce" url="https://yansaid.github.io/categories/introduce/"/>
           
         </display>
     </data>
