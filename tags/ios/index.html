@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Yan Blog">
-    <title>标签: js - Yan Blog</title>
+    <title>标签: ios - Yan Blog</title>
     <meta name="author" content="Yan">
     
     
@@ -17,7 +17,7 @@
     
     <meta property="og:type" content="blog">
 <meta property="og:title" content="Yan Blog">
-<meta property="og:url" content="https://yansaid.github.io/tags/js/index.html">
+<meta property="og:url" content="https://yansaid.github.io/tags/ios/index.html">
 <meta property="og:site_name" content="Yan Blog">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Yan Blog">
@@ -187,8 +187,8 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
-                        <a class="link-unstyled" href="/2017/03/29/new/">
-                            new
+                        <a class="link-unstyled" href="/2017/03/29/objective-c消息转发/">
+                            objective-c 的消息转发
                         </a>
                     
                 </h1>
@@ -210,13 +210,47 @@
             </div>
             
                 <div class="postShorten-content" itemprop="articleBody">
-                    
+                    <p>objc 在执行一个方法的时候是如何判断一个方法是否存在的?</p>
+<ol>
+<li>从本类和父类中查找.</li>
+<li>检查是否动态添加方法.</li>
+<li>查看是否存在快速消息转发.</li>
+<li>查看标准消息转发.</li>
+</ol>
+<p>1-4是按照顺序进行的, 若在某个环节查到符合的方法, 下面的查找则终止.</p>
+<ol>
+<li>我就不具体解释了.</li>
+<li><p>objc 是一门动态的语言, 它允许在运行时, 向一个类添加属性、方法等. class_addMethod、class_addIvar、class_addProperty、class_addProtocol. 具体使用就不介绍了. 需要重写 resolveInstanceMethod 方法, 在其中判断需要添加的方法, 使用class_addMethod来动态添加方法.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">+(BOOL)resolveInstanceMethod:(SEL)aSEL</div><div class="line">&#123;</div><div class="line">if(aSEL == @selector(methodName))&#123;</div><div class="line">class_addMethod(Class cls, SEL name, IMP imp, </div><div class="line">const char *types) ;</div><div class="line">return YES;</div><div class="line">&#125;</div><div class="line">return [super resolveInstanceMethod];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>NSObject 提供快速消息转发方法, 只要重新</p>
+<figure class="highlight plain"><figcaption><span>(id)forwardingTargetForSelector:(SEL)aSelector</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">```</div><div class="line">之后, 每次在父类本类中找不到, 并且没有找到动态添加方法, 则会走该方法, 你可以在这个方法中, return 目标对象, 则目标对象执行 aSelector. 如果没有重写标准消息转发, 并且 return nil, 则会报 `unrecognized selector sent to instance` 这个错误.</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<ul>
+<li>(id)forwardingTargetForSelector:(SEL)aSelector<br>{<br>Person *person = [[Person alloc]init];<br>if ([person respondsToSelector:aSelector]) {<br>return person;<br>}<br>return nil;<br>}<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">4.标准消息转发, 主要可以实现多对象同时转发</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>// 生成一个方法, 并存入表中</p>
+<ul>
+<li>(NSMethodSignature <em>)methodSignatureForSelector:(SEL)aSelector<br>{<br>NSMethodSignature</em> signature = [super methodSignatureForSelector:aSelector];<br>if (!signature) {<br>signature = [yourObj methodSignatureForSelector:aSelector];<br>}<br>return signature; // 将一个新签名的方法放入表中<br>}</li>
+</ul>
+<p>// 实现动态添加方法, 并执行方法</p>
+<ul>
+<li>(void)forwardInvocation:(NSInvocation *)anInvocation<br>{<br>SEL seletor = [anInvocation selector];<br>if ([yourObj respondsToSelector:seletor]) {<br>[anInvocation invokeWithTarget:yourObj];<br>}<br>// 这里可以转发若干个你想转发的对象<br>}</li>
+</ul>
+<p>// 方法的 invoke 大概应该是这样实现的<br>// 相当于 class_addMethod, 将 yourObj 中的方法  IMP 给了[self class].</p>
+<ul>
+<li>(void) invokeWithTarget:(id)target {<br>Method method = class_getInstanceMethod([target class], aSelector);<br>class_addMethod([self class],<br>aSelector,<br>method_getImplementation(method),<br>method_getTypeEncoding(method));<br>}</li>
+</ul>
+<p>```</p>
+
                     
                         
                     
                     
                         <p>
-                            <a href="/2017/03/29/new/#post-footer" class="postShorten-excerpt_link link">
+                            <a href="/2017/03/29/objective-c消息转发/#post-footer" class="postShorten-excerpt_link link">
                                 注释和共享
                             </a>
                         </p>
@@ -301,27 +335,8 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://yansaid.github.io/2017/03/29/hello-world/">
-                            <h3 class="media-heading">Hello World</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2017年3月29日
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-                <div class="media">
-                    
-                    <div class="media-body">
-                        <a class="link-unstyled" href="https://yansaid.github.io/2017/03/29/new/">
-                            <h3 class="media-heading">new</h3>
+                        <a class="link-unstyled" href="https://yansaid.github.io/2017/03/29/objective-c消息转发/">
+                            <h3 class="media-heading">objective-c 的消息转发</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
@@ -343,7 +358,7 @@
                 data-message-zero="没有找到文章"
                 data-message-one="找到 1 篇文章"
                 data-message-other="找到 {n} 篇文章">
-                找到 2 篇文章
+                找到 1 篇文章
             </p>
         </div>
     </div>

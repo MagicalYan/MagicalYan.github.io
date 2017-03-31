@@ -4,14 +4,14 @@
 
     
   <url>
-    <loc>https://yansaid.github.io/2017/03/29/new/</loc>
-    <lastmod>2017-03-29T09:31:28.000Z</lastmod>
+    <loc>https://yansaid.github.io/2017/03/29/objective-c%E6%B6%88%E6%81%AF%E8%BD%AC%E5%8F%91/</loc>
+    <lastmod>2017-03-31T02:20:35.000Z</lastmod>
     <data>
         <display>
-        <title>new</title>
+        <title>objective-c 的消息转发</title>
         <pubTime>2017-03-29T04:28:59.000Z</pubTime>
         
-        <tag>js</tag>
+        <tag>ios</tag>
          
          
            
@@ -25,22 +25,4 @@
     
     
     
-    
-  <url>
-    <loc>https://yansaid.github.io/2017/03/29/hello-world/</loc>
-    <lastmod>2017-03-29T09:10:29.000Z</lastmod>
-    <data>
-        <display>
-        <title>Hello World</title>
-        <pubTime>2017-03-29T03:16:40.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="ios" url="https://yansaid.github.io/categories/ios/"/>
-          
-        </display>
-    </data>
-    </url>
-
 </urlset>
