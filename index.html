@@ -200,7 +200,7 @@
     
         <span>发布在 </span>
         
-    <a class="category-link" href="/categories/react-native/">react native</a>
+    <a class="category-link" href="/categories/iOS/">iOS</a>
 
 
     
@@ -220,29 +220,32 @@
 <ol>
 <li>我就不具体解释了.</li>
 <li><p>objc 是一门动态的语言, 它允许在运行时, 向一个类添加属性、方法等. class_addMethod、class_addIvar、class_addProperty、class_addProtocol. 具体使用就不介绍了. 需要重写 resolveInstanceMethod 方法, 在其中判断需要添加的方法, 使用class_addMethod来动态添加方法.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">+(BOOL)resolveInstanceMethod:(SEL)aSEL</div><div class="line">&#123;</div><div class="line">if(aSEL == @selector(methodName))&#123;</div><div class="line">class_addMethod(Class cls, SEL name, IMP imp, </div><div class="line">const char *types) ;</div><div class="line">return YES;</div><div class="line">&#125;</div><div class="line">return [super resolveInstanceMethod];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">+(BOOL)resolveInstanceMethod:(SEL)aSEL</div><div class="line">&#123;</div><div class="line">    if(aSEL == @selector(methodName))&#123;</div><div class="line">        class_addMethod(Class cls, SEL name, IMP imp, </div><div class="line">        const char *types) ;</div><div class="line">        return YES;</div><div class="line">    &#125;</div><div class="line">    return [super resolveInstanceMethod];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p>NSObject 提供快速消息转发方法, 只要重新</p>
-<figure class="highlight plain"><figcaption><span>(id)forwardingTargetForSelector:(SEL)aSelector</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">```</div><div class="line">之后, 每次在父类本类中找不到, 并且没有找到动态添加方法, 则会走该方法, 你可以在这个方法中, return 目标对象, 则目标对象执行 aSelector. 如果没有重写标准消息转发, 并且 return nil, 则会报 `unrecognized selector sent to instance` 这个错误.</div></pre></td></tr></table></figure>
 </li>
 </ol>
+<figure class="highlight plain"><figcaption><span>(id)forwardingTargetForSelector:(SEL)aSelector</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">```</div><div class="line"></div><div class="line">之后, 每次在父类本类中找不到, 并且没有找到动态添加方法, 则会走该方法, 你可以在这个方法中, return 目标对象, 则目标对象执行 aSelector. 如果没有重写标准消息转发, 并且 return nil, 则会报 `unrecognized selector sent to instance` 这个错误.</div></pre></td></tr></table></figure>
 <ul>
-<li>(id)forwardingTargetForSelector:(SEL)aSelector<br>{<br>Person *person = [[Person alloc]init];<br>if ([person respondsToSelector:aSelector]) {<br>return person;<br>}<br>return nil;<br>}<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">4.标准消息转发, 主要可以实现多对象同时转发</div></pre></td></tr></table></figure>
+<li>(id)forwardingTargetForSelector:(SEL)aSelector<br>{<br>  Person *person = [[Person alloc]init];<pre><code>if ([person respondsToSelector:aSelector]) {
+return person;
+</code></pre>  }<br>  return nil;<br>}<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">4.标准消息转发, 主要可以实现多对象同时转发</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>// 生成一个方法, 并存入表中</p>
 <ul>
-<li>(NSMethodSignature <em>)methodSignatureForSelector:(SEL)aSelector<br>{<br>NSMethodSignature</em> signature = [super methodSignatureForSelector:aSelector];<br>if (!signature) {<br>signature = [yourObj methodSignatureForSelector:aSelector];<br>}<br>return signature; // 将一个新签名的方法放入表中<br>}</li>
+<li>(NSMethodSignature <em>)methodSignatureForSelector:(SEL)aSelector<br>{<br>  NSMethodSignature</em> signature = [super methodSignatureForSelector:aSelector];<br>  if (!signature) {<pre><code>signature = [yourObj methodSignatureForSelector:aSelector];
+</code></pre>  }<br>  return signature; // 将一个新签名的方法放入表中<br>}</li>
 </ul>
 <p>// 实现动态添加方法, 并执行方法</p>
 <ul>
-<li>(void)forwardInvocation:(NSInvocation *)anInvocation<br>{<br>SEL seletor = [anInvocation selector];<br>if ([yourObj respondsToSelector:seletor]) {<br>[anInvocation invokeWithTarget:yourObj];<br>}<br>// 这里可以转发若干个你想转发的对象<br>}</li>
+<li>(void)forwardInvocation:(NSInvocation *)anInvocation<br>{<br>  SEL seletor = [anInvocation selector];<br>  if ([yourObj respondsToSelector:seletor]) {<pre><code>[anInvocation invokeWithTarget:yourObj];
+</code></pre>  }<br>  // 这里可以转发若干个你想转发的对象<br>}</li>
 </ul>
 <p>// 方法的 invoke 大概应该是这样实现的<br>// 相当于 class_addMethod, 将 yourObj 中的方法  IMP 给了[self class].</p>
 <ul>
-<li>(void) invokeWithTarget:(id)target {<br>Method method = class_getInstanceMethod([target class], aSelector);<br>class_addMethod([self class],<br>aSelector,<br>method_getImplementation(method),<br>method_getTypeEncoding(method));<br>}</li>
+<li>(void) invokeWithTarget:(id)target {<br>  Method method = class_getInstanceMethod([target class], aSelector);<br>  class_addMethod([self class],<br>  aSelector,<br>  method_getImplementation(method),<br>  method_getTypeEncoding(method));<br>}<br>```</li>
 </ul>
-<p>```</p>
 
                     
                         
