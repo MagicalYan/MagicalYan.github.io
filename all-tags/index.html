@@ -189,36 +189,102 @@
 
         <section>
         
+            <a class="tag tag--primary tag--small" href="#essay-list" data-tag="essay">
+                essay
+            </a>
+        
             <a class="tag tag--primary tag--small" href="#ios-list" data-tag="ios">
                 ios
+            </a>
+        
+            <a class="tag tag--primary tag--small" href="#react native-list" data-tag="react native">
+                react native
             </a>
         
     </section>
     <section class="boxes">
         
-            <div id="ios-list" class="archive box" data-tag="ios">
+            <div id="essay-list" class="archive box" data-tag="essay">
                 <h4 class="archive-title">
-                    <a class="link-unstyled" href="/tags/ios">
-                        ios (2)
+                    <a class="link-unstyled" href="/tags/essay">
+                        essay (1)
                     </a>
                 </h4>
                 <ul class="archive-posts">
                     
                         <li class="archive-post">
-                            <a class="archive-post-title" href="/2017/03/29/attribute使用/">
-                                __attribute__((cleanup(function))
+                            <a class="archive-post-title" href="/2017/03/29/Me/">
+                                Welcome.
                             </a>
                             <span class="archive-post-date">
                                  - 3月 29, 2017
                             </span>
                         </li>
                     
+                </ul>
+            </div>
+        
+            <div id="ios-list" class="archive box" data-tag="ios">
+                <h4 class="archive-title">
+                    <a class="link-unstyled" href="/tags/ios">
+                        ios (4)
+                    </a>
+                </h4>
+                <ul class="archive-posts">
+                    
                         <li class="archive-post">
-                            <a class="archive-post-title" href="/2017/03/29/objective-c消息转发/">
+                            <a class="archive-post-title" href="/2016/10/28/attribute使用/">
+                                __attribute__((cleanup(function))
+                            </a>
+                            <span class="archive-post-date">
+                                 - 10月 28, 2016
+                            </span>
+                        </li>
+                    
+                        <li class="archive-post">
+                            <a class="archive-post-title" href="/2016/05/03/block/">
+                                __strong、__weak、__block.
+                            </a>
+                            <span class="archive-post-date">
+                                 - 5月 03, 2016
+                            </span>
+                        </li>
+                    
+                        <li class="archive-post">
+                            <a class="archive-post-title" href="/2016/07/15/objective-c消息转发/">
                                 objective-c 的消息转发
                             </a>
                             <span class="archive-post-date">
-                                 - 3月 29, 2017
+                                 - 7月 15, 2016
+                            </span>
+                        </li>
+                    
+                        <li class="archive-post">
+                            <a class="archive-post-title" href="/2016/03/21/类别/">
+                                类别（Category）添加weak （property）属性，关联（Associated）
+                            </a>
+                            <span class="archive-post-date">
+                                 - 3月 21, 2016
+                            </span>
+                        </li>
+                    
+                </ul>
+            </div>
+        
+            <div id="react native-list" class="archive box" data-tag="react native">
+                <h4 class="archive-title">
+                    <a class="link-unstyled" href="/tags/react-native">
+                        react native (1)
+                    </a>
+                </h4>
+                <ul class="archive-posts">
+                    
+                        <li class="archive-post">
+                            <a class="archive-post-title" href="/2016/06/30/tipsView/">
+                                一个react native 的第三方, 附 npm 发布教程.
+                            </a>
+                            <span class="archive-post-date">
+                                 - 6月 30, 2016
                             </span>
                         </li>
                     
@@ -291,17 +357,17 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://yansaid.github.io/2017/03/29/attribute使用/">
-                            <h3 class="media-heading">__attribute__((cleanup(function))</h3>
+                        <a class="link-unstyled" href="https://yansaid.github.io/2016/03/21/类别/">
+                            <h3 class="media-heading">类别（Category）添加weak （property）属性，关联（Associated）</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
                                 
-                                    2017年3月29日
+                                    2016年3月21日
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
+                        <div class="media-content hide-xs font-merryweather"><p>Category 在平常代码中经常使用，在使用第三方工具时，遇到工具不能直接解决当前问题的情况，我就会使用到Category，通过给特定的类加一个方法来处理这种情况。<br>本文仅仅介绍给（Category）加 weak 属性。<br></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
@@ -310,8 +376,99 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://yansaid.github.io/2017/03/29/objective-c消息转发/">
+                        <a class="link-unstyled" href="https://yansaid.github.io/2016/05/03/block/">
+                            <h3 class="media-heading">__strong、__weak、__block.</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年5月3日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>首先说一下循环引用, 为什么没用<code>__weak</code> 修饰就直接用 <code>self.</code>属性不会造成循环引用.<br>循环引用是指两个或者多个对象循环持有造成的无法释放.<br></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://yansaid.github.io/2016/06/30/tipsView/">
+                            <h3 class="media-heading">一个react native 的第三方, 附 npm 发布教程.</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年6月30日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>GitHub:<a href="https://github.com/MagicalYan/RNTipsView" target="_blank" rel="external">https://github.com/MagicalYan/RNTipsView</a></p>
+<p>一个我日常开发所使用的工具, 会在日后不断在 GitHub 上更新.<br>目前提供手写板的功能和截图的功能.</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2131368-62683a0f099fd8d8.gif?imageMogr2/auto-orient/strip" alt=""><br>使用: npm i –save react-native-tipsview<br></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://yansaid.github.io/2016/07/15/objective-c消息转发/">
                             <h3 class="media-heading">objective-c 的消息转发</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年7月15日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>objc 在执行一个方法的时候是如何判断一个方法是否存在的?</p>
+<ol>
+<li>从本类和父类中查找.</li>
+<li>检查是否动态添加方法.</li>
+<li>查看是否存在快速消息转发.</li>
+<li>查看标准消息转发.</li>
+</ol></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://yansaid.github.io/2016/10/28/attribute使用/">
+                            <h3 class="media-heading">__attribute__((cleanup(function))</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年10月28日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p><code>__attribute__</code> 是一个编译命令, 可以为变量、函数、类型定义提供一些属性.<br><code>__attribute__</code>有很多属性deprecated、unused、cleanup等等， 本文主要讲 cleanup.</p>
+<p>cleanup 变量作用域结束之前, 走 cleanup 方法.<br></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-left">
+                        <a class="link-unstyled" href="https://yansaid.github.io/2017/03/29/Me/">
+                            <img class="media-image" src="https://yansaid.github.io/2017/03/29/Me/cover.jpg" width="90" height="90"/>
+                        </a>
+                    </div>
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://yansaid.github.io/2017/03/29/Me/">
+                            <h3 class="media-heading">Welcome.</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
@@ -320,7 +477,7 @@
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
+                        <div class="media-content hide-xs font-merryweather"><h1 id="一个迷茫的程序员。"><a href="#一个迷茫的程序员。" class="headerlink" title="一个迷茫的程序员。"></a>一个迷茫的程序员。</h1><h1 id="一个单身的程序员。"><a href="#一个单身的程序员。" class="headerlink" title="一个单身的程序员。"></a>一个单身的程序员。</h1><h1 id="一个人的上海。"><a href="#一个人的上海。" class="headerlink" title="一个人的上海。"></a>一个人的上海。</h1></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
@@ -333,7 +490,7 @@
                 data-message-zero="没有找到文章"
                 data-message-one="找到 1 篇文章"
                 data-message-other="找到 {n} 篇文章">
-                找到 2 篇文章
+                找到 6 篇文章
             </p>
         </div>
     </div>

@@ -181,82 +181,14 @@
     <section class="postShorten-group main-content-wrap">
     
     
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+    <article class="postShorten postShorten--thumbnailimg-right" itemscope itemType="http://schema.org/BlogPosting">
         <div class="postShorten-wrap">
             
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
-                        <a class="link-unstyled" href="/2017/03/29/objective-c消息转发/">
-                            objective-c 的消息转发
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2017-03-29T12:28:59+08:00">
-	
-		    3月 29, 2017
-    	
-    </time>
-    
-        <span>发布在 </span>
-        
-    <a class="category-link" href="/categories/iOS/">iOS</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <p>objc 在执行一个方法的时候是如何判断一个方法是否存在的?</p>
-<ol>
-<li>从本类和父类中查找.</li>
-<li>检查是否动态添加方法.</li>
-<li>查看是否存在快速消息转发.</li>
-<li>查看标准消息转发.</li>
-</ol>
-<p>1-4是按照顺序进行的, 若在某个环节查到符合的方法, 下面的查找则终止.</p>
-<ol>
-<li>我就不具体解释了.</li>
-<li><p>objc 是一门动态的语言, 它允许在运行时, 向一个类添加属性、方法等. class_addMethod、class_addIvar、class_addProperty、class_addProtocol. 具体使用就不介绍了. 需要重写 resolveInstanceMethod 方法, 在其中判断需要添加的方法, 使用class_addMethod来动态添加方法.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">+(BOOL)resolveInstanceMethod:(SEL)aSEL</div><div class="line">&#123;</div><div class="line">    if(aSEL == @selector(methodName))&#123;</div><div class="line">        class_addMethod(Class cls, SEL name, IMP imp, </div><div class="line">        const char *types) ;</div><div class="line">        return YES;</div><div class="line">    &#125;</div><div class="line">    return [super resolveInstanceMethod];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>NSObject 提供快速消息转发方法, 只要重新</p>
-</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">- (id)forwardingTargetForSelector:(SEL)aSelector</div></pre></td></tr></table></figure>
-<p>之后, 每次在父类本类中找不到, 并且没有找到动态添加方法, 则会走该方法, 你可以在这个方法中, return 目标对象, 则目标对象执行 aSelector. 如果没有重写标准消息转发, 并且 return nil, 则会报 <code>unrecognized selector sent to instance</code> 这个错误.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">- (id)forwardingTargetForSelector:(SEL)aSelector</div><div class="line">&#123;</div><div class="line">    Person *person = [[Person alloc]init];</div><div class="line">        if ([person respondsToSelector:aSelector]) &#123;</div><div class="line">        return person;</div><div class="line">    &#125;</div><div class="line">    return nil;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>4.标准消息转发, 主要可以实现多对象同时转发</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">// 生成一个方法, 并存入表中</div><div class="line">- (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector</div><div class="line">&#123;</div><div class="line">    NSMethodSignature* signature = [super methodSignatureForSelector:aSelector];</div><div class="line">    if (!signature) &#123;</div><div class="line">        signature = [yourObj methodSignatureForSelector:aSelector];</div><div class="line">    &#125;</div><div class="line">    return signature; // 将一个新签名的方法放入表中</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 实现动态添加方法, 并执行方法</div><div class="line">- (void)forwardInvocation:(NSInvocation *)anInvocation</div><div class="line">&#123;</div><div class="line">    SEL seletor = [anInvocation selector];</div><div class="line">    if ([yourObj respondsToSelector:seletor]) &#123;</div><div class="line">        [anInvocation invokeWithTarget:yourObj];</div><div class="line">    &#125;</div><div class="line">    // 这里可以转发若干个你想转发的对象</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 方法的 invoke 大概应该是这样实现的</div><div class="line">// 相当于 class_addMethod, 将 yourObj 中的方法  IMP 给了[self class].</div><div class="line">- (void) invokeWithTarget:(id)target &#123;</div><div class="line">    Method method = class_getInstanceMethod([target class], aSelector);</div><div class="line">    class_addMethod([self class],</div><div class="line">    aSelector,</div><div class="line">    method_getImplementation(method),</div><div class="line">    method_getTypeEncoding(method));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2017/03/29/objective-c消息转发/#post-footer" class="postShorten-excerpt_link link">
-                                注释和共享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2017/03/29/attribute使用/">
-                            __attribute__((cleanup(function))
+                        <a class="link-unstyled" href="/2017/03/29/Me/">
+                            Welcome.
                         </a>
                     
                 </h1>
@@ -269,7 +201,7 @@
     
         <span>发布在 </span>
         
-    <a class="category-link" href="/categories/iOS/">iOS</a>
+    <a class="category-link" href="/categories/introduce/">introduce</a>
 
 
     
@@ -277,32 +209,24 @@
 
             </div>
             
-                <div class="postShorten-content" itemprop="articleBody">
-                    <p><code>__attribute__</code> 是一个编译命令, 可以为变量、函数、类型定义提供一些属性.<br><code>__attribute__</code>有很多属性deprecated、unused、cleanup等等， 本文主要讲 cleanup.</p>
-<p>cleanup 变量作用域结束之前, 走 cleanup 方法.<br>基本功能:<br>变量作用域结束之前, 执行cleanup指定的方法,方法的参数为变量的地址</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2131368-9139f7951f968b52.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2131368-698d86c538b7a3cb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>下面是, 当 block 作用域结束的时候让 cleanup 执行的具体实现.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">static void cleanBlock(__strong void(^*block)(void))  &#123;</div><div class="line">    (*block)();</div><div class="line">&#125;</div><div class="line"></div><div class="line">#if DEBUG</div><div class="line">#define keywordify autoreleasepool &#123;&#125;</div><div class="line">#else</div><div class="line">#define keywordify try &#123;&#125; @catch (...) &#123;&#125;</div><div class="line">#endif</div><div class="line"></div><div class="line">#define onExit \</div><div class="line">keywordify \</div><div class="line">__strong void(^block)(void) __attribute__((cleanup(cleanBlock), unused)) = ^</div></pre></td></tr></table></figure></p>
-<p><code>keywordify</code> 的作用就是在使用的时候可以在前面加一个@, 可以防止 return-type warning, 使用<code>autoreleasepool</code>的时候会创建一个没有实际意义的自动释放池.<br>所以使用<code>@try/@catch/@finally</code>来实现前面加@.</p>
-<p>具体可参考 ReactiveCocoa2.5 版本 “RACmetamacros.h”.</p>
-<p>使用:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^&#123;</div><div class="line">&#123;</div><div class="line">    &#123;</div><div class="line">        NSLock *lock = [[NSLock alloc] init];</div><div class="line">        [lock lock];</div><div class="line">        @onExit &#123;</div><div class="line">            [lock unlock];</div><div class="line">            NSLog(@&quot;end&quot;);</div><div class="line">        &#125;;</div><div class="line">        sleep(5);</div><div class="line">        NSLog(@&quot;begin&quot;);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">log:begin</div><div class="line">log:end</div></pre></td></tr></table></figure>
-<p>onExit 主要的作用是在某个块执行结束, 自动执行 block, 避免了忘记 unlock.</p>
-<p>如果想让代码在{}最后执行都可以使用 onExit.</p>
-
+                <div class="postShorten-excerpt" itemprop="articleBody">
+                    <h1 id="一个迷茫的程序员。"><a href="#一个迷茫的程序员。" class="headerlink" title="一个迷茫的程序员。"></a>一个迷茫的程序员。</h1><h1 id="一个单身的程序员。"><a href="#一个单身的程序员。" class="headerlink" title="一个单身的程序员。"></a>一个单身的程序员。</h1><h1 id="一个人的上海。"><a href="#一个人的上海。" class="headerlink" title="一个人的上海。"></a>一个人的上海。</h1>
                     
+                        <a href="/2017/03/29/Me/" class="postShorten-excerpt_link link">
+                            阅读全文
+                        </a>
                         
-                    
-                    
-                        <p>
-                            <a href="/2017/03/29/attribute使用/#post-footer" class="postShorten-excerpt_link link">
-                                注释和共享
-                            </a>
-                        </p>
                     
                 </div>
             
         </div>
+        
+            <a href="/2017/03/29/Me/">
+                <div class="postShorten-thumbnailimg">
+                    <img alt="" itemprop="image" src="https://yansaid.github.io/2017/03/29/Me/cover.jpg"/>
+                </div>
+            </a>
+            
         
     </article>
     
@@ -381,17 +305,17 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://yansaid.github.io/2017/03/29/attribute使用/">
-                            <h3 class="media-heading">__attribute__((cleanup(function))</h3>
+                        <a class="link-unstyled" href="https://yansaid.github.io/2016/03/21/类别/">
+                            <h3 class="media-heading">类别（Category）添加weak （property）属性，关联（Associated）</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
                                 
-                                    2017年3月29日
+                                    2016年3月21日
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
+                        <div class="media-content hide-xs font-merryweather"><p>Category 在平常代码中经常使用，在使用第三方工具时，遇到工具不能直接解决当前问题的情况，我就会使用到Category，通过给特定的类加一个方法来处理这种情况。<br>本文仅仅介绍给（Category）加 weak 属性。<br></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
@@ -400,8 +324,99 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://yansaid.github.io/2017/03/29/objective-c消息转发/">
+                        <a class="link-unstyled" href="https://yansaid.github.io/2016/05/03/block/">
+                            <h3 class="media-heading">__strong、__weak、__block.</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年5月3日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>首先说一下循环引用, 为什么没用<code>__weak</code> 修饰就直接用 <code>self.</code>属性不会造成循环引用.<br>循环引用是指两个或者多个对象循环持有造成的无法释放.<br></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://yansaid.github.io/2016/06/30/tipsView/">
+                            <h3 class="media-heading">一个react native 的第三方, 附 npm 发布教程.</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年6月30日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>GitHub:<a href="https://github.com/MagicalYan/RNTipsView" target="_blank" rel="external">https://github.com/MagicalYan/RNTipsView</a></p>
+<p>一个我日常开发所使用的工具, 会在日后不断在 GitHub 上更新.<br>目前提供手写板的功能和截图的功能.</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2131368-62683a0f099fd8d8.gif?imageMogr2/auto-orient/strip" alt=""><br>使用: npm i –save react-native-tipsview<br></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://yansaid.github.io/2016/07/15/objective-c消息转发/">
                             <h3 class="media-heading">objective-c 的消息转发</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年7月15日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>objc 在执行一个方法的时候是如何判断一个方法是否存在的?</p>
+<ol>
+<li>从本类和父类中查找.</li>
+<li>检查是否动态添加方法.</li>
+<li>查看是否存在快速消息转发.</li>
+<li>查看标准消息转发.</li>
+</ol></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://yansaid.github.io/2016/10/28/attribute使用/">
+                            <h3 class="media-heading">__attribute__((cleanup(function))</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年10月28日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p><code>__attribute__</code> 是一个编译命令, 可以为变量、函数、类型定义提供一些属性.<br><code>__attribute__</code>有很多属性deprecated、unused、cleanup等等， 本文主要讲 cleanup.</p>
+<p>cleanup 变量作用域结束之前, 走 cleanup 方法.<br></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-left">
+                        <a class="link-unstyled" href="https://yansaid.github.io/2017/03/29/Me/">
+                            <img class="media-image" src="https://yansaid.github.io/2017/03/29/Me/cover.jpg" width="90" height="90"/>
+                        </a>
+                    </div>
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://yansaid.github.io/2017/03/29/Me/">
+                            <h3 class="media-heading">Welcome.</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
@@ -410,7 +425,7 @@
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
+                        <div class="media-content hide-xs font-merryweather"><h1 id="一个迷茫的程序员。"><a href="#一个迷茫的程序员。" class="headerlink" title="一个迷茫的程序员。"></a>一个迷茫的程序员。</h1><h1 id="一个单身的程序员。"><a href="#一个单身的程序员。" class="headerlink" title="一个单身的程序员。"></a>一个单身的程序员。</h1><h1 id="一个人的上海。"><a href="#一个人的上海。" class="headerlink" title="一个人的上海。"></a>一个人的上海。</h1></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
@@ -423,7 +438,7 @@
                 data-message-zero="没有找到文章"
                 data-message-one="找到 1 篇文章"
                 data-message-other="找到 {n} 篇文章">
-                找到 2 篇文章
+                找到 6 篇文章
             </p>
         </div>
     </div>
