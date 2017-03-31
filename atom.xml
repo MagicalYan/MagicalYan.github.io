@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://yansaid.github.io/"/>
-  <updated>2017-03-31T06:19:43.000Z</updated>
+  <updated>2017-03-31T07:42:46.000Z</updated>
   <id>https://yansaid.github.io/</id>
   
   <author>
@@ -16,21 +16,22 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Welcome.</title>
-    <link href="https://yansaid.github.io/2017/03/29/Me/"/>
-    <id>https://yansaid.github.io/2017/03/29/Me/</id>
-    <published>2017-03-29T03:16:40.000Z</published>
-    <updated>2017-03-31T06:19:43.000Z</updated>
+    <title>Welcome To Yan&#39;s Website.</title>
+    <link href="https://yansaid.github.io/2222/02/22/Me/"/>
+    <id>https://yansaid.github.io/2222/02/22/Me/</id>
+    <published>2222-02-21T16:00:00.000Z</published>
+    <updated>2017-03-31T07:42:46.000Z</updated>
     
-    <content type="html"><![CDATA[<!-- excerpt -->
-<p>GitHub: <a href="https://github.com/MagicalYan" target="_blank" rel="external">https://github.com/MagicalYan</a></p>
-<p>简书: <a href="http://www.jianshu.com/u/04179148b6ae" target="_blank" rel="external">http://www.jianshu.com/u/04179148b6ae</a></p>
+    <content type="html"><![CDATA[<p> 一个迷茫的程序员。  一个单身的程序员。   一个人的上海。</p>
 <a id="more"></a>
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="0" height="0" src="http://kg.qq.com/node/play?s=Picbl3PiDH4syPjr&lang=zh_Hans"></iframe>]]></content>
+<p>GitHub: <a href="https://github.com/yansaid" target="_blank" rel="external">https://github.com/yansaid</a></p>
+<p>简书: <a href="http://www.jianshu.com/u/04179148b6ae" target="_blank" rel="external">http://www.jianshu.com/u/04179148b6ae</a> 与 Blog 同步。</p>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="0" height="0" src="http://kg.qq.com/node/play?s=Picbl3PiDH4syPjr&lang=zh_Hans"></iframe>
+]]></content>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;一个迷茫的程序员。&quot;&gt;&lt;a href=&quot;#一个迷茫的程序员。&quot; class=&quot;headerlink&quot; title=&quot;一个迷茫的程序员。&quot;&gt;&lt;/a&gt;一个迷茫的程序员。&lt;/h1&gt;&lt;h1 id=&quot;一个单身的程序员。&quot;&gt;&lt;a href=&quot;#一个单身的程序员。&quot; class=&quot;headerlink&quot; title=&quot;一个单身的程序员。&quot;&gt;&lt;/a&gt;一个单身的程序员。&lt;/h1&gt;&lt;h1 id=&quot;一个人的上海。&quot;&gt;&lt;a href=&quot;#一个人的上海。&quot; class=&quot;headerlink&quot; title=&quot;一个人的上海。&quot;&gt;&lt;/a&gt;一个人的上海。&lt;/h1&gt;
+      &lt;p&gt; 一个迷茫的程序员。  一个单身的程序员。   一个人的上海。&lt;/p&gt;
     
     </summary>
     
@@ -121,10 +122,10 @@
     <link href="https://yansaid.github.io/2016/06/30/tipsView/"/>
     <id>https://yansaid.github.io/2016/06/30/tipsView/</id>
     <published>2016-06-29T16:00:00.000Z</published>
-    <updated>2017-03-31T05:39:37.000Z</updated>
+    <updated>2017-03-31T07:37:31.000Z</updated>
     
     <content type="html"><![CDATA[<!-- excerpt --></p>
-<p>具体使用请看demo: <a href="https://github.com/MagicalYan/RNTipsView/tree/master/Example" target="_blank" rel="external">https://github.com/MagicalYan/RNTipsView/tree/master/Example</a><br>运行 demo: 下载代码, 进入 Example/tips,<br>nmp install<br>进入 ios 工程直接运行项目即可, 目前仅支持 iOS.</p>
+<p>具体使用请看demo: <a href="https://github.com/yansaid/RNTipsView/tree/master/Example" target="_blank" rel="external">https://github.com/yansaid/RNTipsView/tree/master/Example</a><br>运行 demo: 下载代码, 进入 Example/tips,<br>nmp install<br>进入 ios 工程直接运行项目即可, 目前仅支持 iOS.</p>
 <p>npm 发布流程:</p>
 <ol>
 <li><p>首先注册npm 账号:<br><a href="https://www.npmjs.com/" target="_blank" rel="external">https://www.npmjs.com/</a>,免费的即可.</p>
@@ -136,11 +137,11 @@
 <ol>
 <li>发布<br><code>npm publish --registry http://registry.npmjs.org</code></li>
 </ol>
-<p>等待发布完毕, 可以尝试使用一下.<br><a id="more"></a></p>]]></content>
+<p>等待发布完毕, 可以尝试使用一下.</p>]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;GitHub:&lt;a href=&quot;https://github.com/MagicalYan/RNTipsView&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/MagicalYan/RNTipsView&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt;GitHub: &lt;a href=&quot;https://github.com/yansaid/RNTipsView&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/yansaid/RNTipsView&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;一个我日常开发所使用的工具, 会在日后不断在 GitHub 上更新.&lt;br&gt;目前提供手写板的功能和截图的功能.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/2131368-62683a0f099fd8d8.gif?imageMogr2/auto-orient/strip&quot; alt=&quot;&quot;&gt;&lt;br&gt;使用: npm i –save react-native-tipsview&lt;br&gt;
     
