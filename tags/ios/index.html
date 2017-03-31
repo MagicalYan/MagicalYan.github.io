@@ -264,6 +264,64 @@ return person;
         
     </article>
     
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
+                        <a class="link-unstyled" href="/2017/03/29/attribute使用/">
+                            __attribute__((cleanup(function))
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2017-03-29T11:16:40+08:00">
+	
+		    3月 29, 2017
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/iOS/">iOS</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <p><code>__attribute__</code> 是一个编译命令, 可以为变量、函数、类型定义提供一些属性.<br><code>__attribute__</code>有很多属性deprecated、unused、cleanup等等， 本文主要讲 cleanup.</p>
+<p>cleanup 变量作用域结束之前, 走 cleanup 方法.<br>基本功能:<br>变量作用域结束之前, 执行cleanup指定的方法,方法的参数为变量的地址</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2131368-9139f7951f968b52.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2131368-698d86c538b7a3cb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>下面是, 当 block 作用域结束的时候让 cleanup 执行的具体实现.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">static void cleanBlock(__strong void(^*block)(void))  &#123;</div><div class="line">(*block)();</div><div class="line">&#125;</div><div class="line"></div><div class="line">#if DEBUG</div><div class="line">#define keywordify autoreleasepool &#123;&#125;</div><div class="line">#else</div><div class="line">#define keywordify try &#123;&#125; @catch (...) &#123;&#125;</div><div class="line">#endif</div><div class="line"></div><div class="line">#define onExit \</div><div class="line">keywordify \</div><div class="line">__strong void(^block)(void) __attribute__((cleanup(cleanBlock), unused)) = ^</div></pre></td></tr></table></figure></p>
+<p><code>keywordify</code> 的作用就是在使用的时候可以在前面加一个@, 可以防止 return-type warning, 使用<code>autoreleasepool</code>的时候会创建一个没有实际意义的自动释放池.<br>所以使用<code>@try/@catch/@finally</code>来实现前面加@.</p>
+<p>具体可参考 ReactiveCocoa2.5 版本 “RACmetamacros.h”.</p>
+<p>使用:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^&#123;</div><div class="line">&#123;</div><div class="line">&#123;</div><div class="line">NSLock *lock = [[NSLock alloc] init];</div><div class="line">[lock lock];</div><div class="line">@onExit &#123;</div><div class="line">[lock unlock];</div><div class="line">NSLog(@&quot;end&quot;);</div><div class="line">&#125;;</div><div class="line">sleep(5);</div><div class="line">NSLog(@&quot;begin&quot;);</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">log:begin</div><div class="line">log:end</div></pre></td></tr></table></figure>
+<p>onExit 主要的作用是在某个块执行结束, 自动执行 block, 避免了忘记 unlock.</p>
+<p>如果想让代码在{}最后执行都可以使用 onExit.</p>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2017/03/29/attribute使用/#post-footer" class="postShorten-excerpt_link link">
+                                注释和共享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
     <div class="pagination-bar">
     <ul class="pagination">
         
@@ -338,6 +396,25 @@ return person;
                 <div class="media">
                     
                     <div class="media-body">
+                        <a class="link-unstyled" href="https://yansaid.github.io/2017/03/29/attribute使用/">
+                            <h3 class="media-heading">__attribute__((cleanup(function))</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年3月29日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
                         <a class="link-unstyled" href="https://yansaid.github.io/2017/03/29/objective-c消息转发/">
                             <h3 class="media-heading">objective-c 的消息转发</h3>
                         </a>
@@ -361,7 +438,7 @@ return person;
                 data-message-zero="没有找到文章"
                 data-message-one="找到 1 篇文章"
                 data-message-other="找到 {n} 篇文章">
-                找到 1 篇文章
+                找到 2 篇文章
             </p>
         </div>
     </div>

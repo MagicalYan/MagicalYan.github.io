@@ -5,11 +5,31 @@
     
   <url>
     <loc>https://yansaid.github.io/2017/03/29/objective-c%E6%B6%88%E6%81%AF%E8%BD%AC%E5%8F%91/</loc>
-    <lastmod>2017-03-31T02:28:47.000Z</lastmod>
+    <lastmod>2017-03-31T02:30:28.000Z</lastmod>
     <data>
         <display>
         <title>objective-c 的消息转发</title>
         <pubTime>2017-03-29T04:28:59.000Z</pubTime>
+        
+        <tag>ios</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="https://yansaid.github.io/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://yansaid.github.io/2017/03/29/attribute%E4%BD%BF%E7%94%A8/</loc>
+    <lastmod>2017-03-31T02:29:10.000Z</lastmod>
+    <data>
+        <display>
+        <title>__attribute__((cleanup(function))</title>
+        <pubTime>2017-03-29T03:16:40.000Z</pubTime>
         
         <tag>ios</tag>
          

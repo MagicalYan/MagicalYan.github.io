@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Yan Blog">
-    <title>分类: iOS - Yan Blog</title>
+    <title>__attribute__((cleanup(function)) - Yan Blog</title>
     <meta name="author" content="Yan">
     
     
@@ -15,12 +15,31 @@
     
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <meta property="og:type" content="blog">
-<meta property="og:title" content="Yan Blog">
-<meta property="og:url" content="https://yansaid.github.io/categories/iOS/index.html">
+    <meta name="description" content="__attribute__ 是一个编译命令, 可以为变量、函数、类型定义提供一些属性.__attribute__有很多属性deprecated、unused、cleanup等等， 本文主要讲 cleanup.
+cleanup 变量作用域结束之前, 走 cleanup 方法.基本功能:变量作用域结束之前, 执行cleanup指定的方法,方法的参数为变量的地址
+
+
+下面是, 当 block 作用域结束">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="__attribute__((cleanup(function))">
+<meta property="og:url" content="https://yansaid.github.io/2017/03/29/attribute使用/index.html">
 <meta property="og:site_name" content="Yan Blog">
+<meta property="og:description" content="__attribute__ 是一个编译命令, 可以为变量、函数、类型定义提供一些属性.__attribute__有很多属性deprecated、unused、cleanup等等， 本文主要讲 cleanup.
+cleanup 变量作用域结束之前, 走 cleanup 方法.基本功能:变量作用域结束之前, 执行cleanup指定的方法,方法的参数为变量的地址
+
+
+下面是, 当 block 作用域结束">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2131368-9139f7951f968b52.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2131368-698d86c538b7a3cb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-03-31T02:29:10.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Yan Blog">
+<meta name="twitter:title" content="__attribute__((cleanup(function))">
+<meta name="twitter:description" content="__attribute__ 是一个编译命令, 可以为变量、函数、类型定义提供一些属性.__attribute__有很多属性deprecated、unused、cleanup等等， 本文主要讲 cleanup.
+cleanup 变量作用域结束之前, 走 cleanup 方法.基本功能:变量作用域结束之前, 执行cleanup指定的方法,方法的参数为变量的地址
+
+
+下面是, 当 block 作用域结束">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2131368-9139f7951f968b52.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
     
     
         
@@ -52,7 +71,7 @@
         
     
 
-<header id="header" data-behavior="1">
+<header id="header" data-behavior="4">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <div class="header-title">
         <a class="header-title-link" href="/ ">Yan Blog</a>
@@ -76,7 +95,7 @@
         
     
 
-<nav id="sidebar" data-behavior="1">
+<nav id="sidebar" data-behavior="4">
     <div class="sidebar-container">
         
             <div class="sidebar-profile">
@@ -173,110 +192,21 @@
 </nav>
 
             
-            <div id="main" data-behavior="1"
+            <div id="main" data-behavior="4"
                  class="
                         hasCoverMetaIn
                         ">
                 
-    <section class="postShorten-group main-content-wrap">
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
     
     
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2017/03/29/objective-c消息转发/">
-                            objective-c 的消息转发
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2017-03-29T12:28:59+08:00">
-	
-		    3月 29, 2017
-    	
-    </time>
+        <div class="post-header main-content-wrap text-left">
     
-        <span>发布在 </span>
-        
-    <a class="category-link" href="/categories/iOS/">iOS</a>
-
-
+        <h1 class="post-title" itemprop="headline">
+            __attribute__((cleanup(function))
+        </h1>
     
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <p>objc 在执行一个方法的时候是如何判断一个方法是否存在的?</p>
-<ol>
-<li>从本类和父类中查找.</li>
-<li>检查是否动态添加方法.</li>
-<li>查看是否存在快速消息转发.</li>
-<li>查看标准消息转发.</li>
-</ol>
-<p>1-4是按照顺序进行的, 若在某个环节查到符合的方法, 下面的查找则终止.</p>
-<ol>
-<li>我就不具体解释了.</li>
-<li><p>objc 是一门动态的语言, 它允许在运行时, 向一个类添加属性、方法等. class_addMethod、class_addIvar、class_addProperty、class_addProtocol. 具体使用就不介绍了. 需要重写 resolveInstanceMethod 方法, 在其中判断需要添加的方法, 使用class_addMethod来动态添加方法.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">+(BOOL)resolveInstanceMethod:(SEL)aSEL</div><div class="line">&#123;</div><div class="line">    if(aSEL == @selector(methodName))&#123;</div><div class="line">        class_addMethod(Class cls, SEL name, IMP imp, </div><div class="line">        const char *types) ;</div><div class="line">        return YES;</div><div class="line">    &#125;</div><div class="line">    return [super resolveInstanceMethod];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>NSObject 提供快速消息转发方法, 只要重新</p>
-</li>
-</ol>
-<figure class="highlight plain"><figcaption><span>(id)forwardingTargetForSelector:(SEL)aSelector</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">```</div><div class="line"></div><div class="line">之后, 每次在父类本类中找不到, 并且没有找到动态添加方法, 则会走该方法, 你可以在这个方法中, return 目标对象, 则目标对象执行 aSelector. 如果没有重写标准消息转发, 并且 return nil, 则会报 `unrecognized selector sent to instance` 这个错误.</div></pre></td></tr></table></figure>
-<ul>
-<li>(id)forwardingTargetForSelector:(SEL)aSelector<br>{<br>  Person *person = [[Person alloc]init];<pre><code>if ([person respondsToSelector:aSelector]) {
-return person;
-</code></pre>  }<br>  return nil;<br>}<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">4.标准消息转发, 主要可以实现多对象同时转发</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>// 生成一个方法, 并存入表中</p>
-<ul>
-<li>(NSMethodSignature <em>)methodSignatureForSelector:(SEL)aSelector<br>{<br>  NSMethodSignature</em> signature = [super methodSignatureForSelector:aSelector];<br>  if (!signature) {<pre><code>signature = [yourObj methodSignatureForSelector:aSelector];
-</code></pre>  }<br>  return signature; // 将一个新签名的方法放入表中<br>}</li>
-</ul>
-<p>// 实现动态添加方法, 并执行方法</p>
-<ul>
-<li>(void)forwardInvocation:(NSInvocation *)anInvocation<br>{<br>  SEL seletor = [anInvocation selector];<br>  if ([yourObj respondsToSelector:seletor]) {<pre><code>[anInvocation invokeWithTarget:yourObj];
-</code></pre>  }<br>  // 这里可以转发若干个你想转发的对象<br>}</li>
-</ul>
-<p>// 方法的 invoke 大概应该是这样实现的<br>// 相当于 class_addMethod, 将 yourObj 中的方法  IMP 给了[self class].</p>
-<ul>
-<li>(void) invokeWithTarget:(id)target {<br>  Method method = class_getInstanceMethod([target class], aSelector);<br>  class_addMethod([self class],<br>  aSelector,<br>  method_getImplementation(method),<br>  method_getTypeEncoding(method));<br>}<br>```</li>
-</ul>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2017/03/29/objective-c消息转发/#post-footer" class="postShorten-excerpt_link link">
-                                注释和共享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2017/03/29/attribute使用/">
-                            __attribute__((cleanup(function))
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
+    <div class="post-meta">
     <time itemprop="datePublished" datetime="2017-03-29T11:16:40+08:00">
 	
 		    3月 29, 2017
@@ -291,10 +221,11 @@ return person;
     
 </div>
 
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <p><code>__attribute__</code> 是一个编译命令, 可以为变量、函数、类型定义提供一些属性.<br><code>__attribute__</code>有很多属性deprecated、unused、cleanup等等， 本文主要讲 cleanup.</p>
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p><code>__attribute__</code> 是一个编译命令, 可以为变量、函数、类型定义提供一些属性.<br><code>__attribute__</code>有很多属性deprecated、unused、cleanup等等， 本文主要讲 cleanup.</p>
 <p>cleanup 变量作用域结束之前, 走 cleanup 方法.<br>基本功能:<br>变量作用域结束之前, 执行cleanup指定的方法,方法的参数为变量的地址</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/2131368-9139f7951f968b52.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p><img src="http://upload-images.jianshu.io/upload_images/2131368-698d86c538b7a3cb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
@@ -306,31 +237,77 @@ return person;
 <p>onExit 主要的作用是在某个块执行结束, 自动执行 block, 避免了忘记 unlock.</p>
 <p>如果想让代码在{}最后执行都可以使用 onExit.</p>
 
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2017/03/29/attribute使用/#post-footer" class="postShorten-excerpt_link link">
-                                注释和共享
-                            </a>
-                        </p>
-                    
-                </div>
             
         </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
         
-    </article>
-    
-    <div class="pagination-bar">
-    <ul class="pagination">
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/ios/">ios</a>
+
+            </div>
         
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/03/29/objective-c消息转发/"  data-tooltip="objective-c 的消息转发">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://yansaid.github.io/2017/03/29/attribute使用/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yansaid.github.io/2017/03/29/attribute使用/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://yansaid.github.io/2017/03/29/attribute使用/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
         
-        <li class="pagination-number">第 1 页 共 1 页</li>
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
     </ul>
 </div>
 
-</section>
+
+        
+            
+        
+    </div>
+</article>
 
 
 
@@ -341,6 +318,84 @@ return person;
 </footer>
 
             </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/03/29/objective-c消息转发/"  data-tooltip="objective-c 的消息转发">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://yansaid.github.io/2017/03/29/attribute使用/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yansaid.github.io/2017/03/29/attribute使用/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://yansaid.github.io/2017/03/29/attribute使用/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https://yansaid.github.io/2017/03/29/attribute使用/">
+                <i class="fa fa-google-plus"></i><span>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yansaid.github.io/2017/03/29/attribute使用/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https://yansaid.github.io/2017/03/29/attribute使用/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+
             
         </div>
         
@@ -452,6 +507,8 @@ return person;
 <script src="/assets/js/jquery.fancybox-thumbs.js"></script>
 <script src="/assets/js/tranquilpeak.js"></script>
 <!--SCRIPTS END-->
+
+    
 
 
 
