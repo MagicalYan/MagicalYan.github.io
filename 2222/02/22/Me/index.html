@@ -21,7 +21,7 @@
 <meta property="og:url" content="https://yansaid.github.io/2222/02/22/Me/index.html">
 <meta property="og:site_name" content="Yan Blog">
 <meta property="og:description" content="进来听听歌。">
-<meta property="og:updated_time" content="2017-04-01T03:51:34.000Z">
+<meta property="og:updated_time" content="2017-04-01T04:08:13.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Welcome To Yan's Website.">
 <meta name="twitter:description" content="进来听听歌。">
@@ -240,8 +240,8 @@ var index = 0;
 myAudio=document.getElementById("audioList");
 myAudio.onended = function()
 {
-    if (index == urls.length) index = 0;
-    myAudio.src = urls[index + 1];
+    if (index == urls.length) index = -1;
+    myAudio.src = urls[++index];
     myAudio.loop=false;
     myAudio.load();
 };
