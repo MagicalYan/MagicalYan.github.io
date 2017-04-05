@@ -15,30 +15,18 @@
     
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <meta name="description" content="__attribute__ 是一个编译命令, 可以为变量、函数、类型定义提供一些属性.__attribute__有很多属性deprecated、unused、cleanup等等， 本文主要讲 cleanup.cleanup 变量作用域结束之前, 走 cleanup 方法.
-基本功能:变量作用域结束之前, 执行cleanup指定的方法,方法的参数为变量的地址
-
-
-下面是, 当 block 作用域结">
+    <meta name="description" content="__attribute__ 是一个编译命令, 可以为变量、函数、类型定义提供一些属性.__attribute__有很多属性deprecated、unused、cleanup等等， 本文主要讲 cleanup.">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="__attribute__((cleanup(function))">
 <meta property="og:url" content="https://yansaid.github.io/2016/10/28/attribute使用/index.html">
 <meta property="og:site_name" content="Yan Blog">
-<meta property="og:description" content="__attribute__ 是一个编译命令, 可以为变量、函数、类型定义提供一些属性.__attribute__有很多属性deprecated、unused、cleanup等等， 本文主要讲 cleanup.cleanup 变量作用域结束之前, 走 cleanup 方法.
-基本功能:变量作用域结束之前, 执行cleanup指定的方法,方法的参数为变量的地址
-
-
-下面是, 当 block 作用域结">
+<meta property="og:description" content="__attribute__ 是一个编译命令, 可以为变量、函数、类型定义提供一些属性.__attribute__有很多属性deprecated、unused、cleanup等等， 本文主要讲 cleanup.">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2131368-9139f7951f968b52.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2131368-698d86c538b7a3cb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-04-05T01:41:05.000Z">
+<meta property="og:updated_time" content="2017-04-05T01:45:14.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="__attribute__((cleanup(function))">
-<meta name="twitter:description" content="__attribute__ 是一个编译命令, 可以为变量、函数、类型定义提供一些属性.__attribute__有很多属性deprecated、unused、cleanup等等， 本文主要讲 cleanup.cleanup 变量作用域结束之前, 走 cleanup 方法.
-基本功能:变量作用域结束之前, 执行cleanup指定的方法,方法的参数为变量的地址
-
-
-下面是, 当 block 作用域结">
+<meta name="twitter:description" content="__attribute__ 是一个编译命令, 可以为变量、函数、类型定义提供一些属性.__attribute__有很多属性deprecated、unused、cleanup等等， 本文主要讲 cleanup.">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2131368-9139f7951f968b52.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
     
     
@@ -234,8 +222,7 @@
     
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
-            <!-- excerpt -->
-<p><code>__attribute__</code> 是一个编译命令, 可以为变量、函数、类型定义提供一些属性.<br><code>__attribute__</code>有很多属性deprecated、unused、cleanup等等， 本文主要讲 cleanup.<br><a id="more"></a><br>cleanup 变量作用域结束之前, 走 cleanup 方法.</p>
+            <p><code>__attribute__</code> 是一个编译命令, 可以为变量、函数、类型定义提供一些属性.<br><code>__attribute__</code>有很多属性deprecated、unused、cleanup等等， 本文主要讲 cleanup.<br><a id="more"></a><br>cleanup 变量作用域结束之前, 走 cleanup 方法.</p>
 <p>基本功能:<br>变量作用域结束之前, 执行cleanup指定的方法,方法的参数为变量的地址</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/2131368-9139f7951f968b52.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p><img src="http://upload-images.jianshu.io/upload_images/2131368-698d86c538b7a3cb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
@@ -246,6 +233,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">log:begin</div><div class="line">log:end</div></pre></td></tr></table></figure>
 <p>onExit 主要的作用是在某个块执行结束, 自动执行 block, 避免了忘记 unlock.</p>
 <p>如果想让代码在{}最后执行都可以使用 onExit.</p>
+
             
         </div>
     </div>
@@ -496,7 +484,7 @@
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
+                        <div class="media-content hide-xs font-merryweather"><p>首先说一下循环引用, 为什么没用<code>__weak</code> 修饰就直接用 <code>self.</code>属性不会造成循环引用.<br>循环引用是指两个或者多个对象循环持有造成的无法释放.<br></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
@@ -515,7 +503,7 @@
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
+                        <div class="media-content hide-xs font-merryweather"><p>一个我日常开发所使用的工具, 会在日后不断在 GitHub 上更新.<br>目前提供手写板的功能和截图的功能.<br></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
@@ -534,7 +522,7 @@
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
+                        <div class="media-content hide-xs font-merryweather"><p>objc 在执行一个方法的时候是如何判断一个方法是否存在的?</p></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
@@ -553,7 +541,7 @@
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
+                        <div class="media-content hide-xs font-merryweather"><p><code>__attribute__</code> 是一个编译命令, 可以为变量、函数、类型定义提供一些属性.<br><code>__attribute__</code>有很多属性deprecated、unused、cleanup等等， 本文主要讲 cleanup.<br></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>

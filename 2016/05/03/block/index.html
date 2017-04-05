@@ -15,12 +15,12 @@
     
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <meta name="description" content="首先说一下循环引用, 为什么没用__weak 修饰就直接用 self.属性不会造成循环引用.循环引用是指两个或者多个对象循环持有造成的无法释放.类 Person 有个属性 block, 在 block 实现后, 此时 self 持有 block, 如果在 block 中, 直接使用 self, block 将持有 self, 造成循环引用, 如果 block 本身不是 self 的属性, 则 s">
+    <meta name="description" content="首先说一下循环引用, 为什么没用__weak 修饰就直接用 self.属性不会造成循环引用.循环引用是指两个或者多个对象循环持有造成的无法释放.">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="__strong、__weak、__block.">
 <meta property="og:url" content="https://yansaid.github.io/2016/05/03/block/index.html">
 <meta property="og:site_name" content="Yan Blog">
-<meta property="og:description" content="首先说一下循环引用, 为什么没用__weak 修饰就直接用 self.属性不会造成循环引用.循环引用是指两个或者多个对象循环持有造成的无法释放.类 Person 有个属性 block, 在 block 实现后, 此时 self 持有 block, 如果在 block 中, 直接使用 self, block 将持有 self, 造成循环引用, 如果 block 本身不是 self 的属性, 则 s">
+<meta property="og:description" content="首先说一下循环引用, 为什么没用__weak 修饰就直接用 self.属性不会造成循环引用.循环引用是指两个或者多个对象循环持有造成的无法释放.">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2131368-4b64251e2b00e4a3?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2131368-d2d3f4e1e2394432?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2131368-2547ebf5885ccbef.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
@@ -34,10 +34,10 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2131368-0c334ec2de2f09c3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2131368-ed9d6587642ae69e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2131368-3bb88da42b5adcf6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-04-05T01:41:09.000Z">
+<meta property="og:updated_time" content="2017-04-05T01:45:19.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="__strong、__weak、__block.">
-<meta name="twitter:description" content="首先说一下循环引用, 为什么没用__weak 修饰就直接用 self.属性不会造成循环引用.循环引用是指两个或者多个对象循环持有造成的无法释放.类 Person 有个属性 block, 在 block 实现后, 此时 self 持有 block, 如果在 block 中, 直接使用 self, block 将持有 self, 造成循环引用, 如果 block 本身不是 self 的属性, 则 s">
+<meta name="twitter:description" content="首先说一下循环引用, 为什么没用__weak 修饰就直接用 self.属性不会造成循环引用.循环引用是指两个或者多个对象循环持有造成的无法释放.">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2131368-4b64251e2b00e4a3?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
     
     
@@ -233,8 +233,7 @@
     
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
-            <!-- excerpt -->
-<p>首先说一下循环引用, 为什么没用<code>__weak</code> 修饰就直接用 <code>self.</code>属性不会造成循环引用.<br>循环引用是指两个或者多个对象循环持有造成的无法释放.<br><a id="more"></a><br>类 <code>Person</code> 有个属性 <code>block</code>, 在 <code>block</code> 实现后, 此时 <code>self</code> 持有 <code>block</code>, 如果在 <code>block</code> 中, 直接使用 <code>self</code>, <code>block</code> 将持有 <code>self</code>, 造成循环引用, 如果 <code>block</code> 本身不是 <code>self</code> 的属性, 则 <code>self</code>不持有 <code>block</code>, 即使在 <code>block</code> 中直接使用 <code>self</code> 也不会造成循环引用, 但是为了避免多个对象的循环引用, 所以 <code>block</code> 中最好还是用<code>__weak</code>, 防止这种情况出现. 代理用 <code>weak</code> 与此同理.</p>
+            <p>首先说一下循环引用, 为什么没用<code>__weak</code> 修饰就直接用 <code>self.</code>属性不会造成循环引用.<br>循环引用是指两个或者多个对象循环持有造成的无法释放.<br><a id="more"></a><br>类 <code>Person</code> 有个属性 <code>block</code>, 在 <code>block</code> 实现后, 此时 <code>self</code> 持有 <code>block</code>, 如果在 <code>block</code> 中, 直接使用 <code>self</code>, <code>block</code> 将持有 <code>self</code>, 造成循环引用, 如果 <code>block</code> 本身不是 <code>self</code> 的属性, 则 <code>self</code>不持有 <code>block</code>, 即使在 <code>block</code> 中直接使用 <code>self</code> 也不会造成循环引用, 但是为了避免多个对象的循环引用, 所以 <code>block</code> 中最好还是用<code>__weak</code>, 防止这种情况出现. 代理用 <code>weak</code> 与此同理.</p>
 <p>__block:<br>使外部变量可以在 <code>Block</code> 内部进行修改.<br><img src="http://upload-images.jianshu.io/upload_images/2131368-4b64251e2b00e4a3?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p><img src="http://upload-images.jianshu.io/upload_images/2131368-d2d3f4e1e2394432?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>输出:<br>num:2, pointer:0xb000000000000022<br>blockNum:3, pointer:0xb000000000000032<br>可见 <strong> block 会拷贝原来对象,  </strong>block修饰的对象可被 Block 内外同时修改.</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/2131368-2547ebf5885ccbef.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>可见 <code>doctor</code> 和 <code>self</code> 被 <code>block</code> 持有, 即使没有使用<code>__ block</code> 修饰,但他们的属性依然可以被修改, 不会像上面的 <code>num = @3;</code> 那样报错禁止修改, 和 <code>NSArray</code> 是一样的, <code>NSArray</code> 本身是不可修改的, 但是 NSArray 里面存放的对象依然是可以修改的.</p>
@@ -255,6 +254,7 @@
 <p>说一下外面<code>__weak</code>,  里面<code>__strong</code>的好处, 在被<code>block</code>引用的时候,不会被 block 持有, 在<code>block</code>执行完毕, 立即将对象释放, 并不会造成循环引用, 而且还可以在多线程中, 在 <code>block</code> 区块内对对象持有.</p>
 <p>这里有个概念就是区块持有和对象持有.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">// 区块持有</div><div class="line">// 在块内声明的变量, 在块执行完毕立即被释放.</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>对象持有: 地址指向内存.</p>
+
             
         </div>
     </div>
@@ -505,7 +505,7 @@
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
+                        <div class="media-content hide-xs font-merryweather"><p>首先说一下循环引用, 为什么没用<code>__weak</code> 修饰就直接用 <code>self.</code>属性不会造成循环引用.<br>循环引用是指两个或者多个对象循环持有造成的无法释放.<br></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
@@ -524,7 +524,7 @@
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
+                        <div class="media-content hide-xs font-merryweather"><p>一个我日常开发所使用的工具, 会在日后不断在 GitHub 上更新.<br>目前提供手写板的功能和截图的功能.<br></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
@@ -543,7 +543,7 @@
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
+                        <div class="media-content hide-xs font-merryweather"><p>objc 在执行一个方法的时候是如何判断一个方法是否存在的?</p></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
@@ -562,7 +562,7 @@
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
+                        <div class="media-content hide-xs font-merryweather"><p><code>__attribute__</code> 是一个编译命令, 可以为变量、函数、类型定义提供一些属性.<br><code>__attribute__</code>有很多属性deprecated、unused、cleanup等等， 本文主要讲 cleanup.<br></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>

@@ -190,7 +190,7 @@
     <section class="postShorten-group main-content-wrap">
     
     
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+    <article class="postShorten postShorten--thumbnailimg-right" itemscope itemType="http://schema.org/BlogPosting">
         <div class="postShorten-wrap">
             
             <div class="postShorten-header">
@@ -218,32 +218,13 @@
 
             </div>
             
-                <div class="postShorten-content" itemprop="articleBody">
-                    <!-- excerpt -->
-<p>一个我日常开发所使用的工具, 会在日后不断在 GitHub 上更新.<br>目前提供手写板的功能和截图的功能.<br><a id="more"></a><br><img src="http://upload-images.jianshu.io/upload_images/2131368-62683a0f099fd8d8.gif?imageMogr2/auto-orient/strip" alt=""><br>使用: npm i –save react-native-tipsview</p>
-<p>具体使用请看demo: <a href="https://github.com/yansaid/RNTipsView/tree/master/Example" target="_blank" rel="external">https://github.com/yansaid/RNTipsView/tree/master/Example</a><br>运行 demo: 下载代码, 进入 Example/tips,<br>nmp install<br>进入 ios 工程直接运行项目即可, 目前仅支持 iOS.</p>
-<p>npm 发布流程:</p>
-<ol>
-<li><p>首先注册npm 账号:<br><a href="https://www.npmjs.com/" target="_blank" rel="external">https://www.npmjs.com/</a>,免费的即可.</p>
-</li>
-<li><p>生成 package.json :<br>npm 上面的信息都包含在 package.json 文件中.<br>首先在控制台进入想要发布的 package 目录,<br>然后在控制台输入 npm init , 此时正在配置 package.json 文件.<br>配置信息包括很多.<br>name : 唯一标示, 必须全部为小写, npm i –save<code>react-native-tipsview</code>中, <code>react-native-tipsview</code>就是name.<br>version : 版本号.<br>description : 描述信息, 你查看发布后的包的描述就可以看见.<br>main : 入口文件.<br>keywords : 关键词, 主要用于搜索时.</p>
-</li>
-</ol>
-<p>还有很多配置信息可自行搜索学习, 例如 GitHub 等等, 其中 name, 和 version 是必要字段, 没有则无法发布.</p>
-<ol>
-<li>发布<br><code>npm publish --registry http://registry.npmjs.org</code></li>
-</ol>
-<p>等待发布完毕, 可以尝试使用一下.</p>
-<p>GitHub: <a href="https://github.com/yansaid/RNTipsView" target="_blank" rel="external">https://github.com/yansaid/RNTipsView</a></p>
+                <div class="postShorten-excerpt" itemprop="articleBody">
+                    <p>一个我日常开发所使用的工具, 会在日后不断在 GitHub 上更新.<br>目前提供手写板的功能和截图的功能.<br>
                     
+                        <a href="/2016/06/30/tipsView/" class="postShorten-excerpt_link link">
+                            阅读全文
+                        </a>
                         
-                    
-                    
-                        <p>
-                            <a href="/2016/06/30/tipsView/#post-footer" class="postShorten-excerpt_link link">
-                                注释和共享
-                            </a>
-                        </p>
                     
                 </div>
             
@@ -361,7 +342,7 @@
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
+                        <div class="media-content hide-xs font-merryweather"><p>首先说一下循环引用, 为什么没用<code>__weak</code> 修饰就直接用 <code>self.</code>属性不会造成循环引用.<br>循环引用是指两个或者多个对象循环持有造成的无法释放.<br></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
@@ -380,7 +361,7 @@
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
+                        <div class="media-content hide-xs font-merryweather"><p>一个我日常开发所使用的工具, 会在日后不断在 GitHub 上更新.<br>目前提供手写板的功能和截图的功能.<br></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
@@ -399,7 +380,7 @@
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
+                        <div class="media-content hide-xs font-merryweather"><p>objc 在执行一个方法的时候是如何判断一个方法是否存在的?</p></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
@@ -418,7 +399,7 @@
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
+                        <div class="media-content hide-xs font-merryweather"><p><code>__attribute__</code> 是一个编译命令, 可以为变量、函数、类型定义提供一些属性.<br><code>__attribute__</code>有很多属性deprecated、unused、cleanup等等， 本文主要讲 cleanup.<br></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>

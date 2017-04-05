@@ -65,10 +65,9 @@ myAudio.onended = function()
     <link href="https://yansaid.github.io/2016/10/28/attribute%E4%BD%BF%E7%94%A8/"/>
     <id>https://yansaid.github.io/2016/10/28/attribute使用/</id>
     <published>2016-10-27T16:00:00.000Z</published>
-    <updated>2017-04-05T01:41:05.000Z</updated>
+    <updated>2017-04-05T01:45:14.000Z</updated>
     
-    <content type="html"><![CDATA[<!-- excerpt -->
-<p><code>__attribute__</code> 是一个编译命令, 可以为变量、函数、类型定义提供一些属性.<br><code>__attribute__</code>有很多属性deprecated、unused、cleanup等等， 本文主要讲 cleanup.<br><a id="more"></a><br>cleanup 变量作用域结束之前, 走 cleanup 方法.</p>
+    <content type="html"><![CDATA[<p><code>__attribute__</code> 是一个编译命令, 可以为变量、函数、类型定义提供一些属性.<br><code>__attribute__</code>有很多属性deprecated、unused、cleanup等等， 本文主要讲 cleanup.<br><a id="more"></a><br>cleanup 变量作用域结束之前, 走 cleanup 方法.</p>
 <p>基本功能:<br>变量作用域结束之前, 执行cleanup指定的方法,方法的参数为变量的地址</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/2131368-9139f7951f968b52.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p><img src="http://upload-images.jianshu.io/upload_images/2131368-698d86c538b7a3cb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
@@ -78,12 +77,12 @@ myAudio.onended = function()
 <p>使用:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^&#123;</div><div class="line">&#123;</div><div class="line">    &#123;</div><div class="line">        NSLock *lock = [[NSLock alloc] init];</div><div class="line">        [lock lock];</div><div class="line">        @onExit &#123;</div><div class="line">            [lock unlock];</div><div class="line">            NSLog(@&quot;end&quot;);</div><div class="line">        &#125;;</div><div class="line">        sleep(5);</div><div class="line">        NSLog(@&quot;begin&quot;);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">log:begin</div><div class="line">log:end</div></pre></td></tr></table></figure>
 <p>onExit 主要的作用是在某个块执行结束, 自动执行 block, 避免了忘记 unlock.</p>
-<p>如果想让代码在{}最后执行都可以使用 onExit.</p>]]></content>
+<p>如果想让代码在{}最后执行都可以使用 onExit.</p>
+]]></content>
     
     <summary type="html">
     
-      &lt;!-- excerpt --&gt;
-&lt;p&gt;&lt;code&gt;__attribute__&lt;/code&gt; 是一个编译命令, 可以为变量、函数、类型定义提供一些属性.&lt;br&gt;&lt;code&gt;__attribute__&lt;/code&gt;有很多属性deprecated、unused、cleanup等等， 
+      &lt;p&gt;&lt;code&gt;__attribute__&lt;/code&gt; 是一个编译命令, 可以为变量、函数、类型定义提供一些属性.&lt;br&gt;&lt;code&gt;__attribute__&lt;/code&gt;有很多属性deprecated、unused、cleanup等等， 本文主要讲 cleanup.&lt;br&gt;
     
     </summary>
     
@@ -99,10 +98,9 @@ myAudio.onended = function()
     <link href="https://yansaid.github.io/2016/07/15/objective-c%E6%B6%88%E6%81%AF%E8%BD%AC%E5%8F%91/"/>
     <id>https://yansaid.github.io/2016/07/15/objective-c消息转发/</id>
     <published>2016-07-14T16:00:00.000Z</published>
-    <updated>2017-04-01T03:48:42.000Z</updated>
+    <updated>2017-04-05T01:45:24.000Z</updated>
     
-    <content type="html"><![CDATA[<!-- excerpt -->
-<p>objc 在执行一个方法的时候是如何判断一个方法是否存在的?</p>
+    <content type="html"><![CDATA[<p>objc 在执行一个方法的时候是如何判断一个方法是否存在的?</p>
 <a id="more"></a>
 <ol>
 <li>从本类和父类中查找.</li>
@@ -123,17 +121,12 @@ myAudio.onended = function()
 <p>之后, 每次在父类本类中找不到, 并且没有找到动态添加方法, 则会走该方法, 你可以在这个方法中, return 目标对象, 则目标对象执行 aSelector. 如果没有重写标准消息转发, 并且 return nil, 则会报 <code>unrecognized selector sent to instance</code> 这个错误.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">- (id)forwardingTargetForSelector:(SEL)aSelector</div><div class="line">&#123;</div><div class="line">    Person *person = [[Person alloc]init];</div><div class="line">        if ([person respondsToSelector:aSelector]) &#123;</div><div class="line">        return person;</div><div class="line">    &#125;</div><div class="line">    return nil;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>4.标准消息转发, 主要可以实现多对象同时转发</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">// 生成一个方法, 并存入表中</div><div class="line">- (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector</div><div class="line">&#123;</div><div class="line">    NSMethodSignature* signature = [super methodSignatureForSelector:aSelector];</div><div class="line">    if (!signature) &#123;</div><div class="line">        signature = [yourObj methodSignatureForSelector:aSelector];</div><div class="line">    &#125;</div><div class="line">    return signature; // 将一个新签名的方法放入表中</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 实现动态添加方法, 并执行方法</div><div class="line">- (void)forwardInvocation:(NSInvocation *)anInvocation</div><div class="line">&#123;</div><div class="line">    SEL seletor = [anInvocation selector];</div><div class="line">    if ([yourObj respondsToSelector:seletor]) &#123;</div><div class="line">        [anInvocation invokeWithTarget:yourObj];</div><div class="line">    &#125;</div><div class="line">    // 这里可以转发若干个你想转发的对象</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 方法的 invoke 大概应该是这样实现的</div><div class="line">// 相当于 class_addMethod, 将 yourObj 中的方法  IMP 给了[self class].</div><div class="line">- (void) invokeWithTarget:(id)target &#123;</div><div class="line">    Method method = class_getInstanceMethod([target class], aSelector);</div><div class="line">    class_addMethod([self class],</div><div class="line">    aSelector,</div><div class="line">    method_getImplementation(method),</div><div class="line">    method_getTypeEncoding(method));</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">// 生成一个方法, 并存入表中</div><div class="line">- (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector</div><div class="line">&#123;</div><div class="line">    NSMethodSignature* signature = [super methodSignatureForSelector:aSelector];</div><div class="line">    if (!signature) &#123;</div><div class="line">        signature = [yourObj methodSignatureForSelector:aSelector];</div><div class="line">    &#125;</div><div class="line">    return signature; // 将一个新签名的方法放入表中</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 实现动态添加方法, 并执行方法</div><div class="line">- (void)forwardInvocation:(NSInvocation *)anInvocation</div><div class="line">&#123;</div><div class="line">    SEL seletor = [anInvocation selector];</div><div class="line">    if ([yourObj respondsToSelector:seletor]) &#123;</div><div class="line">        [anInvocation invokeWithTarget:yourObj];</div><div class="line">    &#125;</div><div class="line">    // 这里可以转发若干个你想转发的对象</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 方法的 invoke 大概应该是这样实现的</div><div class="line">// 相当于 class_addMethod, 将 yourObj 中的方法  IMP 给了[self class].</div><div class="line">- (void) invokeWithTarget:(id)target &#123;</div><div class="line">    Method method = class_getInstanceMethod([target class], aSelector);</div><div class="line">    class_addMethod([self class],</div><div class="line">    aSelector,</div><div class="line">    method_getImplementation(method),</div><div class="line">    method_getTypeEncoding(method));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+]]></content>
     
     <summary type="html">
     
-      &lt;!-- excerpt --&gt;
-&lt;p&gt;objc 在执行一个方法的时候是如何判断一个方法是否存在的?&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;ol&gt;
-&lt;li&gt;从本类和父类中查找.&lt;/li&gt;
-&lt;li&gt;检查是否动态添加方法.&lt;/li&gt;
-&lt;li&gt;查看是否存在快速消息转发.&lt;/li
+      &lt;p&gt;objc 在执行一个方法的时候是如何判断一个方法是否存在的?&lt;/p&gt;
     
     </summary>
     
@@ -149,10 +142,9 @@ myAudio.onended = function()
     <link href="https://yansaid.github.io/2016/06/30/tipsView/"/>
     <id>https://yansaid.github.io/2016/06/30/tipsView/</id>
     <published>2016-06-29T16:00:00.000Z</published>
-    <updated>2017-04-01T03:49:25.000Z</updated>
+    <updated>2017-04-05T01:45:32.000Z</updated>
     
-    <content type="html"><![CDATA[<!-- excerpt -->
-<p>一个我日常开发所使用的工具, 会在日后不断在 GitHub 上更新.<br>目前提供手写板的功能和截图的功能.<br><a id="more"></a><br><img src="http://upload-images.jianshu.io/upload_images/2131368-62683a0f099fd8d8.gif?imageMogr2/auto-orient/strip" alt=""><br>使用: npm i –save react-native-tipsview</p>
+    <content type="html"><![CDATA[<p>一个我日常开发所使用的工具, 会在日后不断在 GitHub 上更新.<br>目前提供手写板的功能和截图的功能.<br><a id="more"></a><br><img src="http://upload-images.jianshu.io/upload_images/2131368-62683a0f099fd8d8.gif?imageMogr2/auto-orient/strip" alt=""><br>使用: npm i –save react-native-tipsview</p>
 <p>具体使用请看demo: <a href="https://github.com/yansaid/RNTipsView/tree/master/Example" target="_blank" rel="external">https://github.com/yansaid/RNTipsView/tree/master/Example</a><br>运行 demo: 下载代码, 进入 Example/tips,<br>nmp install<br>进入 ios 工程直接运行项目即可, 目前仅支持 iOS.</p>
 <p>npm 发布流程:</p>
 <ol>
@@ -166,12 +158,12 @@ myAudio.onended = function()
 <li>发布<br><code>npm publish --registry http://registry.npmjs.org</code></li>
 </ol>
 <p>等待发布完毕, 可以尝试使用一下.</p>
-<p>GitHub: <a href="https://github.com/yansaid/RNTipsView" target="_blank" rel="external">https://github.com/yansaid/RNTipsView</a></p>]]></content>
+<p>GitHub: <a href="https://github.com/yansaid/RNTipsView" target="_blank" rel="external">https://github.com/yansaid/RNTipsView</a></p>
+]]></content>
     
     <summary type="html">
     
-      &lt;!-- excerpt --&gt;
-&lt;p&gt;一个我日常开发所使用的工具, 会在日后不断在 GitHub 上更新.&lt;br&gt;目前提供手写板的功能和截图的功能.&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;br&gt;&lt;img src=&quot;http://upload-images.jianshu.i
+      &lt;p&gt;一个我日常开发所使用的工具, 会在日后不断在 GitHub 上更新.&lt;br&gt;目前提供手写板的功能和截图的功能.&lt;br&gt;
     
     </summary>
     
@@ -187,10 +179,9 @@ myAudio.onended = function()
     <link href="https://yansaid.github.io/2016/05/03/block/"/>
     <id>https://yansaid.github.io/2016/05/03/block/</id>
     <published>2016-05-02T16:00:00.000Z</published>
-    <updated>2017-04-05T01:41:09.000Z</updated>
+    <updated>2017-04-05T01:45:19.000Z</updated>
     
-    <content type="html"><![CDATA[<!-- excerpt -->
-<p>首先说一下循环引用, 为什么没用<code>__weak</code> 修饰就直接用 <code>self.</code>属性不会造成循环引用.<br>循环引用是指两个或者多个对象循环持有造成的无法释放.<br><a id="more"></a><br>类 <code>Person</code> 有个属性 <code>block</code>, 在 <code>block</code> 实现后, 此时 <code>self</code> 持有 <code>block</code>, 如果在 <code>block</code> 中, 直接使用 <code>self</code>, <code>block</code> 将持有 <code>self</code>, 造成循环引用, 如果 <code>block</code> 本身不是 <code>self</code> 的属性, 则 <code>self</code>不持有 <code>block</code>, 即使在 <code>block</code> 中直接使用 <code>self</code> 也不会造成循环引用, 但是为了避免多个对象的循环引用, 所以 <code>block</code> 中最好还是用<code>__weak</code>, 防止这种情况出现. 代理用 <code>weak</code> 与此同理.</p>
+    <content type="html"><![CDATA[<p>首先说一下循环引用, 为什么没用<code>__weak</code> 修饰就直接用 <code>self.</code>属性不会造成循环引用.<br>循环引用是指两个或者多个对象循环持有造成的无法释放.<br><a id="more"></a><br>类 <code>Person</code> 有个属性 <code>block</code>, 在 <code>block</code> 实现后, 此时 <code>self</code> 持有 <code>block</code>, 如果在 <code>block</code> 中, 直接使用 <code>self</code>, <code>block</code> 将持有 <code>self</code>, 造成循环引用, 如果 <code>block</code> 本身不是 <code>self</code> 的属性, 则 <code>self</code>不持有 <code>block</code>, 即使在 <code>block</code> 中直接使用 <code>self</code> 也不会造成循环引用, 但是为了避免多个对象的循环引用, 所以 <code>block</code> 中最好还是用<code>__weak</code>, 防止这种情况出现. 代理用 <code>weak</code> 与此同理.</p>
 <p>__block:<br>使外部变量可以在 <code>Block</code> 内部进行修改.<br><img src="http://upload-images.jianshu.io/upload_images/2131368-4b64251e2b00e4a3?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p><img src="http://upload-images.jianshu.io/upload_images/2131368-d2d3f4e1e2394432?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>输出:<br>num:2, pointer:0xb000000000000022<br>blockNum:3, pointer:0xb000000000000032<br>可见 <strong> block 会拷贝原来对象,  </strong>block修饰的对象可被 Block 内外同时修改.</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/2131368-2547ebf5885ccbef.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>可见 <code>doctor</code> 和 <code>self</code> 被 <code>block</code> 持有, 即使没有使用<code>__ block</code> 修饰,但他们的属性依然可以被修改, 不会像上面的 <code>num = @3;</code> 那样报错禁止修改, 和 <code>NSArray</code> 是一样的, <code>NSArray</code> 本身是不可修改的, 但是 NSArray 里面存放的对象依然是可以修改的.</p>
@@ -210,12 +201,12 @@ myAudio.onended = function()
 <p>下面的例子刚好是在 <code>doctor</code> 被置为<code>nil</code>之前执行<code>__ strong</code>, 对象被 <code>block</code> 块持有, 没有被释放.</p>
 <p>说一下外面<code>__weak</code>,  里面<code>__strong</code>的好处, 在被<code>block</code>引用的时候,不会被 block 持有, 在<code>block</code>执行完毕, 立即将对象释放, 并不会造成循环引用, 而且还可以在多线程中, 在 <code>block</code> 区块内对对象持有.</p>
 <p>这里有个概念就是区块持有和对象持有.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">// 区块持有</div><div class="line">// 在块内声明的变量, 在块执行完毕立即被释放.</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>对象持有: 地址指向内存.</p>]]></content>
+<p>对象持有: 地址指向内存.</p>
+]]></content>
     
     <summary type="html">
     
-      &lt;!-- excerpt --&gt;
-&lt;p&gt;首先说一下循环引用, 为什么没用&lt;code&gt;__weak&lt;/code&gt; 修饰就直接用 &lt;code&gt;self.&lt;/code&gt;属性不会造成循环引用.&lt;br&gt;循环引用是指两个或者多个对象循环持有造成的无法释放.&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;
+      &lt;p&gt;首先说一下循环引用, 为什么没用&lt;code&gt;__weak&lt;/code&gt; 修饰就直接用 &lt;code&gt;self.&lt;/code&gt;属性不会造成循环引用.&lt;br&gt;循环引用是指两个或者多个对象循环持有造成的无法释放.&lt;br&gt;
     
     </summary>
     
