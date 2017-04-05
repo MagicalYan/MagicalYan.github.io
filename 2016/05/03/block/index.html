@@ -34,7 +34,7 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2131368-0c334ec2de2f09c3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2131368-ed9d6587642ae69e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2131368-3bb88da42b5adcf6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-04-01T03:48:24.000Z">
+<meta property="og:updated_time" content="2017-04-05T01:41:09.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="__strong、__weak、__block.">
 <meta name="twitter:description" content="首先说一下循环引用, 为什么没用__weak 修饰就直接用 self.属性不会造成循环引用.循环引用是指两个或者多个对象循环持有造成的无法释放.类 Person 有个属性 block, 在 block 实现后, 此时 self 持有 block, 如果在 block 中, 直接使用 self, block 将持有 self, 造成循环引用, 如果 block 本身不是 self 的属性, 则 s">
@@ -166,6 +166,15 @@
                     
                         <i class="sidebar-button-icon fa fa-lg fa-github"></i>
                         <span class="sidebar-button-desc">GitHub</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link " href="http://stackoverflow.com/users/5204025/yan" target="_blank">
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-stack-overflow"></i>
+                        <span class="sidebar-button-desc">Stack Overflow</span>
                     </a>
             </li>
             
@@ -477,7 +486,7 @@
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
+                        <div class="media-content hide-xs font-merryweather"><p>Category 在平常代码中经常使用，在使用第三方工具时，遇到工具不能直接解决当前问题的情况，我就会使用到Category，通过给特定的类加一个方法来处理这种情况。<br>本文仅仅介绍给（Category）加 weak 属性。<br></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>

@@ -151,6 +151,15 @@
                     </a>
             </li>
             
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link " href="http://stackoverflow.com/users/5204025/yan" target="_blank">
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-stack-overflow"></i>
+                        <span class="sidebar-button-desc">Stack Overflow</span>
+                    </a>
+            </li>
+            
         </ul>
         
             <ul class="sidebar-buttons">
@@ -438,7 +447,7 @@
     </article>
     
     
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+    <article class="postShorten postShorten--thumbnailimg-right" itemscope itemType="http://schema.org/BlogPosting">
         <div class="postShorten-wrap">
             
             <div class="postShorten-header">
@@ -466,28 +475,13 @@
 
             </div>
             
-                <div class="postShorten-content" itemprop="articleBody">
-                    <!-- excerpt -->
-<p>Category 在平常代码中经常使用，在使用第三方工具时，遇到工具不能直接解决当前问题的情况，我就会使用到Category，通过给特定的类加一个方法来处理这种情况。<br>本文仅仅介绍给（Category）加 weak 属性。<br><a id="more"></a><br>weak：修饰OBJC对象，不会持有指向修饰对象，同样指向的对象引用计数就不会增加，当指向的对象被释放释放的时候，weak修饰的对象会被置为nil。<br>因为堆内存是动态的，所以当某个地址的对象被释放的时候，所有指向他的指针都应该被置为空。weak就是为了满足避免循环引用，同时在对象被释放的时候可以被置为空的情况而存在的。<br>assign是为了修饰栈内存中的数值对象，当使用assign修饰了一个OBJC对象的时候，可能造成野指针。原因在上面刚刚提到。</p>
-<p>进入主题：给 Category 添加 weak 属性。<br>首先，给 Category 属性是需要使用runtime中的关联来实现set 和 get 方法。但runtime只提供如下几种修饰实现，并没有weak。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">typedef OBJC_ENUM(uintptr_t, objc_AssociationPolicy) &#123;</div><div class="line">OBJC_ASSOCIATION_ASSIGN = 0,           /**&lt; Specifies a weak reference to the associated object. */</div><div class="line">OBJC_ASSOCIATION_RETAIN_NONATOMIC = 1, /**&lt; Specifies a strong reference to the associated object.</div><div class="line">*   The association is not made atomically. */</div><div class="line">OBJC_ASSOCIATION_COPY_NONATOMIC = 3,   /**&lt; Specifies that the associated object is copied.</div><div class="line">*   The association is not made atomically. */</div><div class="line">OBJC_ASSOCIATION_RETAIN = 01401,       /**&lt; Specifies a strong reference to the associated object.</div><div class="line">*   The association is made atomically. */</div><div class="line">OBJC_ASSOCIATION_COPY = 01403          /**&lt; Specifies that the associated object is copied.</div><div class="line">*   The association is made atomically. */</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<p>看了别人的思路之后，加以修改。runtime没有开放weak解决方案，所以只能模仿 weak 的思路来实现. 思路是这样的，让需要被 weak 修饰的对象去持有一个 strong 的对象，然后当被修饰的对象被释放的时候，持有的对象也会被释放，那么我们就可以捕捉到释放的事件，进而使用OBJC_ASSOCIATION_ASSIGN 来实现弱引用，在释放事件里面再将其释放掉，进而实现weak功能。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2131368-499f0c8db94c56fa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">// 定义一个对象，使用block来回调析构函数。</div><div class="line">typedef void (^DeallocBlock)();</div><div class="line">@interface OriginalObject : NSObject</div><div class="line">@property (nonatomic, copy) DeallocBlock block;</div><div class="line">- (instancetype)initWithBlock:(DeallocBlock)block;</div><div class="line">@end</div><div class="line"></div><div class="line">@implementation OriginalObject</div><div class="line"></div><div class="line">- (instancetype)initWithBlock:(DeallocBlock)block</div><div class="line">&#123;</div><div class="line">self = [super init];</div><div class="line">if (self) &#123;</div><div class="line">self.block = block;</div><div class="line">&#125;</div><div class="line">return self;</div><div class="line">&#125;</div><div class="line">- (void)dealloc &#123;</div><div class="line">self.block ? self.block() : nil;</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure></p>
-<p>Category添加属性<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">// Category</div><div class="line">// NSObject+property.h</div><div class="line">@interface NSObject (property)</div><div class="line">@property (nonatomic, weak) id objc_weak_id;</div><div class="line">@end</div><div class="line"></div><div class="line">// NSObject+property.m</div><div class="line">@implementation NSObject (property)</div><div class="line">- (id)objc_weak_id &#123;</div><div class="line">return objc_getAssociatedObject(self, _cmd);</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)setObjc_weak_id:(id)objc_weak_id &#123;</div><div class="line">OriginalObject *ob = [[OriginalObject alloc] initWithBlock:^&#123;</div><div class="line">objc_setAssociatedObject(self, @selector(objc_weak_id), nil, OBJC_ASSOCIATION_ASSIGN);</div><div class="line">&#125;];</div><div class="line">// 这里关联的key必须唯一，如果使用_cmd，对一个对象多次关联的时候，前面的对象关联会失效。</div><div class="line">// 给需要被 assign 修饰的对象添加一个 strong 对象.</div><div class="line">objc_setAssociatedObject(objc_weak_id, (__bridge const void *)(ob.block), ob, OBJC_ASSOCIATION_RETAIN_NONATOMIC);</div><div class="line">objc_setAssociatedObject(self, @selector(objc_weak_id), objc_weak_id, OBJC_ASSOCIATION_ASSIGN);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>tips: 一个不被持有的对象是不能被 weak 指向. 即,<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">A *a = [[A alloc] init];</div><div class="line">self.weakObj = a;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>这样写是不成立的, a 会在{}执行之后便释放掉, self.weakObj 指向 nil. 所以上面 objc_weak_id 要关联一个 retain 的对象.</p>
-<p>具体体验weak 和 assgin的区别：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">@property (nonatomic,weak) id      weakPoint;</div><div class="line">@property (nonatomic,assign) id    assignPoint;</div><div class="line">@property (nonatomic,strong) id    strongPoint;</div><div class="line"></div><div class="line">self.strongPoint = [NSDate date];</div><div class="line">self.weakPoint = self.strongPoint;</div><div class="line">self.assignPoint = self.strongPoint;</div><div class="line">self.strongPoint = nil;</div><div class="line">NSLog(@&quot;%p&quot;, self.weakPoint); // print 0x0 指针置为空。</div><div class="line">NSLog(@&quot;%p&quot;, self.assignPoint); // crash 因为self.assignPoint指针指向的对象已经被释放。</div></pre></td></tr></table></figure></p>
-<p>测试weak是否正确：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">self.strongPoint = [NSDate date];</div><div class="line">self.objc_weak_id = self.strongPoint;</div><div class="line">self.weakPoint = self.strongPoint;</div><div class="line">NSLog(@&quot;%p&quot;, self.weakPoint); // print 指针。</div><div class="line">NSLog(@&quot;%p&quot;, self.objc_weak_id); // print 相同的指针。</div><div class="line">self.strongPoint = nil;</div><div class="line"></div><div class="line">NSLog(@&quot;%p&quot;, self.weakPoint); // print 0x0 指针置为空。</div><div class="line">NSLog(@&quot;%p&quot;, self.objc_weak_id); // print 0x0 指针置为空。</div></pre></td></tr></table></figure></p>
-<p>在Category中添加 property 相对添加方法少一些，而添加weak property是少之又少，但实现 通过这次实践，你可以明白什么是weak，什么是assign，而不是仅仅知道delegate中用weak，NSInteger用assign。</p>
+                <div class="postShorten-excerpt" itemprop="articleBody">
+                    <p>Category 在平常代码中经常使用，在使用第三方工具时，遇到工具不能直接解决当前问题的情况，我就会使用到Category，通过给特定的类加一个方法来处理这种情况。<br>本文仅仅介绍给（Category）加 weak 属性。<br>
                     
+                        <a href="/2016/03/21/类别/" class="postShorten-excerpt_link link">
+                            阅读全文
+                        </a>
                         
-                    
-                    
-                        <p>
-                            <a href="/2016/03/21/类别/#post-footer" class="postShorten-excerpt_link link">
-                                注释和共享
-                            </a>
-                        </p>
                     
                 </div>
             
@@ -586,7 +580,7 @@
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
+                        <div class="media-content hide-xs font-merryweather"><p>Category 在平常代码中经常使用，在使用第三方工具时，遇到工具不能直接解决当前问题的情况，我就会使用到Category，通过给特定的类加一个方法来处理这种情况。<br>本文仅仅介绍给（Category）加 weak 属性。<br></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
