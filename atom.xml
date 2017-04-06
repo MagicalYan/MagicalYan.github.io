@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://yansaid.github.io/"/>
-  <updated>2017-04-05T15:43:54.000Z</updated>
+  <updated>2017-04-06T06:19:17.000Z</updated>
   <id>https://yansaid.github.io/</id>
   
   <author>
@@ -20,11 +20,9 @@
     <link href="https://yansaid.github.io/2222/02/22/Me/"/>
     <id>https://yansaid.github.io/2222/02/22/Me/</id>
     <published>2222-02-21T16:00:00.000Z</published>
-    <updated>2017-04-05T15:43:54.000Z</updated>
+    <updated>2017-04-06T06:19:17.000Z</updated>
     
     <content type="html"><![CDATA[<!-- excerpt -->
-<audio id="audioList" autoplay="autoplay"><br>// 那就这样吧<br><!-- <source src="http://onk403mwf.bkt.clouddn.com/%E9%99%AA%E6%88%91%E7%9C%8B%E6%97%A5%E5%87%BA.m4a" type="audio/mpeg"/> --><br><br></audio>
-
 <script>
 let urls = [
 'http://onk403mwf.bkt.clouddn.com/%E9%99%AA%E6%88%91%E7%9C%8B%E6%97%A5%E5%87%BA.m4a',
@@ -35,16 +33,17 @@ let urls = [
 'http://onk403mwf.bkt.clouddn.com/%E7%88%B1%E6%83%85%E5%BA%9F%E6%9F%B4.m4a'
 ];
 var index = parseInt(Math.random() * (urls.length - 1), 10);
-myAudio=document.getElementById("audioList");
-myAudio.src = urls[index];
-myAudio.loop=false;
-myAudio.load();
+myAudio = document.createElement("audio");
+loadAudioAtIndex(index);
+function loadAudioAtIndex(index) {
+  myAudio.src = urls[index];
+  myAudio.loop=false;
+  myAudio.play();
+}
 myAudio.onended = function()
 {
-    if (index == urls.length - 1) index = -1;
-    myAudio.src = urls[++index];
-    myAudio.loop=false;
-    myAudio.load();
+  if (index == urls.length - 1) index = -1;
+  loadAudioAtIndex(++index);
 };
 </script>
 

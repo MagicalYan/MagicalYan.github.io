@@ -21,7 +21,7 @@
 <meta property="og:url" content="https://yansaid.github.io/2222/02/22/Me/index.html">
 <meta property="og:site_name" content="Yan Blog">
 <meta property="og:description" content="进来听听歌。">
-<meta property="og:updated_time" content="2017-04-05T15:43:54.000Z">
+<meta property="og:updated_time" content="2017-04-06T06:19:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Welcome To Yan's Website.">
 <meta name="twitter:description" content="进来听听歌。">
@@ -231,8 +231,6 @@
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
             <!-- excerpt -->
-<audio id="audioList" autoplay="autoplay"><br>// 那就这样吧<br><!-- <source src="http://onk403mwf.bkt.clouddn.com/%E9%99%AA%E6%88%91%E7%9C%8B%E6%97%A5%E5%87%BA.m4a" type="audio/mpeg"/> --><br><br></audio>
-
 <script>
 let urls = [
 'http://onk403mwf.bkt.clouddn.com/%E9%99%AA%E6%88%91%E7%9C%8B%E6%97%A5%E5%87%BA.m4a',
@@ -243,16 +241,17 @@ let urls = [
 'http://onk403mwf.bkt.clouddn.com/%E7%88%B1%E6%83%85%E5%BA%9F%E6%9F%B4.m4a'
 ];
 var index = parseInt(Math.random() * (urls.length - 1), 10);
-myAudio=document.getElementById("audioList");
-myAudio.src = urls[index];
-myAudio.loop=false;
-myAudio.load();
+myAudio = document.createElement("audio");
+loadAudioAtIndex(index);
+function loadAudioAtIndex(index) {
+  myAudio.src = urls[index];
+  myAudio.loop=false;
+  myAudio.play();
+}
 myAudio.onended = function()
 {
-    if (index == urls.length - 1) index = -1;
-    myAudio.src = urls[++index];
-    myAudio.loop=false;
-    myAudio.load();
+  if (index == urls.length - 1) index = -1;
+  loadAudioAtIndex(++index);
 };
 </script>
 
