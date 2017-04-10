@@ -63,6 +63,36 @@ myAudio.onended = function()
   </entry>
   
   <entry>
+    <title>整洁的代码-适配器模式(Adaptor)</title>
+    <link href="https://yansaid.github.io/2017/04/10/adaptor/"/>
+    <id>https://yansaid.github.io/2017/04/10/adaptor/</id>
+    <published>2017-04-09T16:00:00.000Z</published>
+    <updated>2017-04-10T08:13:31.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>什么是适配器模式?<br>例: 我们现在有很多不同种的螺母, 但只有一个螺钉, 螺钉都需要经过处理之后才可以用在螺母上, 处理螺钉的工具就叫做适配器。<br><a id="more"></a></p>
+<p>日常开发中，经常遇到多个视图上需要呈现来自一处的数据, 每个视图的数据处理，就可以定义适配器, 对数据进行处理, 每个适配器对数据处理, 返回给对应的视图, 当然使用一个类来包含所有适配器是可以的, 但是如果过多的处理堆在一个类中, 不方便日后阅读, 所以我建议, 每个适配器都建一个类.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">// 声明 Adaptor</div><div class="line">@property (nonatomic, strong) id&lt;AdaptorProtocol&gt; adaptor;</div><div class="line"></div><div class="line">// 获取数据</div><div class="line">#pragma mark - APIManagerDelegate</div><div class="line">- (void)apiManagerDidSuccess:(APIManager *)manager &#123;</div><div class="line">    NSDictionary *datas = [manager fetchDataWithAdaptor:self.adaptor]; // 通知数据源, 提供数据给 Adaptor 并让 Adaptor 执行数据处理, 返回数据.</div><div class="line">    NSLog(@&quot;%@&quot;, datas);</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 初始化</div><div class="line">- (id&lt;AdaptorProtocol&gt;)adaptor &#123;</div><div class="line">    if (!_adaptor) &#123;</div><div class="line">        _adaptor = [[Adaptor alloc] init];</div><div class="line">    &#125;</div><div class="line">    return _adaptor;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在 数据源 统一处理执行 Adaptor 的方法, 数据源不管你需要什么数据, 只把自己持有的数据给 Adaptor, 让 Adaptor 处理数据.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// APIManager.m</div><div class="line">- (NSDictionary *)fetchDataWithAdaptor:(id&lt;AdaptorProtocol&gt;)adaptor &#123;</div><div class="line">    if (adaptor == nil) &#123;</div><div class="line">        return nil;</div><div class="line">    &#125; else &#123;</div><div class="line">        return [adaptor configDataWithManager:self]; // 执行数据处理</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">//  Adaptor.h</div><div class="line">#import &quot;APIManager.h&quot;</div><div class="line"></div><div class="line">extern NSString * const kAdaptorKeyGender;</div><div class="line">extern NSString * const kAdaptorKeyName;</div><div class="line"></div><div class="line">@interface Adaptor : NSObject&lt;AdaptorProtocol&gt;</div><div class="line"></div><div class="line">@end</div><div class="line"></div><div class="line">//  Adaptor.m</div><div class="line">#import &quot;Adaptor.h&quot;</div><div class="line"></div><div class="line">NSString * const kAdaptorKeyGender = @&quot;kAdaptorKeyGender&quot;;</div><div class="line">NSString * const kAdaptorKeyName = @&quot;kAdaptorKeyName&quot;;</div><div class="line"></div><div class="line">@implementation Adaptor</div><div class="line"></div><div class="line">- (NSDictionary *)configDataWithManager:(APIManager *)manager &#123;</div><div class="line">// 处理数据, 并返回数据</div><div class="line">    return @&#123;kAdaptorKeyName:manager.dic[@&quot;name&quot;], kAdaptorKeyGender:manager.dic[@&quot;gender&quot;]&#125;;</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure>
+<p>如果需要一种新的数据格式, 就可以增加一个新的 Adaptor, 来做相应的处理即可.</p>
+<p>使用适配模式, 主要是为了把数据处理从 view 中抽出来, 方便日后的测试和修改.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;什么是适配器模式?&lt;br&gt;例: 我们现在有很多不同种的螺母, 但只有一个螺钉, 螺钉都需要经过处理之后才可以用在螺母上, 处理螺钉的工具就叫做适配器。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="iOS" scheme="https://yansaid.github.io/categories/iOS/"/>
+    
+    
+      <category term="ios" scheme="https://yansaid.github.io/tags/ios/"/>
+    
+  </entry>
+  
+  <entry>
     <title>NSString 为什么用 copy ? Block 为什么用 copy?</title>
     <link href="https://yansaid.github.io/2017/04/10/copy/"/>
     <id>https://yansaid.github.io/2017/04/10/copy/</id>
