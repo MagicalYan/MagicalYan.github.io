@@ -4,11 +4,31 @@
 
     
   <url>
-    <loc>https://yansaid.github.io/2017/04/10/adaptor/</loc>
-    <lastmod>2017-04-10T08:13:31.000Z</lastmod>
+    <loc>https://yansaid.github.io/2017/04/10/swizziling/</loc>
+    <lastmod>2017-04-12T07:22:23.000Z</lastmod>
     <data>
         <display>
-        <title>整洁的代码-适配器模式(Adaptor)</title>
+        <title>runtime 动态添加方法与执行</title>
+        <pubTime>2017-04-09T16:00:00.000Z</pubTime>
+        
+        <tag>ios</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="https://yansaid.github.io/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://yansaid.github.io/2017/04/10/adaptor/</loc>
+    <lastmod>2017-04-10T08:14:59.000Z</lastmod>
+    <data>
+        <display>
+        <title>整洁的代码 - 适配器模式(Adaptor)</title>
         <pubTime>2017-04-09T16:00:00.000Z</pubTime>
         
         <tag>ios</tag>
@@ -29,26 +49,6 @@
     <data>
         <display>
         <title>NSString 为什么用 copy ? Block 为什么用 copy?</title>
-        <pubTime>2017-04-09T16:00:00.000Z</pubTime>
-        
-        <tag>ios</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS" url="https://yansaid.github.io/categories/iOS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://yansaid.github.io/2017/04/10/swizziling/</loc>
-    <lastmod>2017-04-10T08:03:26.000Z</lastmod>
-    <data>
-        <display>
-        <title>runtime 动态添加方法与执行</title>
         <pubTime>2017-04-09T16:00:00.000Z</pubTime>
         
         <tag>ios</tag>
