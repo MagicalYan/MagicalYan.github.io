@@ -190,8 +190,15 @@
     <section class="postShorten-group main-content-wrap">
     
     
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+    <article class="postShorten postShorten--thumbnailimg-top" itemscope itemType="http://schema.org/BlogPosting">
         <div class="postShorten-wrap">
+            
+                <a href="/2222/02/22/Me/">
+                    <div class="postShorten-thumbnailimg">
+                        <img alt="" itemprop="image" src="http://onk403mwf.bkt.clouddn.com/city-750.jpg"/>
+                    </div>
+                </a>
+                
             
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
@@ -218,9 +225,8 @@
 
             </div>
             
-                <div class="postShorten-content" itemprop="articleBody">
-                    <!-- excerpt -->
-<script>
+                <div class="postShorten-excerpt" itemprop="articleBody">
+                    <script>
 let urls = [
 'http://onk403mwf.bkt.clouddn.com/%E9%99%AA%E6%88%91%E7%9C%8B%E6%97%A5%E5%87%BA.m4a',
 'http://onk403mwf.bkt.clouddn.com/%E9%82%A3%E5%B9%B4%E6%98%A5%E5%A4%A9%E4%B8%8B%E7%9D%80%E9%9B%AA.m4a',
@@ -243,28 +249,15 @@ myAudio.onended = function()
   loadAudioAtIndex(++index);
 };
 </script>
-
-<a id="more"></a>
                     
+                        <a href="/2222/02/22/Me/" class="postShorten-excerpt_link link">
+                            阅读全文
+                        </a>
                         
-                    
-                    
-                        <p>
-                            <a href="/2222/02/22/Me/#post-footer" class="postShorten-excerpt_link link">
-                                注释和共享
-                            </a>
-                        </p>
                     
                 </div>
             
         </div>
-        
-            <a href="/2222/02/22/Me/">
-                <div class="postShorten-thumbnailimg">
-                    <img alt="" itemprop="image" src="http://onk403mwf.bkt.clouddn.com/city-750.jpg"/>
-                </div>
-            </a>
-            
         
     </article>
     
@@ -863,7 +856,29 @@ myAudio.onended = function()
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
+                        <div class="media-content hide-xs font-merryweather"><script>
+let urls = [
+'http://onk403mwf.bkt.clouddn.com/%E9%99%AA%E6%88%91%E7%9C%8B%E6%97%A5%E5%87%BA.m4a',
+'http://onk403mwf.bkt.clouddn.com/%E9%82%A3%E5%B9%B4%E6%98%A5%E5%A4%A9%E4%B8%8B%E7%9D%80%E9%9B%AA.m4a',
+'http://onk403mwf.bkt.clouddn.com/%E9%9C%80%E8%A6%81%E4%BA%BA%E9%99%AA.m4a',
+'http://onk403mwf.bkt.clouddn.com/%E9%82%A3%E5%B0%B1%E8%BF%99%E6%A0%B7%E5%90%A7.m4a',
+'http://onk403mwf.bkt.clouddn.com/%E4%B8%80%E4%B8%AA%E4%BA%BA%E7%9A%84%E5%8C%97%E4%BA%AC.mp4',
+'http://onk403mwf.bkt.clouddn.com/%E7%88%B1%E6%83%85%E5%BA%9F%E6%9F%B4.m4a'
+];
+var index = parseInt(Math.random() * (urls.length - 1), 10);
+myAudio = document.createElement("audio");
+loadAudioAtIndex(index);
+function loadAudioAtIndex(index) {
+  myAudio.src = urls[index];
+  myAudio.loop=false;
+  myAudio.play();
+}
+myAudio.onended = function()
+{
+  if (index == urls.length - 1) index = -1;
+  loadAudioAtIndex(++index);
+};
+</script></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
