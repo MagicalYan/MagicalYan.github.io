@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://yansaid.github.io/"/>
-  <updated>2017-04-06T10:33:11.000Z</updated>
+  <updated>2017-04-25T04:11:14.000Z</updated>
   <id>https://yansaid.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://yansaid.github.io/2222/02/22/Me/"/>
     <id>https://yansaid.github.io/2222/02/22/Me/</id>
     <published>2222-02-21T16:00:00.000Z</published>
-    <updated>2017-04-06T10:33:11.000Z</updated>
+    <updated>2017-04-25T04:11:14.000Z</updated>
     
     <content type="html"><![CDATA[<!-- excerpt -->
 <script>
@@ -51,7 +51,11 @@ myAudio.onended = function()
     
     <summary type="html">
     
-      &lt;p&gt; 进来听听歌。&lt;/p&gt;
+      &lt;!-- excerpt --&gt;
+&lt;script&gt;
+let urls = [
+&#39;http://onk403mwf.bkt.clouddn.com/%E9%99%AA%E6%88%91%E7%9C%8B%E6%97%A5%E5%87%BA.m4a&#39;,
+&#39;http://onk403m
     
     </summary>
     
@@ -67,7 +71,7 @@ myAudio.onended = function()
     <link href="https://yansaid.github.io/2017/04/10/adaptor/"/>
     <id>https://yansaid.github.io/2017/04/10/adaptor/</id>
     <published>2017-04-09T16:00:00.000Z</published>
-    <updated>2017-04-10T08:14:59.000Z</updated>
+    <updated>2017-04-13T09:08:25.000Z</updated>
     
     <content type="html"><![CDATA[<p>什么是适配器模式?<br>例: 我们现在有很多不同种的螺母, 但只有一个螺钉, 螺钉都需要经过处理之后才可以用在螺母上, 处理螺钉的工具就叫做适配器。<br><a id="more"></a></p>
 <p>日常开发中，经常遇到多个视图上需要呈现来自一处的数据, 每个视图的数据处理，就可以定义适配器, 对数据进行处理, 每个适配器对数据处理, 返回给对应的视图, 当然使用一个类来包含所有适配器是可以的, 但是如果过多的处理堆在一个类中, 不方便日后阅读, 所以我建议, 每个适配器都建一个类.</p>
@@ -281,28 +285,29 @@ myAudio.onended = function()
     <link href="https://yansaid.github.io/2016/05/03/block/"/>
     <id>https://yansaid.github.io/2016/05/03/block/</id>
     <published>2016-05-02T16:00:00.000Z</published>
-    <updated>2017-04-05T01:45:19.000Z</updated>
+    <updated>2017-04-14T02:04:50.000Z</updated>
     
     <content type="html"><![CDATA[<p>首先说一下循环引用, 为什么没用<code>__weak</code> 修饰就直接用 <code>self.</code>属性不会造成循环引用.<br>循环引用是指两个或者多个对象循环持有造成的无法释放.<br><a id="more"></a><br>类 <code>Person</code> 有个属性 <code>block</code>, 在 <code>block</code> 实现后, 此时 <code>self</code> 持有 <code>block</code>, 如果在 <code>block</code> 中, 直接使用 <code>self</code>, <code>block</code> 将持有 <code>self</code>, 造成循环引用, 如果 <code>block</code> 本身不是 <code>self</code> 的属性, 则 <code>self</code>不持有 <code>block</code>, 即使在 <code>block</code> 中直接使用 <code>self</code> 也不会造成循环引用, 但是为了避免多个对象的循环引用, 所以 <code>block</code> 中最好还是用<code>__weak</code>, 防止这种情况出现. 代理用 <code>weak</code> 与此同理.</p>
 <p>__block:<br>使外部变量可以在 <code>Block</code> 内部进行修改.<br><img src="http://upload-images.jianshu.io/upload_images/2131368-4b64251e2b00e4a3?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p><img src="http://upload-images.jianshu.io/upload_images/2131368-d2d3f4e1e2394432?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>输出:<br>num:2, pointer:0xb000000000000022<br>blockNum:3, pointer:0xb000000000000032<br>可见 <strong> block 会拷贝原来对象,  </strong>block修饰的对象可被 Block 内外同时修改.</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/2131368-2547ebf5885ccbef.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>可见 <code>doctor</code> 和 <code>self</code> 被 <code>block</code> 持有, 即使没有使用<code>__ block</code> 修饰,但他们的属性依然可以被修改, 不会像上面的 <code>num = @3;</code> 那样报错禁止修改, 和 <code>NSArray</code> 是一样的, <code>NSArray</code> 本身是不可修改的, 但是 NSArray 里面存放的对象依然是可以修改的.</p>
 <p>__weak:<br><img src="http://upload-images.jianshu.io/upload_images/2131368-ed78fc9023d519ec.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><img src="http://upload-images.jianshu.io/upload_images/2131368-b1c3b8f30a523dae.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p><code>weak</code>的实现,  将当前对象(= 右边的对象)值的地址存入 <code>weak hash</code> 表, <code>hash</code> 表中的 <code>key</code> 是 <code>weak</code> 对象的地址, <code>value</code> 是当前对象(= 右边的对象)值的地址, 当每次访问<code>weak</code> 对象的时候, 首先找到 <code>key</code>, 再找到 <code>value</code>. 当当前对象的值被释放, <code>weak hash</code> 表将 <code>value</code> 设置为<code>nil</code>.  如果理解不了, 可以看一下 C语言的指针, 指针的指针.</p>
-<p>__weak 的作用: <code>weak</code> 表中的指向的对象, 不计入引用计数. 不持有对象, 但可以引用对象, 不参与对象释放.</p>
+<p><code>weak</code>的实现,  将当前对象(= 右边的对象)值的地址存入 <code>weak hash</code> 表, <code>hash</code> 表中的 <code>key</code> 是 <code>weak</code> 对象的地址, <code>value</code> 是当前对象(= 右边的对象)值的地址, 当每次访问<code>weak</code> 对象的时候, 首先找到 <code>key</code>, 再找到 <code>value</code>. 当当前对象的值被释放, <code>weak hash</code> 表将 <code>value</code> 设置为<code>nil</code>.  如果理解不了, 可以看一下 C语言的指针, 指针的指针. </p>
+<p> __weak 的作用: <code>weak</code> 表中的指向的对象, 不计入引用计数. 不持有对象, 但可以引用对象, 不参与对象释放.</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/2131368-188aa742ee71c5f7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><img src="http://upload-images.jianshu.io/upload_images/2131368-252e85de5c25330e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p>可见被<code>__weak</code> 修饰过的对象, 不会被 <code>block</code> 持有,所以在对象释放的时候, <code>block</code> 中的 <code>weak</code> 对象也被置为 <code>nil</code>.</p>
 <p>但有一种特殊的情况,  就是存放在栈区的对象并不会因为引用对象的释放而释放.<br><img src="http://upload-images.jianshu.io/upload_images/2131368-5cb84159fe6dd19a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p><img src="http://upload-images.jianshu.io/upload_images/2131368-b23a175a0bfa213a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p>字符串常量是存在栈区的, 栈内存并不会动态释放, 而是当当前线程执行完毕后, 释放当前线程的栈内存. 所有的常量都存在栈区.<br>所以上面的例子中即使使用<code>__ weak</code> 修饰, 但是<code>@&quot;aa&quot;</code>这个常量并没有被释放, 所以 <code>weak</code>的地址指向依然存在值.</p>
 <p><strong>strong:<br>在某个块内对当前对象引用计数加一.<br>在 AFN 中经常出现 <code>block</code> 外面 `</strong> weak<code>, 在内部再</code>__strong`.<br>这里有个例子需要理解</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2131368-98d02c315523d276.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><img src="http://upload-images.jianshu.io/upload_images/2131368-0c334ec2de2f09c3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2131368-98d02c315523d276.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="例 1"><br><img src="http://upload-images.jianshu.io/upload_images/2131368-0c334ec2de2f09c3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p>在这个例子中, 在 <code>block</code> 里面已经通过<code>__strong</code> 对对象引用计数加一,但为什么置为 <code>doctor</code> 置为 <code>nil</code>, 就被释放掉了那?<br>再看下面的例子:</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2131368-ed9d6587642ae69e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><img src="http://upload-images.jianshu.io/upload_images/2131368-3bb88da42b5adcf6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>这个例子为什么只有 <code>doctor</code>是空那?<br>结合两个例子, 引用计数的改变是一个动态改变, 只有被强引用之后, 引用计数才会加一, 我们看第一个例子, 在 <code>doctor</code> 置为 <code>nil</code> 之前, <code>block</code> 的<code>__ strong</code> 并没有执行, 所以当时 <code>doctor</code> 对象当前的区块持有, 当 <code>doctor</code> 置为 <code>nil</code> 的时候, 该对象已经被释放, 所以 <code>__strong</code> 的时候, <code>weak</code> 地址的内存已经被释放, 所以并没有对 doctor 对象引用加一.</p>
-<p>下面的例子刚好是在 <code>doctor</code> 被置为<code>nil</code>之前执行<code>__ strong</code>, 对象被 <code>block</code> 块持有, 没有被释放.</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2131368-ed9d6587642ae69e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="例 2"><br><img src="http://upload-images.jianshu.io/upload_images/2131368-3bb88da42b5adcf6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>这个例子为什么只有 <code>doctor</code>是空那?<br>结合两个例子, 引用计数的改变是一个动态改变, 只有被强引用之后, 引用计数才会加一。</p>
+<p>#####分析例 1：<br>在 <code>doctor</code> 置为 <code>nil</code> 之前, <code>block</code> 的<code>__ strong</code> 并没有执行, 所以当时 <code>doctor</code> 对象被当前的区块持有, 当 <code>doctor</code> 置为 <code>nil</code> 时, 该对象已经被释放, 所以 <code>__strong</code> 的时候, <code>weak</code> 地址的内存已经被释放, strong 指向 nil,  所以 doctor 对象引用计数并没有加 1.</p>
+<p>#####分析例 2：<br>在 <code>doctor</code> 被置为<code>nil</code>之前执行<code>__ strong</code>, doctor 引用计数加 1,  对象被 <code>block</code> 持有,  执行 <code>doctor = nil</code> 之后, doctor 仍然被 <code>block</code> 持有.</p>
 <p>说一下外面<code>__weak</code>,  里面<code>__strong</code>的好处, 在被<code>block</code>引用的时候,不会被 block 持有, 在<code>block</code>执行完毕, 立即将对象释放, 并不会造成循环引用, 而且还可以在多线程中, 在 <code>block</code> 区块内对对象持有.</p>
-<p>这里有个概念就是区块持有和对象持有.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">// 区块持有</div><div class="line">// 在块内声明的变量, 在块执行完毕立即被释放.</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这里有个概念就是区块持有和对象持有.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">     // 区块持有</div><div class="line">    // 在块内声明的变量, 在块执行完毕立即被释放.</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>对象持有: 地址指向内存.</p>
 ]]></content>
     
