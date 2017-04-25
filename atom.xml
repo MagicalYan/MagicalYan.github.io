@@ -63,6 +63,39 @@ myAudio.onended = function()
   </entry>
   
   <entry>
+    <title>Tagged Pointer, weak string 不释放.</title>
+    <link href="https://yansaid.github.io/2017/04/25/Tagged%20Pointer/"/>
+    <id>https://yansaid.github.io/2017/04/25/Tagged Pointer/</id>
+    <published>2017-04-24T16:00:00.000Z</published>
+    <updated>2017-04-25T07:59:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近被 NSString 无法释放这件事搞得糊涂。<br>首先说一下，发现问题的过程：<br><a id="more"></a></p>
+<p>有两个 weak properties<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">@property (nonatomic, weak) id a;</div><div class="line">@property (nonatomic, weak) id sa;</div></pre></td></tr></table></figure></p>
+<p>按道理来说, 当一个对象初始化就赋给了一个 weak 对象, 这个对象就会立刻被释放掉, 但有一个特俗的情况, 看下面的代码和输出。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">        NSString *temp = @&quot;sa&quot;;</div><div class="line">        NSMutableString *sa = [[NSMutableString alloc] initWithString:temp];</div><div class="line">        NSMutableArray *array = [NSMutableArray arrayWithObject:@&quot;aaa&quot;];</div><div class="line">        self.a = [array copy];</div><div class="line">        self.sa = [sa copy];</div><div class="line">        NSLog(@&quot;array:%p&quot;, array);</div><div class="line">        NSLog(@&quot;self.a:%p&quot;, self.a);</div><div class="line">        NSLog(@&quot;self.sa:%p&quot;, self.sa);</div><div class="line">        NSLog(@&quot;temp:%p&quot;, temp);</div><div class="line">&#125;</div><div class="line">array:0x600000241ad0</div><div class="line">self.a:0x0</div><div class="line">self.sa:0xa000000000061732</div><div class="line">temp:0x1081d0030</div></pre></td></tr></table></figure>
+<p>为什么 self.sa 没有被释放?<br>到这里我们来引入 <a href="https://mikeash.com/pyblog/friday-qa-2012-07-27-lets-build-tagged-pointers.html" target="_blank" rel="external"><code>Tagged Pointer</code></a> 这个概念.</p>
+<p>对于那些所需内存小于60位的字符串，它可以创建一个Tagged Pointer。其余的则被放置在真正的NSString对象里。这使得常用的短字符串的性能得到明显的提升。<br>NSNumber、NSDate等, 都是使用  <a href="https://mikeash.com/pyblog/friday-qa-2012-07-27-lets-build-tagged-pointers.html" target="_blank" rel="external"><code>Tagged Pointer</code></a>.</p>
+<p>当你重复运行的时候, 发现 self.sa 的地址, 始终没有发生变化, 其实那并不是对象的地址, 而是直接指向数据的指针.</p>
+<p>可以发现实际的地址 <code>self.sa:0xa000000000061732</code> 对应的数据格式如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">0x2 - Length (2)</div><div class="line">0x73 - &apos;s&apos; </div><div class="line">0x61 - &apos;a&apos;</div></pre></td></tr></table></figure></p>
+<p>当我改代码如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">        NSString *temp = @&quot;saaaaaaaaaaa&quot;;</div><div class="line">        NSMutableString *sa = [[NSMutableString alloc] initWithString:temp];</div><div class="line">        NSMutableArray *array = [NSMutableArray arrayWithObject:@&quot;aaa&quot;];</div><div class="line">        self.a = [array copy];</div><div class="line">        self.sa = [sa copy];</div><div class="line">        NSLog(@&quot;array:%p&quot;, array);</div><div class="line">        NSLog(@&quot;self.a:%p&quot;, self.a);</div><div class="line">        NSLog(@&quot;self.sa:%p&quot;, self.sa);</div><div class="line">        NSLog(@&quot;temp:%p&quot;, temp);</div><div class="line">        </div><div class="line">&#125;</div><div class="line">array:0x600000055300</div><div class="line">self.a:0x0</div><div class="line">self.sa:0x0</div><div class="line">temp:0x109c74030</div></pre></td></tr></table></figure></p>
+<p>发现 self.sa 也变为 nil 了, 因为当长度大于60的时候,  <a href="https://mikeash.com/pyblog/friday-qa-2012-07-27-lets-build-tagged-pointers.html" target="_blank" rel="external"><code>Tagged Pointer</code></a>失效, 改用对象存储, 则初始化后立刻被释放掉了.</p>
+<p>感谢 <a href="http://stackoverflow.com/users/431526/sven" target="_blank" rel="external">@sven</a> 在 <a href="http://stackoverflow.com/questions/43568704/when-a-weak-object-nsmutablestring-copy-who-holds-the-nsmutablestring-copy" target="_blank" rel="external">stackoverflow</a> 的解答.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近被 NSString 无法释放这件事搞得糊涂。&lt;br&gt;首先说一下，发现问题的过程：&lt;br&gt;
+    
+    </summary>
+    
+      <category term="iOS" scheme="https://yansaid.github.io/categories/iOS/"/>
+    
+    
+      <category term="ios" scheme="https://yansaid.github.io/tags/ios/"/>
+    
+  </entry>
+  
+  <entry>
     <title>整洁的代码 - 适配器模式(Adaptor)</title>
     <link href="https://yansaid.github.io/2017/04/10/adaptor/"/>
     <id>https://yansaid.github.io/2017/04/10/adaptor/</id>
