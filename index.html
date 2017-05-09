@@ -239,7 +239,7 @@
     </article>
     
     
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+    <article class="postShorten postShorten--thumbnailimg-right" itemscope itemType="http://schema.org/BlogPosting">
         <div class="postShorten-wrap">
             
             <div class="postShorten-header">
@@ -267,25 +267,13 @@
 
             </div>
             
-                <div class="postShorten-content" itemprop="articleBody">
-                    <p>产品开发的时候无法避免的就是在一个 <code>UITableView</code>中, 包含多种样式的 <code>cell</code>, 我们通常的做法如下:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">if (indexPath.row == 0) &#123;</div><div class="line">      </div><div class="line">&#125; else if (indexPath.row == 1) &#123;</div><div class="line"></div><div class="line">&#125; else if (indexPath.row == 2) &#123;</div><div class="line"></div><div class="line">&#125; .....</div></pre></td></tr></table></figure>
-<p>这样的做法没有问题, 但是如果有很多种 <code>cell</code> 的话, 例如资料页, 当需要在第二和第三个 <code>cell</code> 之间插入一个 <code>cell</code> 的时候, 我们需要把数组添加一列, 然后把整个 <code>if</code> 改一遍, 如何避免 <code>index</code> 之间的耦合? </p>
-<p>OK, 简单来说就是在<code>数据模型</code> 中添加一个标识, 数据的排列交给数组, 我们不判断当前是第几个, 只根据标识来确定放那种样式的<code>cell</code>,<br>这样只有当增加新的样式的时候才会涉及到改 UI 部分的代码, 大部分情况我们只需要对数组进行排序即可, 而不必因为该数组, 从而再改 <code>if</code>.</p>
-<p>###下面来介绍一款专门为了解耦而写的第三方: <a href="https://github.com/yansaid/HYTableViewSection" target="_blank" rel="external">HYTableViewSection</a></p>
-<p>使用方法:<br>通过构建数据来实现布局</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">HYTableViewRow *row = [HYTableViewRow row:@&#123;@&quot;title&quot;:@&quot;style1&quot;&#125;];</div><div class="line">row.identifier = @&quot;style1&quot;;</div><div class="line">row.heightBlock = ^CGFloat&#123;</div><div class="line">    return 100;  // heightBlock 可以使用计算复杂高度, 或者直接使用 row.height</div><div class="line">&#125;;</div><div class="line">[self.tableView.hy_section addRowModel:row atSection:0];</div><div class="line"></div><div class="line">HYTableViewRow *row1 = [HYTableViewRow row:@&#123;@&quot;title&quot;:@&quot;style2&quot;&#125;];</div><div class="line">row1.identifier = @&quot;style2&quot;;</div><div class="line">row1.heightBlock = ^CGFloat&#123;</div><div class="line">    return 150;</div><div class="line">&#125;;</div><div class="line">[self.tableView.hy_section addRowModel:row1 atSection:0];</div><div class="line"></div><div class="line"></div><div class="line">HYTableViewRow *row2 = [HYTableViewRow row:@&#123;@&quot;title&quot;:@&quot;style3&quot;&#125;];</div><div class="line">row2.identifier = @&quot;style3&quot;;</div><div class="line">row2.heightBlock = ^CGFloat&#123;</div><div class="line">    return 80;</div><div class="line">&#125;;</div><div class="line">[self.tableView.hy_section addRowModel:row2 atSection:1];</div></pre></td></tr></table></figure>
-<p>代理方法中使用技巧, 除了新增 <code>style</code> 几乎不会涉及改 <code>UITableView</code> 的代理方法.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath &#123;</div><div class="line">    HYTableViewRow *row = [self.tableView.hy_section modelAtIndexPath:indexPath];</div><div class="line">    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:row.identifier];</div><div class="line">    if (!cell) &#123;</div><div class="line">        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:row.identifier];</div><div class="line">    &#125;</div><div class="line">    cell.textLabel.text = row.model[@&quot;title&quot;];</div><div class="line">    if ([row.identifier isEqualToString:@&quot;style1&quot;]) &#123;</div><div class="line">        cell.contentView.backgroundColor = [UIColor redColor];</div><div class="line">    &#125; else if ([row.identifier isEqualToString:@&quot;style2&quot;]) &#123;</div><div class="line">        cell.contentView.backgroundColor = [UIColor greenColor];</div><div class="line">    &#125; else if ([row.identifier isEqualToString:@&quot;style3&quot;]) &#123;</div><div class="line">        cell.contentView.backgroundColor = [UIColor blueColor];</div><div class="line">    &#125;</div><div class="line">    return cell;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath &#123;</div><div class="line">    HYTableViewRow *row = [self.tableView.hy_section modelAtIndexPath:indexPath];</div><div class="line">    return row.height;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section &#123;</div><div class="line">    return [self.tableView.hy_section numberOfRowsInSection:section];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView &#123;</div><div class="line">    return [self.tableView.hy_section numberOfSections];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+                <div class="postShorten-excerpt" itemprop="articleBody">
+                    <p>产品开发的时候无法避免的就是在一个 <code>UITableView</code>中, 包含多种样式的 <code>cell</code>, 我们通常的做法如下:<br>
                     
+                        <a href="/2017/05/09/uitableview 解耦/" class="postShorten-excerpt_link link">
+                            阅读全文
+                        </a>
                         
-                    
-                    
-                        <p>
-                            <a href="/2017/05/09/uitableview 解耦/#post-footer" class="postShorten-excerpt_link link">
-                                注释和共享
-                            </a>
-                        </p>
                     
                 </div>
             
@@ -386,6 +374,49 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
+                        <a class="link-unstyled" href="/2017/04/10/swizziling/">
+                            runtime 动态添加方法与执行
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2017-04-10T00:00:00+08:00">
+	
+		    4月 10, 2017
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/iOS/">iOS</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-excerpt" itemprop="articleBody">
+                    <p>OC 是一门动态的语言, runtime 的机制给开发者提供了许多新的可能, 在运行时, 可以动态为一个类添加方法和属性.<br>
+                    
+                        <a href="/2017/04/10/swizziling/" class="postShorten-excerpt_link link">
+                            阅读全文
+                        </a>
+                        
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-right" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
                         <a class="link-unstyled" href="/2017/04/10/copy/">
                             NSString 为什么用 copy ? Block 为什么用 copy?
                         </a>
@@ -413,49 +444,6 @@
 <p>浅拷贝：<br>拷贝的是地址，和对象的 = 赋值是一样的。<br>OC 中 我们声明一个 NSString 属性。<br>
                     
                         <a href="/2017/04/10/copy/" class="postShorten-excerpt_link link">
-                            阅读全文
-                        </a>
-                        
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-right" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2017/04/10/swizziling/">
-                            runtime 动态添加方法与执行
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2017-04-10T00:00:00+08:00">
-	
-		    4月 10, 2017
-    	
-    </time>
-    
-        <span>发布在 </span>
-        
-    <a class="category-link" href="/categories/iOS/">iOS</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-excerpt" itemprop="articleBody">
-                    <p>OC 是一门动态的语言, runtime 的机制给开发者提供了许多新的可能, 在运行时, 可以动态为一个类添加方法和属性.<br>
-                    
-                        <a href="/2017/04/10/swizziling/" class="postShorten-excerpt_link link">
                             阅读全文
                         </a>
                         
@@ -907,7 +895,7 @@
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
+                        <div class="media-content hide-xs font-merryweather"><p>产品开发的时候无法避免的就是在一个 <code>UITableView</code>中, 包含多种样式的 <code>cell</code>, 我们通常的做法如下:<br></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
