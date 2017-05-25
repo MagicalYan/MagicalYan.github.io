@@ -5,7 +5,7 @@
     
   <url>
     <loc>https://yansaid.github.io/2017/05/11/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/</loc>
-    <lastmod>2017-05-11T07:24:07.000Z</lastmod>
+    <lastmod>2017-05-25T10:08:44.000Z</lastmod>
     <data>
         <display>
         <title>Objective-C 实现排序算法</title>
@@ -17,6 +17,29 @@
            
              
               <breadCrumb title="iOS" url="https://yansaid.github.io/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://yansaid.github.io/2017/05/25/%E5%85%A8%E5%B1%80%E9%9D%99%E6%80%81%E5%8F%98%E9%87%8F/</loc>
+    <lastmod>2017-05-25T10:01:48.000Z</lastmod>
+    <data>
+        <display>
+        <title>全局静态变量 和 全局变量 的区别</title>
+        <pubTime>2017-05-24T16:00:00.000Z</pubTime>
+        
+        <tag>ios</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="https://yansaid.github.io/categories/iOS/"/>
+          
+             
+              <breadCrumb title="C" url="https://yansaid.github.io/categories/iOS/C/"/>
           
         </display>
     </data>

@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Yan Blog">
-    <title>分类: introduce - Yan Blog</title>
+    <title>全局静态变量 和 全局变量 的区别 - Yan Blog</title>
     <meta name="author" content="Yan">
     
     
@@ -15,12 +15,16 @@
     
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <meta property="og:type" content="blog">
-<meta property="og:title" content="Yan Blog">
-<meta property="og:url" content="https://yansaid.github.io/categories/introduce/index.html">
+    <meta name="description" content="由于近几年一直在敲 oc, 在 oc 中使用的 c 并不多, 于是把这些给忘了。最近看 react-native 的源码的时候，最先入手的是RCT_EXPORT_MODULE(), 这个宏到底是干嘛的那 ?">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="全局静态变量 和 全局变量 的区别">
+<meta property="og:url" content="https://yansaid.github.io/2017/05/25/全局静态变量/index.html">
 <meta property="og:site_name" content="Yan Blog">
+<meta property="og:description" content="由于近几年一直在敲 oc, 在 oc 中使用的 c 并不多, 于是把这些给忘了。最近看 react-native 的源码的时候，最先入手的是RCT_EXPORT_MODULE(), 这个宏到底是干嘛的那 ?">
+<meta property="og:updated_time" content="2017-05-25T10:01:48.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Yan Blog">
+<meta name="twitter:title" content="全局静态变量 和 全局变量 的区别">
+<meta name="twitter:description" content="由于近几年一直在敲 oc, 在 oc 中使用的 c 并不多, 于是把这些给忘了。最近看 react-native 的源码的时候，最先入手的是RCT_EXPORT_MODULE(), 这个宏到底是干嘛的那 ?">
     
     
         
@@ -52,7 +56,7 @@
         
     
 
-<header id="header" data-behavior="1">
+<header id="header" data-behavior="4">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <div class="header-title">
         <a class="header-title-link" href="/ ">Yan Blog</a>
@@ -76,7 +80,7 @@
         
     
 
-<nav id="sidebar" data-behavior="1">
+<nav id="sidebar" data-behavior="4">
     <div class="sidebar-container">
         
             <div class="sidebar-profile">
@@ -182,73 +186,134 @@
 </nav>
 
             
-            <div id="main" data-behavior="1"
+            <div id="main" data-behavior="4"
                  class="
                         hasCoverMetaIn
                         ">
                 
-    <section class="postShorten-group main-content-wrap">
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
     
     
-    <article class="postShorten postShorten--thumbnailimg-top" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-                <a href="/2222/02/22/Me/">
-                    <div class="postShorten-thumbnailimg">
-                        <img alt="" itemprop="image" src="http://onk403mwf.bkt.clouddn.com/city-750.jpg"/>
-                    </div>
-                </a>
-                
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2222/02/22/Me/">
-                            Welcome To Yan&#39;s Website!
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2222-02-22T00:00:00+08:00">
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title" itemprop="headline">
+            全局静态变量 和 全局变量 的区别
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2017-05-25T00:00:00+08:00">
 	
-		    2月 22, 2222
+		    5月 25, 2017
     	
     </time>
     
         <span>发布在 </span>
         
-    <a class="category-link" href="/categories/introduce/">introduce</a>
+    <a class="category-link" href="/categories/iOS/">iOS</a>, <a class="category-link" href="/categories/iOS/C/">C</a>
 
 
     
 </div>
 
-            </div>
-            
-                <div class="postShorten-excerpt" itemprop="articleBody">
-                    <p>Songs<br>
-                    
-                        <a href="/2222/02/22/Me/" class="postShorten-excerpt_link link">
-                            阅读全文
-                        </a>
-                        
-                    
-                </div>
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>由于近几年一直在敲 oc, 在 oc 中使用的 c 并不多, 于是把这些给忘了。<br>最近看 react-native 的源码的时候，最先入手的是<code>RCT_EXPORT_MODULE()</code>, 这个宏到底是干嘛的那 ?<br><a id="more"></a><br>ok, 我们来看源码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#define RCT_EXPORT_MODULE(js_name) \</div><div class="line">RCT_EXTERN void RCTRegisterModule(Class); \</div><div class="line">+ (NSString *)moduleName &#123; return @#js_name; &#125; \</div><div class="line">+ (void)load &#123; RCTRegisterModule(self); &#125;</div></pre></td></tr></table></figure>
+<p><code>moduleName</code> 是添加一个类方法, 可以返回定义的 js_name, 没什么好说的, 往下看 <code>+ (void)load { RCTRegisterModule(self);</code> 重写 <code>load</code> 的方法, 在 <code>load</code> 中执行了 <code>RCTRegisterModule</code>, 我们看一下, 这个方法:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">static NSMutableArray&lt;Class&gt; *RCTModuleClasses;</div><div class="line">void RCTRegisterModule(Class);</div><div class="line">void RCTRegisterModule(Class moduleClass)</div><div class="line">&#123;</div><div class="line">  static dispatch_once_t onceToken;</div><div class="line">  dispatch_once(&amp;onceToken, ^&#123;</div><div class="line">    RCTModuleClasses = [NSMutableArray new];</div><div class="line">  &#125;);</div><div class="line"></div><div class="line">  RCTAssert([moduleClass conformsToProtocol:@protocol(RCTBridgeModule)],</div><div class="line">            @&quot;%@ does not conform to the RCTBridgeModule protocol&quot;,</div><div class="line">            moduleClass);</div><div class="line">  // Register module</div><div class="line">  [RCTModuleClasses addObject:moduleClass];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>ok，我们终于讲到正题, 我定义一个 <code>Test</code> 类, 代码如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">//.m</div><div class="line">#import &quot;Test.h&quot;</div><div class="line">void RCTRegisterModule(Class moduleClass)</div><div class="line">&#123;</div><div class="line">    static dispatch_once_t onceToken;</div><div class="line">    dispatch_once(&amp;onceToken, ^&#123;</div><div class="line">        RCTModuleClasses = [NSMutableArray new];</div><div class="line">    &#125;);</div><div class="line">    // Register module</div><div class="line">    [RCTModuleClasses addObject:moduleClass];</div><div class="line">&#125;</div><div class="line">@implementation Test</div><div class="line">@end</div><div class="line"></div><div class="line">//.h</div><div class="line">void RCTRegisterModule(Class);</div><div class="line">static NSMutableArray&lt;Class&gt; *RCTModuleClasses;</div><div class="line"></div><div class="line">@interface Test : NSObject</div><div class="line">@end</div></pre></td></tr></table></figure>
+<p>当我在 <code>APPDelegate</code> 中, 调用和打印:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">RCTRegisterModule(self.class);</div><div class="line">NSLog(@&quot;%@&quot;, RCTModuleClasses);</div><div class="line"></div><div class="line">log: (null)</div></pre></td></tr></table></figure></p>
+<p>这里为什么会是空的那? 我明明调用了<code>RCTRegisterModule</code>, 而且<code>RCTModuleClasses</code> 还是一个单利, ok, 接下来我使用全局变量来试一下,</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">//.m</div><div class="line">#import &quot;Test.h&quot;</div><div class="line">NSMutableArray&lt;Class&gt; *RCTModuleClasses;</div><div class="line">void RCTRegisterModule(Class moduleClass)</div><div class="line">&#123;</div><div class="line">    static dispatch_once_t onceToken;</div><div class="line">    dispatch_once(&amp;onceToken, ^&#123;</div><div class="line">        RCTModuleClasses = [NSMutableArray new];</div><div class="line">    &#125;);</div><div class="line">    // Register module</div><div class="line">    [RCTModuleClasses addObject:moduleClass];</div><div class="line">&#125;</div><div class="line">@implementation Test</div><div class="line">@end</div><div class="line"></div><div class="line">//.h</div><div class="line">void RCTRegisterModule(Class);</div><div class="line">extern NSMutableArray&lt;Class&gt; *RCTModuleClasses;</div><div class="line"></div><div class="line">@interface Test : NSObject</div><div class="line"></div><div class="line">- (void)hahah;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
+<p>当我在 <code>APPDelegate</code> 中, 调用和打印:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">RCTRegisterModule(self.class);</div><div class="line">NSLog(@&quot;%@&quot;, RCTModuleClasses);</div><div class="line"></div><div class="line">log: (</div><div class="line">    AppDelegate</div><div class="line">)</div></pre></td></tr></table></figure>
+<p>带着疑惑 Google 了一下, 全局静态变量 和 全局变量的区别, 全局静态变量是有作用域的, 只可以被声明的.h .m / .c 中访问到, 全局变量是没有作用域的，无论在任何地方，引入一下 Test.h，便可以获得并使用全局变量。</p>
+<p>当然还有一个局部静态变量, 就是在块 <code>{}</code> 中可以访问, 他与普通局部变量的区别就是, 局部静态变量 的作用是保持变量内容的持久。</p>
+
             
         </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
         
-    </article>
-    
-    <div class="pagination-bar">
-    <ul class="pagination">
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/ios/">ios</a>
+
+            </div>
         
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2222/02/22/Me/"  data-tooltip="Welcome To Yan&#39;s Website!">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/05/11/排序算法/" data-tooltip="Objective-C 实现排序算法">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://yansaid.github.io/2017/05/25/全局静态变量/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yansaid.github.io/2017/05/25/全局静态变量/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://yansaid.github.io/2017/05/25/全局静态变量/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
         
-        <li class="pagination-number">第 1 页 共 1 页</li>
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#lv-container">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
     </ul>
 </div>
 
-</section>
+        
+            
+                <!-- UY BEGIN -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8yODA1OS80NjM0"></div>
+<!-- UY END -->
 
+            
+        
+    </div>
+</article>
 
 
                 <footer id="footer" class="main-content-wrap">
@@ -258,6 +323,89 @@
 </footer>
 
             </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2222/02/22/Me/"  data-tooltip="Welcome To Yan&#39;s Website!">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/05/11/排序算法/" data-tooltip="Objective-C 实现排序算法">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://yansaid.github.io/2017/05/25/全局静态变量/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yansaid.github.io/2017/05/25/全局静态变量/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://yansaid.github.io/2017/05/25/全局静态变量/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#lv-container">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https://yansaid.github.io/2017/05/25/全局静态变量/">
+                <i class="fa fa-google-plus"></i><span>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yansaid.github.io/2017/05/25/全局静态变量/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https://yansaid.github.io/2017/05/25/全局静态变量/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+
             
         </div>
         
@@ -528,6 +676,24 @@
 <script src="/assets/js/jquery.fancybox-thumbs.js"></script>
 <script src="/assets/js/tranquilpeak.js"></script>
 <!--SCRIPTS END-->
+
+    
+      <!-- 来必力City版安装代码 -->
+<script type="text/javascript">
+ (function(d, s) {
+     var j, e = d.getElementsByTagName(s)[0];
+
+     if (typeof LivereTower === 'function') { return; }
+
+     j = d.createElement(s);
+     j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+     j.async = true;
+
+     e.parentNode.insertBefore(j, e);
+ })(document, 'script');
+</script>
+<!-- City版安装代码已完成 -->
+    
 
 
 
