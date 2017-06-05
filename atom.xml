@@ -63,6 +63,42 @@ myAudio.onended = function()
   </entry>
   
   <entry>
+    <title>关于 OC 的循环引用, 特俗情况</title>
+    <link href="https://yansaid.github.io/2017/06/05/%E5%BE%AA%E7%8E%AF%E5%BC%95%E7%94%A8/"/>
+    <id>https://yansaid.github.io/2017/06/05/循环引用/</id>
+    <published>2017-06-04T16:00:00.000Z</published>
+    <updated>2017-06-05T06:36:19.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>一说起循环引用, 首先肯定想到的是 <code>block</code> 和 <code>代理</code>，解决方法就是使用 <code>weak</code> 来弱引用.<br><a id="more"></a></p>
+<p>#####什么是循环引用?<br>有两个对象 A 和 B, A 强引用 B, 并且 B 强引用 A, 这就是循环引用, 因为两个对象互相强引用, 所以两个对象都不会被释放.</p>
+<p>block 的循环引用请看: <a href="http://www.jianshu.com/p/34400360ce7e" target="_blank" rel="external">block 循环引用, <code>__strong、__weak、__block</code>使用规则</a></p>
+<p>#####无法直接通过 <code>weak</code> 来解决循环引用的情况</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">self.displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(selector)];</div><div class="line">[self.displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];</div><div class="line"></div><div class="line">- (void)dealloc &#123;</div><div class="line">    [self.displayLink invalidate];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上面这段代码, 我希望在 dealloc 的时候将 <code>CADisplayLink</code> 对象释放掉, 但是 <code>CADisplayLink</code> 在 <code>displayLinkWithTarget</code> 方法中,  <code>CADisplayLink</code> 对象会强引用 <code>self</code>, 如此看来, <code>self</code> 和 self.displayLink 已经出现循环引用,  那么如何在不主动执行 <code>[self.displayLink invalidate];</code> 的前提下将 <code>self</code> 释放掉?</p>
+<p>首先我们都会想到使用 <code>__weak</code> 来实现, 但是, 在 <code>CADisplayLink</code> 内部被强引用, 怎么实现这个 <code>weak</code>?</p>
+<p>既然两个对象无法解决, 我们就加一个对象, 或者更多, 只要, 这个闭环中有一个对象是 <code>weak</code> 的, 那么循环引用就不成立了, 那么怎么加这个对象那, 在之前的文章(<a href="http://www.jianshu.com/p/3bb4595ba686" target="_blank" rel="external">objective-c 的消息转发</a>)中, 提到过消息转发.</p>
+<p>我们现在新加一个类叫做 <code>WeakTarget</code>, 让它的事例去持有 weak 的 <code>self</code>, 让  <code>self.displayLink</code> 持有 <code>WeakTarget</code> 的事例, ok, <code>self</code> 本身是持有 <code>self.displayLink</code> 的, 这样就不是一个闭环了, 如下图.<br><img src="http://upload-images.jianshu.io/upload_images/2131368-26e20a389fe86c74.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>现在, 只要实现 <code>WeakTarget</code> 将消息转发给 self 就可以了,<br>实现很简单, 代码如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">// class WeakTarget</div><div class="line">@property (nonatomic, weak) id target;</div><div class="line">- (instancetype)initWithTarget:(id)target &#123;</div><div class="line">    self = [super init];</div><div class="line">    if (self) &#123;</div><div class="line">        self.target = target;</div><div class="line">    &#125;</div><div class="line">    return self;</div><div class="line">&#125;</div><div class="line">- (id)forwardingTargetForSelector:(SEL)selector &#123;</div><div class="line">    return self.target;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">self.displayLink = [CADisplayLink displayLinkWithTarget:[[WeakTarget alloc] initWithTarget:self] selector:@selector(selector)];</div><div class="line">[self.displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];</div><div class="line"></div><div class="line">- (void)dealloc &#123;</div><div class="line">    [self.displayLink invalidate];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>消息转发的具体细节请看<a href="http://www.jianshu.com/p/3bb4595ba686" target="_blank" rel="external">objective-c 的消息转发</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;一说起循环引用, 首先肯定想到的是 &lt;code&gt;block&lt;/code&gt; 和 &lt;code&gt;代理&lt;/code&gt;，解决方法就是使用 &lt;code&gt;weak&lt;/code&gt; 来弱引用.&lt;br&gt;
+    
+    </summary>
+    
+      <category term="iOS" scheme="https://yansaid.github.io/categories/iOS/"/>
+    
+    
+      <category term="ios" scheme="https://yansaid.github.io/tags/ios/"/>
+    
+  </entry>
+  
+  <entry>
     <title>全局静态变量 和 全局变量 的区别</title>
     <link href="https://yansaid.github.io/2017/05/25/%E5%85%A8%E5%B1%80%E9%9D%99%E6%80%81%E5%8F%98%E9%87%8F/"/>
     <id>https://yansaid.github.io/2017/05/25/全局静态变量/</id>

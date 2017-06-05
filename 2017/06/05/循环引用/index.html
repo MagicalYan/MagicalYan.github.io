@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Yan Blog">
-    <title>all-tags - Yan Blog</title>
+    <title>关于 OC 的循环引用, 特俗情况 - Yan Blog</title>
     <meta name="author" content="Yan">
     
     
@@ -15,13 +15,18 @@
     
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <meta property="og:type" content="blog">
-<meta property="og:title" content="all-tags">
-<meta property="og:url" content="https://yansaid.github.io/all-tags/index.html">
+    <meta name="description" content="一说起循环引用, 首先肯定想到的是 block 和 代理，解决方法就是使用 weak 来弱引用.">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="关于 OC 的循环引用, 特俗情况">
+<meta property="og:url" content="https://yansaid.github.io/2017/06/05/循环引用/index.html">
 <meta property="og:site_name" content="Yan Blog">
-<meta property="og:updated_time" content="2017-03-29T09:29:13.000Z">
+<meta property="og:description" content="一说起循环引用, 首先肯定想到的是 block 和 代理，解决方法就是使用 weak 来弱引用.">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2131368-26e20a389fe86c74.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-06-05T06:36:19.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="all-tags">
+<meta name="twitter:title" content="关于 OC 的循环引用, 特俗情况">
+<meta name="twitter:description" content="一说起循环引用, 首先肯定想到的是 block 和 代理，解决方法就是使用 weak 来弱引用.">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2131368-26e20a389fe86c74.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
     
     
         
@@ -53,7 +58,7 @@
         
     
 
-<header id="header" data-behavior="1">
+<header id="header" data-behavior="4">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <div class="header-title">
         <a class="header-title-link" href="/ ">Yan Blog</a>
@@ -77,7 +82,7 @@
         
     
 
-<nav id="sidebar" data-behavior="1">
+<nav id="sidebar" data-behavior="4">
     <div class="sidebar-container">
         
             <div class="sidebar-profile">
@@ -183,197 +188,136 @@
 </nav>
 
             
-            <div id="main" data-behavior="1"
+            <div id="main" data-behavior="4"
                  class="
                         hasCoverMetaIn
                         ">
-                <div id="tags-archives" class="main-content-wrap">
-    <form id="filter-form" action="#">
-        <input name="tag" type="text" class="form-control input--xlarge" placeholder="搜索标签" autofocus="autofocus">
-    </form>
-    <h4 class="archive-result text-color-base text-xlarge"
-        data-message-zero="没有找到标签"
-        data-message-one="找到 1 个标签"
-        data-message-other="找到 {n} 个标签"></h4>
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title" itemprop="headline">
+            关于 OC 的循环引用, 特俗情况
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2017-06-05T00:00:00+08:00">
+	
+		    6月 05, 2017
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/iOS/">iOS</a>
 
-        <section>
-        
-            <a class="tag tag--primary tag--small" href="#essay-list" data-tag="essay">
-                essay
-            </a>
-        
-            <a class="tag tag--primary tag--small" href="#ios-list" data-tag="ios">
-                ios
-            </a>
-        
-            <a class="tag tag--primary tag--small" href="#react native-list" data-tag="react native">
-                react native
-            </a>
-        
-    </section>
-    <section class="boxes">
-        
-            <div id="essay-list" class="archive box" data-tag="essay">
-                <h4 class="archive-title">
-                    <a class="link-unstyled" href="/tags/essay">
-                        essay (1)
-                    </a>
-                </h4>
-                <ul class="archive-posts">
-                    
-                        <li class="archive-post">
-                            <a class="archive-post-title" href="/2222/02/22/Me/">
-                                Welcome To Yan&#39;s Website!
-                            </a>
-                            <span class="archive-post-date">
-                                 - 2月 22, 2222
-                            </span>
-                        </li>
-                    
-                </ul>
-            </div>
-        
-            <div id="ios-list" class="archive box" data-tag="ios">
-                <h4 class="archive-title">
-                    <a class="link-unstyled" href="/tags/ios">
-                        ios (12)
-                    </a>
-                </h4>
-                <ul class="archive-posts">
-                    
-                        <li class="archive-post">
-                            <a class="archive-post-title" href="/2017/04/10/adaptor/">
-                                整洁的代码 - 适配器模式(Adaptor)
-                            </a>
-                            <span class="archive-post-date">
-                                 - 4月 10, 2017
-                            </span>
-                        </li>
-                    
-                        <li class="archive-post">
-                            <a class="archive-post-title" href="/2017/04/25/Tagged Pointer/">
-                                Tagged Pointer, weak string 不释放.
-                            </a>
-                            <span class="archive-post-date">
-                                 - 4月 25, 2017
-                            </span>
-                        </li>
-                    
-                        <li class="archive-post">
-                            <a class="archive-post-title" href="/2017/04/10/copy/">
-                                NSString 为什么用 copy ? Block 为什么用 copy?
-                            </a>
-                            <span class="archive-post-date">
-                                 - 4月 10, 2017
-                            </span>
-                        </li>
-                    
-                        <li class="archive-post">
-                            <a class="archive-post-title" href="/2016/10/28/attribute使用/">
-                                __attribute__((cleanup(function))
-                            </a>
-                            <span class="archive-post-date">
-                                 - 10月 28, 2016
-                            </span>
-                        </li>
-                    
-                        <li class="archive-post">
-                            <a class="archive-post-title" href="/2016/07/15/objective-c消息转发/">
-                                objective-c 的消息转发
-                            </a>
-                            <span class="archive-post-date">
-                                 - 7月 15, 2016
-                            </span>
-                        </li>
-                    
-                        <li class="archive-post">
-                            <a class="archive-post-title" href="/2016/05/03/block/">
-                                __strong、__weak、__block.
-                            </a>
-                            <span class="archive-post-date">
-                                 - 5月 03, 2016
-                            </span>
-                        </li>
-                    
-                        <li class="archive-post">
-                            <a class="archive-post-title" href="/2017/04/10/swizziling/">
-                                Method Swizzling 的具体分析
-                            </a>
-                            <span class="archive-post-date">
-                                 - 4月 10, 2017
-                            </span>
-                        </li>
-                    
-                        <li class="archive-post">
-                            <a class="archive-post-title" href="/2017/05/25/全局静态变量/">
-                                全局静态变量 和 全局变量 的区别
-                            </a>
-                            <span class="archive-post-date">
-                                 - 5月 25, 2017
-                            </span>
-                        </li>
-                    
-                        <li class="archive-post">
-                            <a class="archive-post-title" href="/2017/05/11/排序算法/">
-                                Objective-C 实现排序算法
-                            </a>
-                            <span class="archive-post-date">
-                                 - 5月 11, 2017
-                            </span>
-                        </li>
-                    
-                        <li class="archive-post">
-                            <a class="archive-post-title" href="/2017/05/09/uitableview 解耦/">
-                                UITableView 解耦
-                            </a>
-                            <span class="archive-post-date">
-                                 - 5月 09, 2017
-                            </span>
-                        </li>
-                    
-                        <li class="archive-post">
-                            <a class="archive-post-title" href="/2017/06/05/循环引用/">
-                                关于 OC 的循环引用, 特俗情况
-                            </a>
-                            <span class="archive-post-date">
-                                 - 6月 05, 2017
-                            </span>
-                        </li>
-                    
-                        <li class="archive-post">
-                            <a class="archive-post-title" href="/2016/03/21/类别/">
-                                类别（Category）添加weak （property）属性，关联（Associated）
-                            </a>
-                            <span class="archive-post-date">
-                                 - 3月 21, 2016
-                            </span>
-                        </li>
-                    
-                </ul>
-            </div>
-        
-            <div id="react native-list" class="archive box" data-tag="react native">
-                <h4 class="archive-title">
-                    <a class="link-unstyled" href="/tags/react-native">
-                        react native (1)
-                    </a>
-                </h4>
-                <ul class="archive-posts">
-                    
-                        <li class="archive-post">
-                            <a class="archive-post-title" href="/2016/06/30/tipsView/">
-                                一个react native 的第三方, 附 npm 发布教程.
-                            </a>
-                            <span class="archive-post-date">
-                                 - 6月 30, 2016
-                            </span>
-                        </li>
-                    
-                </ul>
-            </div>
-        
-    </section>
+
+    
 </div>
+
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>一说起循环引用, 首先肯定想到的是 <code>block</code> 和 <code>代理</code>，解决方法就是使用 <code>weak</code> 来弱引用.<br><a id="more"></a></p>
+<p>#####什么是循环引用?<br>有两个对象 A 和 B, A 强引用 B, 并且 B 强引用 A, 这就是循环引用, 因为两个对象互相强引用, 所以两个对象都不会被释放.</p>
+<p>block 的循环引用请看: <a href="http://www.jianshu.com/p/34400360ce7e" target="_blank" rel="external">block 循环引用, <code>__strong、__weak、__block</code>使用规则</a></p>
+<p>#####无法直接通过 <code>weak</code> 来解决循环引用的情况</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">self.displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(selector)];</div><div class="line">[self.displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];</div><div class="line"></div><div class="line">- (void)dealloc &#123;</div><div class="line">    [self.displayLink invalidate];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上面这段代码, 我希望在 dealloc 的时候将 <code>CADisplayLink</code> 对象释放掉, 但是 <code>CADisplayLink</code> 在 <code>displayLinkWithTarget</code> 方法中,  <code>CADisplayLink</code> 对象会强引用 <code>self</code>, 如此看来, <code>self</code> 和 self.displayLink 已经出现循环引用,  那么如何在不主动执行 <code>[self.displayLink invalidate];</code> 的前提下将 <code>self</code> 释放掉?</p>
+<p>首先我们都会想到使用 <code>__weak</code> 来实现, 但是, 在 <code>CADisplayLink</code> 内部被强引用, 怎么实现这个 <code>weak</code>?</p>
+<p>既然两个对象无法解决, 我们就加一个对象, 或者更多, 只要, 这个闭环中有一个对象是 <code>weak</code> 的, 那么循环引用就不成立了, 那么怎么加这个对象那, 在之前的文章(<a href="http://www.jianshu.com/p/3bb4595ba686" target="_blank" rel="external">objective-c 的消息转发</a>)中, 提到过消息转发.</p>
+<p>我们现在新加一个类叫做 <code>WeakTarget</code>, 让它的事例去持有 weak 的 <code>self</code>, 让  <code>self.displayLink</code> 持有 <code>WeakTarget</code> 的事例, ok, <code>self</code> 本身是持有 <code>self.displayLink</code> 的, 这样就不是一个闭环了, 如下图.<br><img src="http://upload-images.jianshu.io/upload_images/2131368-26e20a389fe86c74.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>现在, 只要实现 <code>WeakTarget</code> 将消息转发给 self 就可以了,<br>实现很简单, 代码如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">// class WeakTarget</div><div class="line">@property (nonatomic, weak) id target;</div><div class="line">- (instancetype)initWithTarget:(id)target &#123;</div><div class="line">    self = [super init];</div><div class="line">    if (self) &#123;</div><div class="line">        self.target = target;</div><div class="line">    &#125;</div><div class="line">    return self;</div><div class="line">&#125;</div><div class="line">- (id)forwardingTargetForSelector:(SEL)selector &#123;</div><div class="line">    return self.target;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">self.displayLink = [CADisplayLink displayLinkWithTarget:[[WeakTarget alloc] initWithTarget:self] selector:@selector(selector)];</div><div class="line">[self.displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];</div><div class="line"></div><div class="line">- (void)dealloc &#123;</div><div class="line">    [self.displayLink invalidate];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>消息转发的具体细节请看<a href="http://www.jianshu.com/p/3bb4595ba686" target="_blank" rel="external">objective-c 的消息转发</a></p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/ios/">ios</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2222/02/22/Me/"  data-tooltip="Welcome To Yan&#39;s Website!">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/05/25/全局静态变量/" data-tooltip="全局静态变量 和 全局变量 的区别">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://yansaid.github.io/2017/06/05/循环引用/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yansaid.github.io/2017/06/05/循环引用/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://yansaid.github.io/2017/06/05/循环引用/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#lv-container">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+        
+            
+                <!-- UY BEGIN -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8yODA1OS80NjM0"></div>
+<!-- UY END -->
+
+            
+        
+    </div>
+</article>
+
 
                 <footer id="footer" class="main-content-wrap">
     <span class="copyrights">
@@ -382,6 +326,89 @@
 </footer>
 
             </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2222/02/22/Me/"  data-tooltip="Welcome To Yan&#39;s Website!">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/05/25/全局静态变量/" data-tooltip="全局静态变量 和 全局变量 的区别">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://yansaid.github.io/2017/06/05/循环引用/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yansaid.github.io/2017/06/05/循环引用/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://yansaid.github.io/2017/06/05/循环引用/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#lv-container">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https://yansaid.github.io/2017/06/05/循环引用/">
+                <i class="fa fa-google-plus"></i><span>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yansaid.github.io/2017/06/05/循环引用/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https://yansaid.github.io/2017/06/05/循环引用/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+
             
         </div>
         
@@ -652,6 +679,24 @@
 <script src="/assets/js/jquery.fancybox-thumbs.js"></script>
 <script src="/assets/js/tranquilpeak.js"></script>
 <!--SCRIPTS END-->
+
+    
+      <!-- 来必力City版安装代码 -->
+<script type="text/javascript">
+ (function(d, s) {
+     var j, e = d.getElementsByTagName(s)[0];
+
+     if (typeof LivereTower === 'function') { return; }
+
+     j = d.createElement(s);
+     j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+     j.async = true;
+
+     e.parentNode.insertBefore(j, e);
+ })(document, 'script');
+</script>
+<!-- City版安装代码已完成 -->
+    
 
 
 
