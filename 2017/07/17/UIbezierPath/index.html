@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Yan Blog">
-    <title>归档 - Yan Blog</title>
+    <title>UIBezierPath 如何通过 point.x 获取到 point.y - Yan Blog</title>
     <meta name="author" content="Yan">
     
     
@@ -15,12 +15,19 @@
     
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <meta property="og:type" content="blog">
-<meta property="og:title" content="Yan Blog">
-<meta property="og:url" content="https://yansaid.github.io/archives/index.html">
+    <meta name="description" content="UIBezierPath 有固定的数学公式, ok, 不多说, 直接拿出公式:
+1C(t) = (1 - t)^2 * P(0) + 2 * t * (1 - t) * P(1) + t^2 * P(2)">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="UIBezierPath 如何通过 point.x 获取到 point.y">
+<meta property="og:url" content="https://yansaid.github.io/2017/07/17/UIbezierPath/index.html">
 <meta property="og:site_name" content="Yan Blog">
+<meta property="og:description" content="UIBezierPath 有固定的数学公式, ok, 不多说, 直接拿出公式:
+1C(t) = (1 - t)^2 * P(0) + 2 * t * (1 - t) * P(1) + t^2 * P(2)">
+<meta property="og:updated_time" content="2017-07-17T09:54:53.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Yan Blog">
+<meta name="twitter:title" content="UIBezierPath 如何通过 point.x 获取到 point.y">
+<meta name="twitter:description" content="UIBezierPath 有固定的数学公式, ok, 不多说, 直接拿出公式:
+1C(t) = (1 - t)^2 * P(0) + 2 * t * (1 - t) * P(1) + t^2 * P(2)">
     
     
         
@@ -52,7 +59,7 @@
         
     
 
-<header id="header" data-behavior="1">
+<header id="header" data-behavior="4">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <div class="header-title">
         <a class="header-title-link" href="/ ">Yan Blog</a>
@@ -76,7 +83,7 @@
         
     
 
-<nav id="sidebar" data-behavior="1">
+<nav id="sidebar" data-behavior="4">
     <div class="sidebar-container">
         
             <div class="sidebar-profile">
@@ -182,76 +189,21 @@
 </nav>
 
             
-            <div id="main" data-behavior="1"
+            <div id="main" data-behavior="4"
                  class="
                         hasCoverMetaIn
                         ">
                 
-    <section class="postShorten-group main-content-wrap">
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
     
     
-    <article class="postShorten postShorten--thumbnailimg-top" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-                <a href="/2222/02/22/Me/">
-                    <div class="postShorten-thumbnailimg">
-                        <img alt="" itemprop="image" src="http://onk403mwf.bkt.clouddn.com/city-750.jpg"/>
-                    </div>
-                </a>
-                
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2222/02/22/Me/">
-                            Welcome To Yan&#39;s Website!
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2222-02-22T00:00:00+08:00">
-	
-		    2月 22, 2222
-    	
-    </time>
+        <div class="post-header main-content-wrap text-left">
     
-        <span>发布在 </span>
-        
-    <a class="category-link" href="/categories/introduce/">introduce</a>
-
-
+        <h1 class="post-title" itemprop="headline">
+            UIBezierPath 如何通过 point.x 获取到 point.y
+        </h1>
     
-</div>
-
-            </div>
-            
-                <div class="postShorten-excerpt" itemprop="articleBody">
-                    <p>Songs<br>
-                    
-                        <a href="/2222/02/22/Me/" class="postShorten-excerpt_link link">
-                            阅读全文
-                        </a>
-                        
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-right" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2017/07/17/UIbezierPath/">
-                            UIBezierPath 如何通过 point.x 获取到 point.y
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
+    <div class="post-meta">
     <time itemprop="datePublished" datetime="2017-07-17T00:00:00+08:00">
 	
 		    7月 17, 2017
@@ -266,384 +218,103 @@
     
 </div>
 
-            </div>
-            
-                <div class="postShorten-excerpt" itemprop="articleBody">
-                    <p>UIBezierPath 有固定的数学公式, ok, 不多说, 直接拿出公式:</p>
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>UIBezierPath 有固定的数学公式, ok, 不多说, 直接拿出公式:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">C(t) = (1 - t)^2 * P(0) + 2 * t * (1 - t) * P(1) + t^2 * P(2)</div></pre></td></tr></table></figure>
-                    
-                        <a href="/2017/07/17/UIbezierPath/" class="postShorten-excerpt_link link">
-                            阅读全文
-                        </a>
-                        
-                    
-                </div>
+<a id="more"></a>
+<p>P(0) 代表起始点<br>P(1) 代表 control point<br>P(2) 代表终点</p>
+<p>只要给出三个点, 同时 <code>t</code> 值, 从 0 - 1 改变, 就得到了一条曲线, 也就是我们常用的方法 <code>addQuadCurveToPoint:controlPoint:</code> , 既然知道公式, 我们也知道 P(0)、P(1)、P(2)，只要通过 x 求出 <code>t</code>, 在通过 <code>t</code> 来回推出 y 即可.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">根据上面的公式可得出: </div><div class="line">X = (1 - t)^2 * X0 + 2 * t * (1 - t) * X1 + t^2 * X2 </div><div class="line">经过换算:</div><div class="line">t = (X - X0) / (2 * (X1 - X0))</div><div class="line">再把 `t` 代入下面的方程式中, 即可获得 y</div><div class="line">Y = (1 - t)^2 * Y0 + 2 * t *(1 - t) * Y1 + t^2 * Y2</div></pre></td></tr></table></figure>
+<p>下面是具体实现, 可以直接使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">/* see https://stackoverflow.com/questions/26857850/get-points-from-a-uibezierpath/26858983</div><div class="line"> Given the equation</div><div class="line"> </div><div class="line"> X = (1-t)^2*X0 + 2*t*(1-t)*X1 + t^2 *X2</div><div class="line"> I solve for t</div><div class="line"> </div><div class="line"> t = ((2.0 * x0 - x1) + sqrt(((-2.0 * x0 + x1) ** 2.0)</div><div class="line"> - ((4 * (x0 - 2.0 * x1 + x2)) * (x0 - x)))) / (2.0 * (x0 - 2.0 * x1 + x2))</div><div class="line"> or</div><div class="line"> </div><div class="line"> t = ((2.0 * x0 - x1) - sqrt(((-2.0 * x0 + x1) ** 2.0)</div><div class="line"> - ((4 * (x0 - 2.0 * x1 + x2)) * (x0 - x)))) / (2.0 * (x0 - 2.0 * x1 + x2))</div><div class="line"> Using this value, find Y that corresponds to X (we used X to find the above t value)</div><div class="line"> </div><div class="line"> Y = (1-t)^2*Y0 + 2*t*(1-t)*Y1 + t^2 *Y2</div><div class="line"> */</div><div class="line">- (float)getYFromBezierPath:(float)x start:(CGPoint)start ctrlpt:(CGPoint)ctrlpt end:(CGPoint)end &#123;</div><div class="line">    float y;</div><div class="line">    float t;</div><div class="line">    t = [self getTvalFromBezierPath:x x0:start.x x1:ctrlpt.x x2:end.x];</div><div class="line">    y = [self getCoordFromBezierPath:t y0:start.y y1:ctrlpt.y y2:end.y];</div><div class="line">    return y;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// x0 start point x, x1 control point x, x2 end point x</div><div class="line">- (float)getTvalFromBezierPath:(float)x x0:(float)x0 x1:(float)x1 x2:(float)x2 &#123;</div><div class="line">    float t = (x - x0) / (2 * (x1 - x0));</div><div class="line">    return t;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//y0 start point y, y1 control point y, y2 end point y</div><div class="line">- (float)getCoordFromBezierPath:(float)t y0: (float)y0 y1: (float)y1 y2: (float)y2 &#123;</div><div class="line">    return (pow((1 - t), 2) * y0) + (2 * t * (1 - t) * y1) + (pow(t, 2) * y2);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>###by the way<br>比较简单的获取 <code>control point</code> 的方法, <code>control point</code> 主要是控制曲线的弯曲程度, 这个方法获取的 <code>control point</code> 可以满足日常绘制曲线, 但特俗的需求, 需要自定义修改</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">- (CGPoint)controlPointWithP1:(CGPoint)p1 p2:(CGPoint)p2 &#123;</div><div class="line">    CGPoint point = [self centerWithP1:p1 p2:p2];</div><div class="line">    CGFloat differY = fabs(p1.y - point.y);</div><div class="line">    if (p1.y &gt; p2.y) &#123;</div><div class="line">        point.y -= differY;</div><div class="line">    &#125; else &#123;</div><div class="line">        point.y += differY;</div><div class="line">    &#125;</div><div class="line">    return point;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (CGPoint)centerWithP1:(CGPoint)p1 p2:(CGPoint)p2 &#123;</div><div class="line">    return CGPointMake((p1.x + p2.x) / 2.0f, (p1.y + p2.y) / 2.0f);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>参考: <a href="https://stackoverflow.com/questions/26857850/get-points-from-a-uibezierpath" target="_blank" rel="external">Get points from a UIBezierPath</a></p>
+
             
         </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
         
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-right" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2017/06/08/fmdb/">
-                            关于 FMDB 线程问题
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2017-06-08T00:00:00+08:00">
-	
-		    6月 08, 2017
-    	
-    </time>
-    
-        <span>发布在 </span>
-        
-    <a class="category-link" href="/categories/iOS/">iOS</a>
-
-
-    
-</div>
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/ios/">ios</a>
 
             </div>
-            
-                <div class="postShorten-excerpt" itemprop="articleBody">
-                    <p>目前比较火的 iOS 端的数据库, realm、CoreData、FMDB, 就学习成本看来，FMDB 应该是最低的，本文主要说 FMDB 多线程造成  locked 的问题, 和主线程阻塞问题。<br>
-                    
-                        <a href="/2017/06/08/fmdb/" class="postShorten-excerpt_link link">
-                            阅读全文
-                        </a>
-                        
-                    
-                </div>
-            
-        </div>
         
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-right" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2017/06/05/循环引用/">
-                            关于 OC 的循环引用, 特俗情况
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2017-06-05T00:00:00+08:00">
-	
-		    6月 05, 2017
-    	
-    </time>
-    
-        <span>发布在 </span>
-        
-    <a class="category-link" href="/categories/iOS/">iOS</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-excerpt" itemprop="articleBody">
-                    <p>一说起循环引用, 首先肯定想到的是 <code>block</code> 和 <code>代理</code>，解决方法就是使用 <code>weak</code> 来弱引用.<br>
-                    
-                        <a href="/2017/06/05/循环引用/" class="postShorten-excerpt_link link">
-                            阅读全文
-                        </a>
-                        
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-right" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2017/05/25/全局静态变量/">
-                            全局静态变量 和 全局变量 的区别
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2017-05-25T00:00:00+08:00">
-	
-		    5月 25, 2017
-    	
-    </time>
-    
-        <span>发布在 </span>
-        
-    <a class="category-link" href="/categories/iOS/">iOS</a>, <a class="category-link" href="/categories/iOS/C/">C</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-excerpt" itemprop="articleBody">
-                    <p>由于近几年一直在敲 oc, 在 oc 中使用的 c 并不多, 于是把这些给忘了。<br>最近看 react-native 的源码的时候，最先入手的是<code>RCT_EXPORT_MODULE()</code>, 这个宏到底是干嘛的那 ?<br>
-                    
-                        <a href="/2017/05/25/全局静态变量/" class="postShorten-excerpt_link link">
-                            阅读全文
-                        </a>
-                        
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-right" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2017/05/11/排序算法/">
-                            Objective-C 实现排序算法
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2017-05-11T00:00:00+08:00">
-	
-		    5月 11, 2017
-    	
-    </time>
-    
-        <span>发布在 </span>
-        
-    <a class="category-link" href="/categories/iOS/">iOS</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-excerpt" itemprop="articleBody">
-                    <p>当数据量很大的时候, 可以清晰的看出 快速排序的优势。<br>
-                    
-                        <a href="/2017/05/11/排序算法/" class="postShorten-excerpt_link link">
-                            阅读全文
-                        </a>
-                        
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-right" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2017/05/09/uitableview 解耦/">
-                            UITableView 解耦
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2017-05-09T00:00:00+08:00">
-	
-		    5月 09, 2017
-    	
-    </time>
-    
-        <span>发布在 </span>
-        
-    <a class="category-link" href="/categories/iOS/">iOS</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-excerpt" itemprop="articleBody">
-                    <p>产品开发的时候无法避免的就是在一个 <code>UITableView</code>中, 包含多种样式的 <code>cell</code>, 我们通常的做法如下:<br>
-                    
-                        <a href="/2017/05/09/uitableview 解耦/" class="postShorten-excerpt_link link">
-                            阅读全文
-                        </a>
-                        
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-right" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2017/04/25/Tagged Pointer/">
-                            Tagged Pointer, weak string 不释放.
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2017-04-25T00:00:00+08:00">
-	
-		    4月 25, 2017
-    	
-    </time>
-    
-        <span>发布在 </span>
-        
-    <a class="category-link" href="/categories/iOS/">iOS</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-excerpt" itemprop="articleBody">
-                    <p>最近被 NSString 无法释放这件事搞得糊涂。<br>首先说一下，发现问题的过程：<br>
-                    
-                        <a href="/2017/04/25/Tagged Pointer/" class="postShorten-excerpt_link link">
-                            阅读全文
-                        </a>
-                        
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-right" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2017/04/10/adaptor/">
-                            整洁的代码 - 适配器模式(Adaptor)
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2017-04-10T00:00:00+08:00">
-	
-		    4月 10, 2017
-    	
-    </time>
-    
-        <span>发布在 </span>
-        
-    <a class="category-link" href="/categories/iOS/">iOS</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-excerpt" itemprop="articleBody">
-                    <p>什么是适配器模式?<br>例: 我们现在有很多不同种的螺母, 但只有一个螺钉, 螺钉都需要经过处理之后才可以用在螺母上, 处理螺钉的工具就叫做适配器。<br>
-                    
-                        <a href="/2017/04/10/adaptor/" class="postShorten-excerpt_link link">
-                            阅读全文
-                        </a>
-                        
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-right" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2017/04/10/swizziling/">
-                            Method Swizzling 的具体分析
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2017-04-10T00:00:00+08:00">
-	
-		    4月 10, 2017
-    	
-    </time>
-    
-        <span>发布在 </span>
-        
-    <a class="category-link" href="/categories/iOS/">iOS</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-excerpt" itemprop="articleBody">
-                    <p>OC 是一门动态的语言, runtime 的机制给开发者提供了许多新的可能, 在运行时, 可以动态为一个类添加方法和属性.<br>
-                    
-                        <a href="/2017/04/10/swizziling/" class="postShorten-excerpt_link link">
-                            阅读全文
-                        </a>
-                        
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    <div class="pagination-bar">
-    <ul class="pagination">
-        
-        
-        <li class="pagination-next">
-            <a class="btn btn--default btn--small" href="/archives/page/2/">
-                    <span>下一页</span>
-                <i class="fa fa-angle-right text-base icon-ml"></i>
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2222/02/22/Me/"  data-tooltip="Welcome To Yan&#39;s Website!">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/06/08/fmdb/" data-tooltip="关于 FMDB 线程问题">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://yansaid.github.io/2017/07/17/UIbezierPath/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yansaid.github.io/2017/07/17/UIbezierPath/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://yansaid.github.io/2017/07/17/UIbezierPath/">
+                <i class="fa fa-twitter"></i>
             </a>
         </li>
         
-        <li class="pagination-number">第 1 页 共 2 页</li>
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#lv-container">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
     </ul>
 </div>
 
-</section>
+        
+            
+                <!-- UY BEGIN -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8yODA1OS80NjM0"></div>
+<!-- UY END -->
 
+            
+        
+    </div>
+</article>
 
 
                 <footer id="footer" class="main-content-wrap">
@@ -653,6 +324,89 @@
 </footer>
 
             </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2222/02/22/Me/"  data-tooltip="Welcome To Yan&#39;s Website!">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/06/08/fmdb/" data-tooltip="关于 FMDB 线程问题">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://yansaid.github.io/2017/07/17/UIbezierPath/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yansaid.github.io/2017/07/17/UIbezierPath/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://yansaid.github.io/2017/07/17/UIbezierPath/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#lv-container">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https://yansaid.github.io/2017/07/17/UIbezierPath/">
+                <i class="fa fa-google-plus"></i><span>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yansaid.github.io/2017/07/17/UIbezierPath/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https://yansaid.github.io/2017/07/17/UIbezierPath/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+
             
         </div>
         
@@ -923,6 +677,24 @@
 <script src="/assets/js/jquery.fancybox-thumbs.js"></script>
 <script src="/assets/js/tranquilpeak.js"></script>
 <!--SCRIPTS END-->
+
+    
+      <!-- 来必力City版安装代码 -->
+<script type="text/javascript">
+ (function(d, s) {
+     var j, e = d.getElementsByTagName(s)[0];
+
+     if (typeof LivereTower === 'function') { return; }
+
+     j = d.createElement(s);
+     j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+     j.async = true;
+
+     e.parentNode.insertBefore(j, e);
+ })(document, 'script');
+</script>
+<!-- City版安装代码已完成 -->
+    
 
 
 

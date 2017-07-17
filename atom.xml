@@ -63,6 +63,40 @@ myAudio.onended = function()
   </entry>
   
   <entry>
+    <title>UIBezierPath 如何通过 point.x 获取到 point.y</title>
+    <link href="https://yansaid.github.io/2017/07/17/UIbezierPath/"/>
+    <id>https://yansaid.github.io/2017/07/17/UIbezierPath/</id>
+    <published>2017-07-16T16:00:00.000Z</published>
+    <updated>2017-07-17T09:54:53.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>UIBezierPath 有固定的数学公式, ok, 不多说, 直接拿出公式:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">C(t) = (1 - t)^2 * P(0) + 2 * t * (1 - t) * P(1) + t^2 * P(2)</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>P(0) 代表起始点<br>P(1) 代表 control point<br>P(2) 代表终点</p>
+<p>只要给出三个点, 同时 <code>t</code> 值, 从 0 - 1 改变, 就得到了一条曲线, 也就是我们常用的方法 <code>addQuadCurveToPoint:controlPoint:</code> , 既然知道公式, 我们也知道 P(0)、P(1)、P(2)，只要通过 x 求出 <code>t</code>, 在通过 <code>t</code> 来回推出 y 即可.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">根据上面的公式可得出: </div><div class="line">X = (1 - t)^2 * X0 + 2 * t * (1 - t) * X1 + t^2 * X2 </div><div class="line">经过换算:</div><div class="line">t = (X - X0) / (2 * (X1 - X0))</div><div class="line">再把 `t` 代入下面的方程式中, 即可获得 y</div><div class="line">Y = (1 - t)^2 * Y0 + 2 * t *(1 - t) * Y1 + t^2 * Y2</div></pre></td></tr></table></figure>
+<p>下面是具体实现, 可以直接使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">/* see https://stackoverflow.com/questions/26857850/get-points-from-a-uibezierpath/26858983</div><div class="line"> Given the equation</div><div class="line"> </div><div class="line"> X = (1-t)^2*X0 + 2*t*(1-t)*X1 + t^2 *X2</div><div class="line"> I solve for t</div><div class="line"> </div><div class="line"> t = ((2.0 * x0 - x1) + sqrt(((-2.0 * x0 + x1) ** 2.0)</div><div class="line"> - ((4 * (x0 - 2.0 * x1 + x2)) * (x0 - x)))) / (2.0 * (x0 - 2.0 * x1 + x2))</div><div class="line"> or</div><div class="line"> </div><div class="line"> t = ((2.0 * x0 - x1) - sqrt(((-2.0 * x0 + x1) ** 2.0)</div><div class="line"> - ((4 * (x0 - 2.0 * x1 + x2)) * (x0 - x)))) / (2.0 * (x0 - 2.0 * x1 + x2))</div><div class="line"> Using this value, find Y that corresponds to X (we used X to find the above t value)</div><div class="line"> </div><div class="line"> Y = (1-t)^2*Y0 + 2*t*(1-t)*Y1 + t^2 *Y2</div><div class="line"> */</div><div class="line">- (float)getYFromBezierPath:(float)x start:(CGPoint)start ctrlpt:(CGPoint)ctrlpt end:(CGPoint)end &#123;</div><div class="line">    float y;</div><div class="line">    float t;</div><div class="line">    t = [self getTvalFromBezierPath:x x0:start.x x1:ctrlpt.x x2:end.x];</div><div class="line">    y = [self getCoordFromBezierPath:t y0:start.y y1:ctrlpt.y y2:end.y];</div><div class="line">    return y;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// x0 start point x, x1 control point x, x2 end point x</div><div class="line">- (float)getTvalFromBezierPath:(float)x x0:(float)x0 x1:(float)x1 x2:(float)x2 &#123;</div><div class="line">    float t = (x - x0) / (2 * (x1 - x0));</div><div class="line">    return t;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//y0 start point y, y1 control point y, y2 end point y</div><div class="line">- (float)getCoordFromBezierPath:(float)t y0: (float)y0 y1: (float)y1 y2: (float)y2 &#123;</div><div class="line">    return (pow((1 - t), 2) * y0) + (2 * t * (1 - t) * y1) + (pow(t, 2) * y2);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>###by the way<br>比较简单的获取 <code>control point</code> 的方法, <code>control point</code> 主要是控制曲线的弯曲程度, 这个方法获取的 <code>control point</code> 可以满足日常绘制曲线, 但特俗的需求, 需要自定义修改</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">- (CGPoint)controlPointWithP1:(CGPoint)p1 p2:(CGPoint)p2 &#123;</div><div class="line">    CGPoint point = [self centerWithP1:p1 p2:p2];</div><div class="line">    CGFloat differY = fabs(p1.y - point.y);</div><div class="line">    if (p1.y &gt; p2.y) &#123;</div><div class="line">        point.y -= differY;</div><div class="line">    &#125; else &#123;</div><div class="line">        point.y += differY;</div><div class="line">    &#125;</div><div class="line">    return point;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (CGPoint)centerWithP1:(CGPoint)p1 p2:(CGPoint)p2 &#123;</div><div class="line">    return CGPointMake((p1.x + p2.x) / 2.0f, (p1.y + p2.y) / 2.0f);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>参考: <a href="https://stackoverflow.com/questions/26857850/get-points-from-a-uibezierpath" target="_blank" rel="external">Get points from a UIBezierPath</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;UIBezierPath 有固定的数学公式, ok, 不多说, 直接拿出公式:&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;C(t) = (1 - t)^2 * P(0) + 2 * t * (1 - t) * P(1) + t^2 * P(2)&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+      <category term="iOS" scheme="https://yansaid.github.io/categories/iOS/"/>
+    
+    
+      <category term="ios" scheme="https://yansaid.github.io/tags/ios/"/>
+    
+  </entry>
+  
+  <entry>
     <title>关于 FMDB 线程问题</title>
     <link href="https://yansaid.github.io/2017/06/08/fmdb/"/>
     <id>https://yansaid.github.io/2017/06/08/fmdb/</id>
