@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Yan Blog">
-    <title>标签: react native - Yan Blog</title>
+    <title>自定义翻转动画, 获取不到 from view - Yan Blog</title>
     <meta name="author" content="Yan">
     
     
@@ -15,12 +15,16 @@
     
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <meta property="og:type" content="blog">
-<meta property="og:title" content="Yan Blog">
-<meta property="og:url" content="https://yansaid.github.io/tags/react-native/index.html">
+    <meta name="description" content="最近根据产品需求, 更改翻转动画, 很多时候我们只是改一下 to view 的 frame 来满足需求, 但当要 from view 动起来就出现很多坑了.">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="自定义翻转动画, 获取不到 from view">
+<meta property="og:url" content="https://yansaid.github.io/2017/08/08/transition/index.html">
 <meta property="og:site_name" content="Yan Blog">
+<meta property="og:description" content="最近根据产品需求, 更改翻转动画, 很多时候我们只是改一下 to view 的 frame 来满足需求, 但当要 from view 动起来就出现很多坑了.">
+<meta property="og:updated_time" content="2017-08-08T10:25:58.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Yan Blog">
+<meta name="twitter:title" content="自定义翻转动画, 获取不到 from view">
+<meta name="twitter:description" content="最近根据产品需求, 更改翻转动画, 很多时候我们只是改一下 to view 的 frame 来满足需求, 但当要 from view 动起来就出现很多坑了.">
     
     
         
@@ -52,7 +56,7 @@
         
     
 
-<header id="header" data-behavior="1">
+<header id="header" data-behavior="4">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <div class="header-title">
         <a class="header-title-link" href="/ ">Yan Blog</a>
@@ -76,7 +80,7 @@
         
     
 
-<nav id="sidebar" data-behavior="1">
+<nav id="sidebar" data-behavior="4">
     <div class="sidebar-container">
         
             <div class="sidebar-profile">
@@ -182,65 +186,138 @@
 </nav>
 
             
-            <div id="main" data-behavior="1"
+            <div id="main" data-behavior="4"
                  class="
                         hasCoverMetaIn
                         ">
                 
-    <section class="postShorten-group main-content-wrap">
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
     
     
-    <article class="postShorten postShorten--thumbnailimg-right" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2016/06/30/tipsView/">
-                            一个react native 的第三方, 附 npm 发布教程.
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2016-06-30T00:00:00+08:00">
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title" itemprop="headline">
+            自定义翻转动画, 获取不到 from view
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2017-08-08T00:00:00+08:00">
 	
-		    6月 30, 2016
+		    8月 08, 2017
     	
     </time>
     
         <span>发布在 </span>
         
-    <a class="category-link" href="/categories/React-Native/">React Native</a>
+    <a class="category-link" href="/categories/iOS/">iOS</a>
 
 
     
 </div>
 
-            </div>
-            
-                <div class="postShorten-excerpt" itemprop="articleBody">
-                    <p>一个我日常开发所使用的工具, 会在日后不断在 GitHub 上更新.<br>目前提供手写板的功能和截图的功能.<br>
-                    
-                        <a href="/2016/06/30/tipsView/" class="postShorten-excerpt_link link">
-                            阅读全文
-                        </a>
-                        
-                    
-                </div>
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>最近根据产品需求, 更改翻转动画, 很多时候我们只是改一下 to view 的 frame 来满足需求, 但当要 from view 动起来就出现很多坑了.</p>
+<a id="more"></a>
+<p>首先说一下通过 <code>viewControllerForKey</code>然后<code>.view</code>来获取 to view 和 from view 与使用<code>viewForKey</code>来获取的区别, 如果 to 和 from view 都与 animator 关联, 那么就没有区别了, 但苹果在这里设置了一个坑, 解释如下:</p>
+<p>(本文说的 from view 是 present 时候的 from view, dismiss 时候的 to view)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// Currently only two keys are defined by the system -</div><div class="line">// UITransitionContextFromViewKey, and UITransitionContextToViewKey</div><div class="line">// viewForKey: may return nil which would indicate that the animator should not</div><div class="line">// manipulate the associated view controller&apos;s view.</div><div class="line">- (nullable __kindof UIView *)viewForKey:(UITransitionContextViewKey)key NS_AVAILABLE_IOS(8_0);</div></pre></td></tr></table></figure>
+<p>ok, 如果使用 <code>viewForKey</code> 获取不到 view, 那么我们使用 <code>viewControllerForKey</code> 获取 view 不就肯定没问题了吗?<br>答案是错误的, 因为 如果 to 和 from view 没和 animator 关联, 那么这个 view 就不可以加交互动画, 当你 dismiss 的时候动画立刻执行完成, 根本不受 <code>updateInteractiveTransition</code> 的控制, 说到这里我们必须说一下什么情况会发生未关联这种情况, 看苹果解释:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">// If NO is returned from -shouldRemovePresentersView, the view associated</div><div class="line">// with UITransitionContextFromViewKey is nil during presentation.  This</div><div class="line">// intended to be a hint that your animator should NOT be manipulating the</div><div class="line">// presenting view controller&apos;s view.  For a dismissal, the -presentedView</div><div class="line">// is returned.</div><div class="line">//</div><div class="line">// Why not allow the animator manipulate the presenting view controller&apos;s</div><div class="line">// view at all times?  First of all, if the presenting view controller&apos;s</div><div class="line">// view is going to stay visible after the animation finishes during the</div><div class="line">// whole presentation life cycle there is no need to animate it at all — it</div><div class="line">// just stays where it is.  Second, if the ownership for that view</div><div class="line">// controller is transferred to the presentation controller, the</div><div class="line">// presentation controller will most likely not know how to layout that</div><div class="line">// view controller&apos;s view when needed, for example when the orientation</div><div class="line">// changes, but the original owner of the presenting view controller does.</div><div class="line">    UIView *fromView = [transitionContext viewForKey:UITransitionContextFromViewKey];</div><div class="line"></div><div class="line">// Indicate whether the view controller&apos;s view we are transitioning from will be removed from the window in the end of the</div><div class="line">// presentation transition</div><div class="line">// (Default: NO)</div><div class="line">@property(nonatomic, readonly) BOOL shouldRemovePresentersView;</div></pre></td></tr></table></figure>
+<p><a href="https://developer.apple.com/library/content/samplecode/CustomTransitions/Listings/CustomTransitions_Custom_Presentation_AAPLCustomPresentationController_m.html" target="_blank" rel="external">解释具体位置</a></p>
+<p><code>shouldRemovePresentersView</code>这个属性在哪里那?<br>苹果提供 管理 交互动画的 控制器 <code>UIPresentationController</code>,<br>只要继承这个类, 并重写你需要的方法, 就可以在交互过程中, 完成你想要的效果, 重写下面方法:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">- (void)presentationTransitionWillBegin;</div><div class="line">- (void)presentationTransitionDidEnd:(BOOL)completed;</div><div class="line">- (void)dismissalTransitionWillBegin;</div><div class="line">- (void)dismissalTransitionDidEnd:(BOOL)completed;</div></pre></td></tr></table></figure>
+<p>说了这么多, 回到主题, 如何让 from view 和 animator 关联,<br>只要继承 <code>UIPresentationController</code>类, 自定义一个<code>SomePresentationController</code>重写 <code>shouldRemovePresentersView</code> get方法, 返回 YES, 就关联了, default 是 NO, 如果不重写, 你永远获取不到 from view.</p>
+<p>同时, 需要实现 <code>UIViewControllerTransitioningDelegate</code> 的相应代理方法, 如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">- (UIPresentationController *)presentationControllerForPresentedViewController:(UIViewController *)presented presentingViewController:(UIViewController *)presenting sourceViewController:(UIViewController *)source &#123;</div><div class="line">    SomePresentationController *presentation = [[SomePresentationController alloc]initWithPresentedViewController:presented presentingViewController:presenting];</div><div class="line">    return presentation;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">- (BOOL)shouldRemovePresentersView &#123;</div><div class="line">    return YES; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>最后说几句, 如果不看苹果的那个 demo , 你可能永远不知道自己错哪了, 当我看到下面的那几句解释, 整个人都释然了.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// If NO is returned from -shouldRemovePresentersView, the view associated</div><div class="line">// with UITransitionContextFromViewKey is nil during presentation.  This</div><div class="line">// intended to be a hint that your animator should NOT be manipulating the</div><div class="line">// presenting view controller&apos;s view.  For a dismissal, the -presentedView</div><div class="line">// is returned.</div></pre></td></tr></table></figure></p>
+<p><a href="https://developer.apple.com/library/content/featuredarticles/ViewControllerPGforiPhoneOS/CustomizingtheTransitionAnimations.html#//apple_ref/doc/uid/TP40007457-CH16-SW1" target="_blank" rel="external">苹果事例链接</a></p>
+<p><a href="https://developer.apple.com/library/content/samplecode/CustomTransitions/Listings/CustomTransitions_Custom_Presentation_AAPLCustomPresentationController_m.html" target="_blank" rel="external">苹果的 demo</a></p>
+
             
         </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
         
-    </article>
-    
-    <div class="pagination-bar">
-    <ul class="pagination">
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/ios/">ios</a>
+
+            </div>
         
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2222/02/22/Me/"  data-tooltip="Welcome To Yan&#39;s Website!">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/07/17/UIbezierPath/" data-tooltip="UIBezierPath 如何通过 point.x 获取到 point.y">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://yansaid.github.io/2017/08/08/transition/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yansaid.github.io/2017/08/08/transition/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://yansaid.github.io/2017/08/08/transition/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
         
-        <li class="pagination-number">第 1 页 共 1 页</li>
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#lv-container">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
     </ul>
 </div>
 
-</section>
+        
+            
+                <!-- UY BEGIN -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8yODA1OS80NjM0"></div>
+<!-- UY END -->
+
+            
+        
+    </div>
+</article>
 
 
                 <footer id="footer" class="main-content-wrap">
@@ -250,6 +327,89 @@
 </footer>
 
             </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2222/02/22/Me/"  data-tooltip="Welcome To Yan&#39;s Website!">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/07/17/UIbezierPath/" data-tooltip="UIBezierPath 如何通过 point.x 获取到 point.y">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://yansaid.github.io/2017/08/08/transition/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yansaid.github.io/2017/08/08/transition/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://yansaid.github.io/2017/08/08/transition/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#lv-container">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https://yansaid.github.io/2017/08/08/transition/">
+                <i class="fa fa-google-plus"></i><span>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yansaid.github.io/2017/08/08/transition/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https://yansaid.github.io/2017/08/08/transition/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+
             
         </div>
         
@@ -520,6 +680,24 @@
 <script src="/assets/js/jquery.fancybox-thumbs.js"></script>
 <script src="/assets/js/tranquilpeak.js"></script>
 <!--SCRIPTS END-->
+
+    
+      <!-- 来必力City版安装代码 -->
+<script type="text/javascript">
+ (function(d, s) {
+     var j, e = d.getElementsByTagName(s)[0];
+
+     if (typeof LivereTower === 'function') { return; }
+
+     j = d.createElement(s);
+     j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+     j.async = true;
+
+     e.parentNode.insertBefore(j, e);
+ })(document, 'script');
+</script>
+<!-- City版安装代码已完成 -->
+    
 
 
 
