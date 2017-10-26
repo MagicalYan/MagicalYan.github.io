@@ -21,7 +21,7 @@
 <meta property="og:url" content="https://yansaid.github.io/2222/02/22/Me/index.html">
 <meta property="og:site_name" content="Yan Blog">
 <meta property="og:description" content="Songs">
-<meta property="og:updated_time" content="2017-04-25T04:26:21.000Z">
+<meta property="og:updated_time" content="2017-10-26T03:48:38.331Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Welcome To Yan's Website!">
 <meta name="twitter:description" content="Songs">
@@ -241,11 +241,11 @@ let urls = [
 'http://onk403mwf.bkt.clouddn.com/%E7%88%B1%E6%83%85%E5%BA%9F%E6%9F%B4.m4a'
 ];
 var index = parseInt(Math.random() * (urls.length - 1), 10);
-myAudio = document.createElement("audio");
+var myAudio = document.createElement("audio");
 loadAudioAtIndex(index);
 function loadAudioAtIndex(index) {
   myAudio.src = urls[index];
-  myAudio.loop=false;
+  myAudio.loop = false;
   myAudio.play();
 }
 myAudio.onended = function()
@@ -586,25 +586,6 @@ myAudio.onended = function()
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://yansaid.github.io/2017/04/10/swizziling/">
-                            <h3 class="media-heading">Method Swizzling 的具体分析</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2017年4月10日
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"><p>OC 是一门动态的语言, runtime 的机制给开发者提供了许多新的可能, 在运行时, 可以动态为一个类添加方法和属性.<br></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-                <div class="media">
-                    
-                    <div class="media-body">
                         <a class="link-unstyled" href="https://yansaid.github.io/2017/04/10/copy/">
                             <h3 class="media-heading">NSString 为什么用 copy ? Block 为什么用 copy?</h3>
                         </a>
@@ -617,6 +598,25 @@ myAudio.onended = function()
                         </span>
                         <div class="media-content hide-xs font-merryweather"><p>copy<br>深拷贝与浅拷贝的区别, 在于是否开辟新内存，copy 只针对堆内存对象而言。</p>
 <p>浅拷贝：<br>拷贝的是地址，和对象的 = 赋值是一样的。<br>OC 中 我们声明一个 NSString 属性。<br></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://yansaid.github.io/2017/04/10/swizziling/">
+                            <h3 class="media-heading">Method Swizzling 的具体分析</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年4月10日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>OC 是一门动态的语言, runtime 的机制给开发者提供了许多新的可能, 在运行时, 可以动态为一个类添加方法和属性.<br></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
