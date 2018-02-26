@@ -22,7 +22,7 @@
 <meta property="og:site_name" content="Yan Blog">
 <meta property="og:description" content="目前比较火的 iOS 端的数据库, realm、CoreData、FMDB, 就学习成本看来，FMDB 应该是最低的，本文主要说 FMDB 多线程造成  locked 的问题, 和主线程阻塞问题。">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2131368-4663a7179ccb19d9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-06-16T02:31:59.000Z">
+<meta property="og:updated_time" content="2018-02-26T07:01:56.357Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于 FMDB 线程问题">
 <meta name="twitter:description" content="目前比较火的 iOS 端的数据库, realm、CoreData、FMDB, 就学习成本看来，FMDB 应该是最低的，本文主要说 FMDB 多线程造成  locked 的问题, 和主线程阻塞问题。">
@@ -223,7 +223,6 @@
         <div class="main-content-wrap">
             <p>目前比较火的 iOS 端的数据库, realm、CoreData、FMDB, 就学习成本看来，FMDB 应该是最低的，本文主要说 FMDB 多线程造成  locked 的问题, 和主线程阻塞问题。<br><a id="more"></a><br>当 查询、插入、 删除、 更新 同时对同一数据操作的时候， 就会造成 “database is locked” , 而且会存在数据安全问题, 如何避免这种情况发生? 最简单的方法就是在同一个线程中对数据库进行操作,  什么是同一个线程? 我们日常开发中经常使用到 <code>dispatch_async</code> 和 <code>dispatch_sync</code>,  <code>dispatch_async</code> 一定会开辟一个新线程吗?<br>答案是不一定, 当 <code>dispatch_async</code> 使用在一个串行队列中, 这个串行队列中只有一个线程, 而且所有的  <code>dispatch_async</code>  是顺序执行的, 所以只有最开始用的时候, 会开辟一个线程。 <code>dispatch_sync</code> 可以阻塞当前线程和后面的队列(目标队列)，因为  <code>dispatch_sync</code> 是在当前队列的当前线程执行一段代码, 所以如果使用  <code>dispatch_sync</code> 进行一段耗时操作, 肯定会阻塞当前线程。当  <code>dispatch_async</code>  使用并行队列的时候，每次都会开辟一个新线程 (前提是前面的线程都没执行完, 如果执行完也会复用)， <code>dispatch_sync</code> 和串行的效果是相同的。</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/2131368-4663a7179ccb19d9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>既然知道怎么可以避免问题, 那么就可以开始解决问题了, 之前看了,  微信读书数据库解决方案<a href="https://github.com/Zepo/GYDataCenter" target="_blank" rel="external"><code>GYDataCenter</code></a> 的源码, 虽然, 他是始终使用唯一串行队列来管理一个类(相当于一个表), 但是查找的时候使用的是 sync, 这里就有机会阻塞主线程, 当前面有大量数据查找的时候, 等待数据处理, 就会发生线程阻塞, 而如果所有查找都自己再开个线程那么使用起来相当麻烦, 所以, 在这里, 查询还不如使用异步的, 既不会阻塞线程, 也避免每次查找都需要开新线程。测试代码可以看 <a href="https://github.com/Zepo/GYDataCenter/files/1057107/GYDataCenterTest.zip" target="_blank" rel="external">GYDataCenterTest.zip</a></p>
 <p><a href="https://github.com/yansaid/HYDatabaseManager" target="_blank" rel="external">HYDatabaseManager</a> 我之前自己也基于 FMDB 封装了一个,, 如果感兴趣的可以看一下。</p>
 <p>这篇文章主要针对于使用了 FMDB , 但不知道为什么会 locked 和 sleep 的同学。</p>
 
@@ -312,7 +311,7 @@
 
                 <footer id="footer" class="main-content-wrap">
     <span class="copyrights">
-        Copyrights &copy; 2017 Yan. All Rights Reserved.
+        Copyrights &copy; 2018 Yan. All Rights Reserved.
     </span>
 </footer>
 
@@ -557,6 +556,25 @@
                 <div class="media">
                     
                     <div class="media-body">
+                        <a class="link-unstyled" href="https://yansaid.github.io/2017/04/10/adaptor/">
+                            <h3 class="media-heading">整洁的代码 - 适配器模式(Adaptor)</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年4月10日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>什么是适配器模式?<br>例: 我们现在有很多不同种的螺母, 但只有一个螺钉, 螺钉都需要经过处理之后才可以用在螺母上, 处理螺钉的工具就叫做适配器。<br></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
                         <a class="link-unstyled" href="https://yansaid.github.io/2017/04/10/copy/">
                             <h3 class="media-heading">NSString 为什么用 copy ? Block 为什么用 copy?</h3>
                         </a>
@@ -588,25 +606,6 @@
                             </span>
                         </span>
                         <div class="media-content hide-xs font-merryweather"><p>OC 是一门动态的语言, runtime 的机制给开发者提供了许多新的可能, 在运行时, 可以动态为一个类添加方法和属性.<br></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-                <div class="media">
-                    
-                    <div class="media-body">
-                        <a class="link-unstyled" href="https://yansaid.github.io/2017/04/10/adaptor/">
-                            <h3 class="media-heading">整洁的代码 - 适配器模式(Adaptor)</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2017年4月10日
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"><p>什么是适配器模式?<br>例: 我们现在有很多不同种的螺母, 但只有一个螺钉, 螺钉都需要经过处理之后才可以用在螺母上, 处理螺钉的工具就叫做适配器。<br></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
