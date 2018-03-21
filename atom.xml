@@ -4,9 +4,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="https://yansaid.github.io/"/>
+  <link href="https://huyan.club/"/>
   <updated>2017-10-26T03:48:38.331Z</updated>
-  <id>https://yansaid.github.io/</id>
+  <id>https://huyan.club/</id>
   
   <author>
     <name>Yan</name>
@@ -17,8 +17,8 @@
   
   <entry>
     <title>Welcome To Yan&#39;s Website!</title>
-    <link href="https://yansaid.github.io/2222/02/22/Me/"/>
-    <id>https://yansaid.github.io/2222/02/22/Me/</id>
+    <link href="https://huyan.club/2222/02/22/Me/"/>
+    <id>https://huyan.club/2222/02/22/Me/</id>
     <published>2222-02-21T16:00:00.000Z</published>
     <updated>2017-10-26T03:48:38.331Z</updated>
     
@@ -55,17 +55,17 @@ myAudio.onended = function()
     
     </summary>
     
-      <category term="introduce" scheme="https://yansaid.github.io/categories/introduce/"/>
+      <category term="introduce" scheme="https://huyan.club/categories/introduce/"/>
     
     
-      <category term="essay" scheme="https://yansaid.github.io/tags/essay/"/>
+      <category term="essay" scheme="https://huyan.club/tags/essay/"/>
     
   </entry>
   
   <entry>
     <title>自定义翻转动画, 获取不到 from view</title>
-    <link href="https://yansaid.github.io/2017/08/08/transition/"/>
-    <id>https://yansaid.github.io/2017/08/08/transition/</id>
+    <link href="https://huyan.club/2017/08/08/transition/"/>
+    <id>https://huyan.club/2017/08/08/transition/</id>
     <published>2017-08-07T16:00:00.000Z</published>
     <updated>2017-08-08T10:25:58.000Z</updated>
     
@@ -94,17 +94,17 @@ myAudio.onended = function()
     
     </summary>
     
-      <category term="iOS" scheme="https://yansaid.github.io/categories/iOS/"/>
+      <category term="iOS" scheme="https://huyan.club/categories/iOS/"/>
     
     
-      <category term="ios" scheme="https://yansaid.github.io/tags/ios/"/>
+      <category term="ios" scheme="https://huyan.club/tags/ios/"/>
     
   </entry>
   
   <entry>
     <title>UIBezierPath 如何通过 point.x 获取到 point.y</title>
-    <link href="https://yansaid.github.io/2017/07/17/UIbezierPath/"/>
-    <id>https://yansaid.github.io/2017/07/17/UIbezierPath/</id>
+    <link href="https://huyan.club/2017/07/17/UIbezierPath/"/>
+    <id>https://huyan.club/2017/07/17/UIbezierPath/</id>
     <published>2017-07-16T16:00:00.000Z</published>
     <updated>2017-07-17T09:54:53.000Z</updated>
     
@@ -128,17 +128,17 @@ myAudio.onended = function()
     
     </summary>
     
-      <category term="iOS" scheme="https://yansaid.github.io/categories/iOS/"/>
+      <category term="iOS" scheme="https://huyan.club/categories/iOS/"/>
     
     
-      <category term="ios" scheme="https://yansaid.github.io/tags/ios/"/>
+      <category term="ios" scheme="https://huyan.club/tags/ios/"/>
     
   </entry>
   
   <entry>
     <title>关于 FMDB 线程问题</title>
-    <link href="https://yansaid.github.io/2017/06/08/fmdb/"/>
-    <id>https://yansaid.github.io/2017/06/08/fmdb/</id>
+    <link href="https://huyan.club/2017/06/08/fmdb/"/>
+    <id>https://huyan.club/2017/06/08/fmdb/</id>
     <published>2017-06-07T16:00:00.000Z</published>
     <updated>2018-02-26T07:01:56.357Z</updated>
     
@@ -154,17 +154,17 @@ myAudio.onended = function()
     
     </summary>
     
-      <category term="iOS" scheme="https://yansaid.github.io/categories/iOS/"/>
+      <category term="iOS" scheme="https://huyan.club/categories/iOS/"/>
     
     
-      <category term="ios" scheme="https://yansaid.github.io/tags/ios/"/>
+      <category term="ios" scheme="https://huyan.club/tags/ios/"/>
     
   </entry>
   
   <entry>
     <title>关于 OC 的循环引用, 特殊情况</title>
-    <link href="https://yansaid.github.io/2017/06/05/%E5%BE%AA%E7%8E%AF%E5%BC%95%E7%94%A8/"/>
-    <id>https://yansaid.github.io/2017/06/05/循环引用/</id>
+    <link href="https://huyan.club/2017/06/05/%E5%BE%AA%E7%8E%AF%E5%BC%95%E7%94%A8/"/>
+    <id>https://huyan.club/2017/06/05/循环引用/</id>
     <published>2017-06-04T16:00:00.000Z</published>
     <updated>2018-03-08T05:48:21.667Z</updated>
     
@@ -190,17 +190,17 @@ myAudio.onended = function()
     
     </summary>
     
-      <category term="iOS" scheme="https://yansaid.github.io/categories/iOS/"/>
+      <category term="iOS" scheme="https://huyan.club/categories/iOS/"/>
     
     
-      <category term="ios" scheme="https://yansaid.github.io/tags/ios/"/>
+      <category term="ios" scheme="https://huyan.club/tags/ios/"/>
     
   </entry>
   
   <entry>
     <title>全局静态变量 和 全局变量 的区别</title>
-    <link href="https://yansaid.github.io/2017/05/25/%E5%85%A8%E5%B1%80%E9%9D%99%E6%80%81%E5%8F%98%E9%87%8F/"/>
-    <id>https://yansaid.github.io/2017/05/25/全局静态变量/</id>
+    <link href="https://huyan.club/2017/05/25/%E5%85%A8%E5%B1%80%E9%9D%99%E6%80%81%E5%8F%98%E9%87%8F/"/>
+    <id>https://huyan.club/2017/05/25/全局静态变量/</id>
     <published>2017-05-24T16:00:00.000Z</published>
     <updated>2017-05-25T10:01:48.000Z</updated>
     
@@ -225,19 +225,19 @@ myAudio.onended = function()
     
     </summary>
     
-      <category term="iOS" scheme="https://yansaid.github.io/categories/iOS/"/>
+      <category term="iOS" scheme="https://huyan.club/categories/iOS/"/>
     
-      <category term="C" scheme="https://yansaid.github.io/categories/iOS/C/"/>
+      <category term="C" scheme="https://huyan.club/categories/iOS/C/"/>
     
     
-      <category term="ios" scheme="https://yansaid.github.io/tags/ios/"/>
+      <category term="ios" scheme="https://huyan.club/tags/ios/"/>
     
   </entry>
   
   <entry>
     <title>Objective-C 实现排序算法</title>
-    <link href="https://yansaid.github.io/2017/05/11/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/"/>
-    <id>https://yansaid.github.io/2017/05/11/排序算法/</id>
+    <link href="https://huyan.club/2017/05/11/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/"/>
+    <id>https://huyan.club/2017/05/11/排序算法/</id>
     <published>2017-05-10T16:00:00.000Z</published>
     <updated>2017-05-25T10:08:44.000Z</updated>
     
@@ -251,17 +251,17 @@ myAudio.onended = function()
     
     </summary>
     
-      <category term="iOS" scheme="https://yansaid.github.io/categories/iOS/"/>
+      <category term="iOS" scheme="https://huyan.club/categories/iOS/"/>
     
     
-      <category term="ios" scheme="https://yansaid.github.io/tags/ios/"/>
+      <category term="ios" scheme="https://huyan.club/tags/ios/"/>
     
   </entry>
   
   <entry>
     <title>UITableView 解耦</title>
-    <link href="https://yansaid.github.io/2017/05/09/uitableview%20%E8%A7%A3%E8%80%A6/"/>
-    <id>https://yansaid.github.io/2017/05/09/uitableview 解耦/</id>
+    <link href="https://huyan.club/2017/05/09/uitableview%20%E8%A7%A3%E8%80%A6/"/>
+    <id>https://huyan.club/2017/05/09/uitableview 解耦/</id>
     <published>2017-05-08T16:00:00.000Z</published>
     <updated>2017-05-09T04:28:23.000Z</updated>
     
@@ -283,17 +283,17 @@ myAudio.onended = function()
     
     </summary>
     
-      <category term="iOS" scheme="https://yansaid.github.io/categories/iOS/"/>
+      <category term="iOS" scheme="https://huyan.club/categories/iOS/"/>
     
     
-      <category term="ios" scheme="https://yansaid.github.io/tags/ios/"/>
+      <category term="ios" scheme="https://huyan.club/tags/ios/"/>
     
   </entry>
   
   <entry>
     <title>Tagged Pointer, weak string 不释放.</title>
-    <link href="https://yansaid.github.io/2017/04/25/Tagged%20Pointer/"/>
-    <id>https://yansaid.github.io/2017/04/25/Tagged Pointer/</id>
+    <link href="https://huyan.club/2017/04/25/Tagged%20Pointer/"/>
+    <id>https://huyan.club/2017/04/25/Tagged Pointer/</id>
     <published>2017-04-24T16:00:00.000Z</published>
     <updated>2017-04-25T07:59:00.000Z</updated>
     
@@ -316,55 +316,17 @@ myAudio.onended = function()
     
     </summary>
     
-      <category term="iOS" scheme="https://yansaid.github.io/categories/iOS/"/>
+      <category term="iOS" scheme="https://huyan.club/categories/iOS/"/>
     
     
-      <category term="ios" scheme="https://yansaid.github.io/tags/ios/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>NSString 为什么用 copy ? Block 为什么用 copy?</title>
-    <link href="https://yansaid.github.io/2017/04/10/copy/"/>
-    <id>https://yansaid.github.io/2017/04/10/copy/</id>
-    <published>2017-04-09T16:00:00.000Z</published>
-    <updated>2017-04-10T08:04:02.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>copy<br>深拷贝与浅拷贝的区别, 在于是否开辟新内存，copy 只针对堆内存对象而言。</p>
-<p>浅拷贝：<br>拷贝的是地址，和对象的 = 赋值是一样的。<br>OC 中 我们声明一个 NSString 属性。<br><a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@property NSString *str；</div></pre></td></tr></table></figure></p>
-<p>为什么会有这个<em>, c 语言中, </em>是一个取值操作符, <em>str 对应的是值, 所以 str 是</em> str 的地址, 为什么要说这个那, 就是 = 传递的是对象的地址, 浅拷贝就是地址的拷贝.</p>
-<p>提示：上面提到的只针对堆内存的对象。<br>&amp; 取址操作符，平常声明的值对象是存在栈内存中.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">int a = 5;</div></pre></td></tr></table></figure></p>
-<p>a 对应的栈中存放的 5，&amp;a 对应栈内存地址。</p>
-<p>#####深拷贝：<br>开辟新的内存空间，相当于声明了一个新的对象，对象中的值，与当前对象值相同。</p>
-<p>NSString 为什么用 copy ?<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">@property (nonatomic, strong) NSString *strongStr;</div><div class="line">@property (nonatomic, copy) NSString *cpyStr;</div></pre></td></tr></table></figure></p>
-<p>我们有两个对象, 一个用 strong, 一个用 copy.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">NSString *tmpStr = @&quot;temp&quot;;</div><div class="line">self.strongStr = tmpStr;</div><div class="line">self.cpyStr = tmpStr;</div><div class="line"></div><div class="line">2017-04-10 12:06:11.953 Copy[66625:4617737] tmpStr:temp</div><div class="line">strongStr:temp</div><div class="line">cpyStr:temp</div><div class="line">2017-04-10 12:06:11.953 Copy[66625:4617737] tmpStr:0x10f096078</div><div class="line">strongStr:0x10f096078</div><div class="line">cpyStr:0x10f096078</div></pre></td></tr></table></figure></p>
-<p>对于不可变字符串, copy 和 strong 都是浅拷贝.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">NSMutableString *tmpStr = [[NSMutableString alloc] initWithString:@&quot;temp&quot;];</div><div class="line">self.strongStr = tmpStr;</div><div class="line">self.cpyStr = tmpStr;</div><div class="line">[tmpStr appendString:@&quot; + add&quot;];</div><div class="line">NSLog(@&quot;tmpStr:%@\n strongStr:%@\n cpyStr:%@&quot;, tmpStr, self.strongStr, self.cpyStr);</div><div class="line">NSLog(@&quot;tmpStr:%p\n strongStr:%p\n cpyStr:%p&quot;, tmpStr, self.strongStr, self.cpyStr);</div><div class="line"></div><div class="line">2017-04-10 11:58:56.888 Copy[66562:4610424] </div><div class="line">tmpStr:temp + add</div><div class="line">strongStr:temp + add</div><div class="line">cpyStr:temp</div><div class="line">2017-04-10 11:58:56.888 Copy[66562:4610424] tmpStr:0x600000271580</div><div class="line">strongStr:0x600000271580</div><div class="line">cpyStr:0xa000000706d65744</div></pre></td></tr></table></figure>
-<p>当 tmpStr 改变之后 strongStr 也改变了, 虽然 strongStr 是个不可变字符串, 但是它指向了一个可变字符串. 可以看见 cpyStr 是深拷贝, 它指向的内存和 tmpStr 完全不同.</p>
-<p>NSMutableString 不可以使用 copy.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@property (nonatomic, copy) NSMutableString *mutableString;</div></pre></td></tr></table></figure></p>
-<p>copy 返回的都是不可变的, 所以当执行 <code>appendString:</code> 等NSMutableString特有的方法的时候, 会报<code>unrecognized selector sent to instance</code> 这个错误.</p>
-<p>tips:<br>为什么 NSString 可以直接指向一个常量, 而 NSMutableString 不可以?<br>不可变字符串, 不可变, 他可以指向一个常量, 常量是不可变的, 存放在常量区.</p>
-<p>Block 为什么用 copy?<br>代码块 是存在栈区的, 需要通过 copy 拷贝到堆内存, ARC 下, 赋值的时候编译器会自行对 block 进行 copy 操作, copy 到堆内存, 与一般的对象是相同的.<br>所以在 ARC 下 block 使用 copy 和 strong 是没有区别的.</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;copy&lt;br&gt;深拷贝与浅拷贝的区别, 在于是否开辟新内存，copy 只针对堆内存对象而言。&lt;/p&gt;
-&lt;p&gt;浅拷贝：&lt;br&gt;拷贝的是地址，和对象的 = 赋值是一样的。&lt;br&gt;OC 中 我们声明一个 NSString 属性。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="iOS" scheme="https://yansaid.github.io/categories/iOS/"/>
-    
-    
-      <category term="ios" scheme="https://yansaid.github.io/tags/ios/"/>
+      <category term="ios" scheme="https://huyan.club/tags/ios/"/>
     
   </entry>
   
   <entry>
     <title>Method Swizzling 的具体分析</title>
-    <link href="https://yansaid.github.io/2017/04/10/swizziling/"/>
-    <id>https://yansaid.github.io/2017/04/10/swizziling/</id>
+    <link href="https://huyan.club/2017/04/10/swizziling/"/>
+    <id>https://huyan.club/2017/04/10/swizziling/</id>
     <published>2017-04-09T16:00:00.000Z</published>
     <updated>2017-06-02T02:57:20.000Z</updated>
     
@@ -393,17 +355,55 @@ myAudio.onended = function()
     
     </summary>
     
-      <category term="iOS" scheme="https://yansaid.github.io/categories/iOS/"/>
+      <category term="iOS" scheme="https://huyan.club/categories/iOS/"/>
     
     
-      <category term="ios" scheme="https://yansaid.github.io/tags/ios/"/>
+      <category term="ios" scheme="https://huyan.club/tags/ios/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>NSString 为什么用 copy ? Block 为什么用 copy?</title>
+    <link href="https://huyan.club/2017/04/10/copy/"/>
+    <id>https://huyan.club/2017/04/10/copy/</id>
+    <published>2017-04-09T16:00:00.000Z</published>
+    <updated>2017-04-10T08:04:02.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>copy<br>深拷贝与浅拷贝的区别, 在于是否开辟新内存，copy 只针对堆内存对象而言。</p>
+<p>浅拷贝：<br>拷贝的是地址，和对象的 = 赋值是一样的。<br>OC 中 我们声明一个 NSString 属性。<br><a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@property NSString *str；</div></pre></td></tr></table></figure></p>
+<p>为什么会有这个<em>, c 语言中, </em>是一个取值操作符, <em>str 对应的是值, 所以 str 是</em> str 的地址, 为什么要说这个那, 就是 = 传递的是对象的地址, 浅拷贝就是地址的拷贝.</p>
+<p>提示：上面提到的只针对堆内存的对象。<br>&amp; 取址操作符，平常声明的值对象是存在栈内存中.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">int a = 5;</div></pre></td></tr></table></figure></p>
+<p>a 对应的栈中存放的 5，&amp;a 对应栈内存地址。</p>
+<p>#####深拷贝：<br>开辟新的内存空间，相当于声明了一个新的对象，对象中的值，与当前对象值相同。</p>
+<p>NSString 为什么用 copy ?<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">@property (nonatomic, strong) NSString *strongStr;</div><div class="line">@property (nonatomic, copy) NSString *cpyStr;</div></pre></td></tr></table></figure></p>
+<p>我们有两个对象, 一个用 strong, 一个用 copy.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">NSString *tmpStr = @&quot;temp&quot;;</div><div class="line">self.strongStr = tmpStr;</div><div class="line">self.cpyStr = tmpStr;</div><div class="line"></div><div class="line">2017-04-10 12:06:11.953 Copy[66625:4617737] tmpStr:temp</div><div class="line">strongStr:temp</div><div class="line">cpyStr:temp</div><div class="line">2017-04-10 12:06:11.953 Copy[66625:4617737] tmpStr:0x10f096078</div><div class="line">strongStr:0x10f096078</div><div class="line">cpyStr:0x10f096078</div></pre></td></tr></table></figure></p>
+<p>对于不可变字符串, copy 和 strong 都是浅拷贝.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">NSMutableString *tmpStr = [[NSMutableString alloc] initWithString:@&quot;temp&quot;];</div><div class="line">self.strongStr = tmpStr;</div><div class="line">self.cpyStr = tmpStr;</div><div class="line">[tmpStr appendString:@&quot; + add&quot;];</div><div class="line">NSLog(@&quot;tmpStr:%@\n strongStr:%@\n cpyStr:%@&quot;, tmpStr, self.strongStr, self.cpyStr);</div><div class="line">NSLog(@&quot;tmpStr:%p\n strongStr:%p\n cpyStr:%p&quot;, tmpStr, self.strongStr, self.cpyStr);</div><div class="line"></div><div class="line">2017-04-10 11:58:56.888 Copy[66562:4610424] </div><div class="line">tmpStr:temp + add</div><div class="line">strongStr:temp + add</div><div class="line">cpyStr:temp</div><div class="line">2017-04-10 11:58:56.888 Copy[66562:4610424] tmpStr:0x600000271580</div><div class="line">strongStr:0x600000271580</div><div class="line">cpyStr:0xa000000706d65744</div></pre></td></tr></table></figure>
+<p>当 tmpStr 改变之后 strongStr 也改变了, 虽然 strongStr 是个不可变字符串, 但是它指向了一个可变字符串. 可以看见 cpyStr 是深拷贝, 它指向的内存和 tmpStr 完全不同.</p>
+<p>NSMutableString 不可以使用 copy.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@property (nonatomic, copy) NSMutableString *mutableString;</div></pre></td></tr></table></figure></p>
+<p>copy 返回的都是不可变的, 所以当执行 <code>appendString:</code> 等NSMutableString特有的方法的时候, 会报<code>unrecognized selector sent to instance</code> 这个错误.</p>
+<p>tips:<br>为什么 NSString 可以直接指向一个常量, 而 NSMutableString 不可以?<br>不可变字符串, 不可变, 他可以指向一个常量, 常量是不可变的, 存放在常量区.</p>
+<p>Block 为什么用 copy?<br>代码块 是存在栈区的, 需要通过 copy 拷贝到堆内存, ARC 下, 赋值的时候编译器会自行对 block 进行 copy 操作, copy 到堆内存, 与一般的对象是相同的.<br>所以在 ARC 下 block 使用 copy 和 strong 是没有区别的.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;copy&lt;br&gt;深拷贝与浅拷贝的区别, 在于是否开辟新内存，copy 只针对堆内存对象而言。&lt;/p&gt;
+&lt;p&gt;浅拷贝：&lt;br&gt;拷贝的是地址，和对象的 = 赋值是一样的。&lt;br&gt;OC 中 我们声明一个 NSString 属性。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="iOS" scheme="https://huyan.club/categories/iOS/"/>
+    
+    
+      <category term="ios" scheme="https://huyan.club/tags/ios/"/>
     
   </entry>
   
   <entry>
     <title>一个react native 的第三方, 附 npm 发布教程.</title>
-    <link href="https://yansaid.github.io/2017/03/15/tipsView/"/>
-    <id>https://yansaid.github.io/2017/03/15/tipsView/</id>
+    <link href="https://huyan.club/2017/03/15/tipsView/"/>
+    <id>https://huyan.club/2017/03/15/tipsView/</id>
     <published>2017-03-14T16:00:00.000Z</published>
     <updated>2018-03-01T08:12:34.709Z</updated>
     
@@ -430,17 +430,17 @@ myAudio.onended = function()
     
     </summary>
     
-      <category term="React Native" scheme="https://yansaid.github.io/categories/React-Native/"/>
+      <category term="React Native" scheme="https://huyan.club/categories/React-Native/"/>
     
     
-      <category term="react native" scheme="https://yansaid.github.io/tags/react-native/"/>
+      <category term="react native" scheme="https://huyan.club/tags/react-native/"/>
     
   </entry>
   
   <entry>
     <title>整洁的代码 - 适配器模式(Adaptor)</title>
-    <link href="https://yansaid.github.io/2017/02/23/adaptor/"/>
-    <id>https://yansaid.github.io/2017/02/23/adaptor/</id>
+    <link href="https://huyan.club/2017/02/23/adaptor/"/>
+    <id>https://huyan.club/2017/02/23/adaptor/</id>
     <published>2017-02-22T16:00:00.000Z</published>
     <updated>2018-03-01T08:11:36.713Z</updated>
     
@@ -460,17 +460,17 @@ myAudio.onended = function()
     
     </summary>
     
-      <category term="iOS" scheme="https://yansaid.github.io/categories/iOS/"/>
+      <category term="iOS" scheme="https://huyan.club/categories/iOS/"/>
     
     
-      <category term="ios" scheme="https://yansaid.github.io/tags/ios/"/>
+      <category term="ios" scheme="https://huyan.club/tags/ios/"/>
     
   </entry>
   
   <entry>
     <title>__attribute__((cleanup(function))</title>
-    <link href="https://yansaid.github.io/2016/10/28/attribute%E4%BD%BF%E7%94%A8/"/>
-    <id>https://yansaid.github.io/2016/10/28/attribute使用/</id>
+    <link href="https://huyan.club/2016/10/28/attribute%E4%BD%BF%E7%94%A8/"/>
+    <id>https://huyan.club/2016/10/28/attribute使用/</id>
     <published>2016-10-27T16:00:00.000Z</published>
     <updated>2017-04-05T01:45:14.000Z</updated>
     
@@ -493,17 +493,17 @@ myAudio.onended = function()
     
     </summary>
     
-      <category term="iOS" scheme="https://yansaid.github.io/categories/iOS/"/>
+      <category term="iOS" scheme="https://huyan.club/categories/iOS/"/>
     
     
-      <category term="ios" scheme="https://yansaid.github.io/tags/ios/"/>
+      <category term="ios" scheme="https://huyan.club/tags/ios/"/>
     
   </entry>
   
   <entry>
     <title>objective-c 的消息转发</title>
-    <link href="https://yansaid.github.io/2016/07/15/objective-c%E6%B6%88%E6%81%AF%E8%BD%AC%E5%8F%91/"/>
-    <id>https://yansaid.github.io/2016/07/15/objective-c消息转发/</id>
+    <link href="https://huyan.club/2016/07/15/objective-c%E6%B6%88%E6%81%AF%E8%BD%AC%E5%8F%91/"/>
+    <id>https://huyan.club/2016/07/15/objective-c消息转发/</id>
     <published>2016-07-14T16:00:00.000Z</published>
     <updated>2017-04-05T01:45:24.000Z</updated>
     
@@ -537,17 +537,17 @@ myAudio.onended = function()
     
     </summary>
     
-      <category term="iOS" scheme="https://yansaid.github.io/categories/iOS/"/>
+      <category term="iOS" scheme="https://huyan.club/categories/iOS/"/>
     
     
-      <category term="ios" scheme="https://yansaid.github.io/tags/ios/"/>
+      <category term="ios" scheme="https://huyan.club/tags/ios/"/>
     
   </entry>
   
   <entry>
     <title>__strong、__weak、__block.</title>
-    <link href="https://yansaid.github.io/2016/05/03/block/"/>
-    <id>https://yansaid.github.io/2016/05/03/block/</id>
+    <link href="https://huyan.club/2016/05/03/block/"/>
+    <id>https://huyan.club/2016/05/03/block/</id>
     <published>2016-05-02T16:00:00.000Z</published>
     <updated>2017-04-14T02:04:50.000Z</updated>
     
@@ -581,17 +581,17 @@ myAudio.onended = function()
     
     </summary>
     
-      <category term="iOS" scheme="https://yansaid.github.io/categories/iOS/"/>
+      <category term="iOS" scheme="https://huyan.club/categories/iOS/"/>
     
     
-      <category term="ios" scheme="https://yansaid.github.io/tags/ios/"/>
+      <category term="ios" scheme="https://huyan.club/tags/ios/"/>
     
   </entry>
   
   <entry>
     <title>类别（Category）添加weak （property）属性，关联（Associated）</title>
-    <link href="https://yansaid.github.io/2016/03/21/%E7%B1%BB%E5%88%AB/"/>
-    <id>https://yansaid.github.io/2016/03/21/类别/</id>
+    <link href="https://huyan.club/2016/03/21/%E7%B1%BB%E5%88%AB/"/>
+    <id>https://huyan.club/2016/03/21/类别/</id>
     <published>2016-03-20T16:00:00.000Z</published>
     <updated>2017-04-05T01:43:42.000Z</updated>
     
@@ -614,10 +614,10 @@ myAudio.onended = function()
     
     </summary>
     
-      <category term="iOS" scheme="https://yansaid.github.io/categories/iOS/"/>
+      <category term="iOS" scheme="https://huyan.club/categories/iOS/"/>
     
     
-      <category term="ios" scheme="https://yansaid.github.io/tags/ios/"/>
+      <category term="ios" scheme="https://huyan.club/tags/ios/"/>
     
   </entry>
   
