@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: yansaid.github.io
+Token: b40a6628238515d588df12b06a372d1b18e5bfb19cf4909d591281345db5d523
